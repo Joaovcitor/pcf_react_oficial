@@ -23,15 +23,24 @@ export const Div = styled.div`
 `;
 
 export const Form = styled.form`
-margin-top: 20px;
 display: flex;
 flex-direction: column;
+margin-top: 20px;
+
+label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
 
 input {
-  margin-bottom: 20px;
   height: 40px;
+  font-size: 18px;
+  border: 1px solid #0D0D0D;
   padding: 0 10px;
   border-radius: 4px;
-  border: 1px solid #ddd;
+  &:focus {
+    border: 1px solid red;
+  }
 }
 `;

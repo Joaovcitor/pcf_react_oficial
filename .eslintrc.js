@@ -13,7 +13,7 @@ module.exports = {
   plugins: ["prettier", "react", "react-hooks"],
   rules: {
     "react/react-in-jsx-scope": "off",
-    "prettier/prettier": "error",
+    "prettier/prettier": ["off"],
     "import/prettier-default-export": 0,
     "no-unused-vars": "off",
   },

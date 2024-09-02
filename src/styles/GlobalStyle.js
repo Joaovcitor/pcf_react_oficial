@@ -21,7 +21,7 @@ export default createGlobalStyle`
 
   button {
     cursor: pointer;
-    background-color: ${primaryColor};
+    background-color: #038C7F;
     border: none;
     color: #fff;
     padding: 10px 20px;
@@ -39,8 +39,8 @@ export default createGlobalStyle`
 `;
 
 export const Container = styled.section`
-  max-width: 360px;
-  background-color: #0f406b;
+  max-width: 550px;
+  background-color: #F2E7DC;
   margin: 0 auto;
   padding: 30px;
   border-radius: 4px;
