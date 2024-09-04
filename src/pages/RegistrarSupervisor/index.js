@@ -3,8 +3,8 @@ import axios from "../../services/axios";
 import history from "../../services/history";
 
 import { toast } from "react-toastify";
-import { get } from "lodash"
 import { isEmail } from "validator";
+import { get } from "lodash"
 import { Container } from "../../styles/GlobalStyle";
 import { Form } from "./styled"
 

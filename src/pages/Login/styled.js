@@ -33,5 +33,9 @@ input {
   padding: 0 10px;
   border-radius: 4px;
   border: 1px solid #ddd;
-}
+  display: flex;
+  flex-direction: column;
+  &:focus {
+  border: 1px solid #05F2C7;
+}}
 `;

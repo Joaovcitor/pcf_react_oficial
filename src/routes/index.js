@@ -3,31 +3,44 @@ import { Switch, Route } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import Login from "../pages/Login";
-import Visitador from "../pages/Visitador";
-import Coordenador from "../pages/Coordenador";
-import Supervisor from "../pages/Supervisor";
+import Home from "../pages/Home";
+import MyRoute from "./MyRoute";
 import Criancas from "../pages/Criancas";
 import Familias from "../pages/Familias";
 import PlanosDeVisita from "../pages/PlanosDeVisita";
 import Cuidadores from "../pages/Cuidadores";
-import RegistrarCoordenador from "../pages/RegistrarCoordenador"
+import RegistrarCoordenador from "../pages/RegistrarCoordenador";
+
+// cadastro
 
 import Page404 from "../pages/Page404";
 
 export default function Routes() {
   return (
     <Switch>
-      <Route
+      <MyRoute
         exact path="/"
-        component={Visitador}
-        isClosed={false} />
-      <Route exact path="/login"
+        component={Home}
+        isClosed />
+      <MyRoute
+        exact path="/familias"
+        component={Familias}
+        isClosed />
+        <MyRoute
+        exact path="/cuidador"
+        component={Cuidadores}
+        isClosed />
+        <MyRoute
+        exact path="/planos"
+        component={PlanosDeVisita}
+        isClosed />
+      <MyRoute exact path="/login"
         component={Login}
         isClosed={false} />
-      <Route exact path="/cadastrar-coordenador"
+      <MyRoute exact path="/cadastrar-coordenador"
         component={RegistrarCoordenador}
         isClosed={false} />
-      <Route path="*" component={Page404} />
+      <MyRoute path="*" component={Page404} />
     </Switch>
   );
 }

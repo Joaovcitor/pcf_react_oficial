@@ -6,7 +6,7 @@ export default (reducers) => {
     {
       key: "PCFPREFEITURA",
       storage,
-      whitelist: ["example"],
+      whitelist: ["auth"],
     },
     reducers
   );

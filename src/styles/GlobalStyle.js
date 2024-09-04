@@ -21,12 +21,14 @@ export default createGlobalStyle`
 
   button {
     cursor: pointer;
-    background-color: #038C7F;
+    background-color: #D90452;
     border: none;
     color: #fff;
     padding: 10px 20px;
     border-radius: 4px;
     margin-top: 20px;
+    font-size: 16px;
+    font-weight: bolder;
   }
 
   a {
@@ -39,13 +41,16 @@ export default createGlobalStyle`
 `;
 
 export const Container = styled.section`
-  max-width: 550px;
-  background-color: #F2E7DC;
+  max-width: 370px;
+  background-color: #010326;
   margin: 0 auto;
-  padding: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 10px;
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   align-items: center;
   display: flex;
   flex-direction: column;
+  color: white;
 `;

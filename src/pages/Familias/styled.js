@@ -8,8 +8,11 @@ export const Div = styled.div`
 
   p {
     font-size: 18px;
-    /* margin-left: 15px; */
     color: black;
+  }
+
+  h2 {
+    color: white;
   }
 
   input {
@@ -22,4 +25,14 @@ export const Div = styled.div`
   }
 `;
 
-export const Paragrafo = styled.p``;
+export const Section = styled.section`
+background-color: #F2B705;
+display: flex;
+justify-content: center;
+text-align: center;
+flex-direction: column;
+padding: 10px;
+margin: 20px;
+border-radius: 2px 35px 2px 35px;
+
+`;
