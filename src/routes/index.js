@@ -8,6 +8,7 @@ import MyRoute from "./MyRoute";
 import Criancas from "../pages/Criancas";
 import Familias from "../pages/Familias";
 import PlanosDeVisita from "../pages/PlanosDeVisita";
+import CriarPlanosDeVisitas from "../pages/CriarPlanosDeVisitas";
 import Cuidadores from "../pages/Cuidadores";
 import RegistrarCoordenador from "../pages/RegistrarCoordenador";
 
@@ -33,6 +34,10 @@ export default function Routes() {
         <MyRoute
         exact path="/planos"
         component={PlanosDeVisita}
+        isClosed />
+        <MyRoute
+        exact path="/planos/criarplano/:id"
+        component={CriarPlanosDeVisitas}
         isClosed />
       <MyRoute exact path="/login"
         component={Login}

@@ -27,7 +27,7 @@ export default function Header() {
         </div>
         <div>
           <IoReader size={38} style={{ color: 'white' }} />
-          <p>Planos de Visita</p>
+          <p>Criar Planos de Visita</p>
           <Link className="links" to="/planos">
             Acessar
           </Link>

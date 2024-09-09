@@ -5,6 +5,13 @@ export const Div = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: blue;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
 
   h2 {
     color: white;
