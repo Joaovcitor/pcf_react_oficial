@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Container } from "../../styles/GlobalStyle";
-
 import { Link } from "react-router-dom";
+import axios from "../../services/axios";
 
 import { Div } from "./styled"
-import FerramentasVisitadores from "../../components/FerramentasVisitadores"
-import axios from "../../services/axios";
 import { toast } from "react-toastify";
+import FerramentasVisitadores from "../../components/FerramentasVisitadores"
+import FerramentasSupervisores from "../../components/FerramentasSupervisores"
 
 export default function Visitador() {
   const [users, setUsers] = useState({});
@@ -14,12 +13,23 @@ export default function Visitador() {
 
   React.useEffect(() => {
     async function getData() {
-      const response = await axios.get("/visitadores/showInformations");
+      const response = await axios.get("/");
       setUsers(response.data.user);
     }
 
     getData();
-  }, [])
+  }, []);
+
+  function renderizaComponente() {
+    switch(users.role) {
+      case "visitador":
+        return <FerramentasVisitadores/>
+      case "supervisor":
+        return <FerramentasSupervisores/>
+      case "coordenador":
+        return toast.success("Você é coordenador")
+    }
+  }
 
   useEffect(() => {
     async function getChildrens() {
@@ -41,9 +51,7 @@ export default function Visitador() {
           <p>Beneficiários: {childrens.length}</p>
         </nav>
       </div>
-      <FerramentasVisitadores>
-
-      </FerramentasVisitadores>
+    {renderizaComponente()}
     </Div>
   );
 }

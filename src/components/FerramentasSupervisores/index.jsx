@@ -35,14 +35,14 @@ export default function Header() {
         <div>
           <IoPeopleCircleSharp size={38} style={{color: 'white'}} />
           <p>Cuidadores</p>
-          <Link className="links" to="/cuidadores">
+          <Link className="links" to="/">
             Acessar
           </Link>
         </div>
         <div>
           <CiCompass1 size={38} style={{color: 'white'}} />
           <p>Realizar Visitas</p>
-          <Link className="links" to="/visitas-marcadas">
+          <Link className="links" to="/">
             Acessar
           </Link>
         </div>

@@ -6,9 +6,10 @@ import { toast } from "react-toastify";
 import { get } from "lodash"
 import { isEmail } from "validator";
 import { Container } from "../../styles/GlobalStyle";
-import { Form } from "./styled"
+import { Form, StyledCheckbox } from "./styled"
 
 export default function Login() {
+  //week_pregnant
   const [name, setNome] = useState('');
   const [endereco, setEndereco] = useState('');
   const [rg, setRg] = useState('');
@@ -16,8 +17,12 @@ export default function Login() {
   const [bairro, setBairro] = useState('');
   const [contato, setContato] = useState('');
   const [dataDeNascimento, setDataNascimento] = useState('');
-  const [gestante, setGestante] = useState('');
+  const [gestante, setGestante] = useState(false);
+  const [week_pregnant, setWeek] = useState(0);
 
+  const handleCheckboxChange = (e) => {
+    setGestante(e.target.checked); // Atualiza o estado com o valor booleano do checkbox
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -37,9 +42,16 @@ export default function Login() {
     if (formsErrors) return;
 
     try {
-      await axios.post("/coordenador/cadastro", {
-        name, endereco, rg, cpf, bairro, contato, gestante, dataDeNascimento
+      const response = await axios.post("/cuidador/cadastro", {
+        name, endereco, rg, cpf, bairro, contato, gestante, dataDeNascimento, week_pregnant
       })
+
+      console.log(gestante)
+
+      const {id} = response.data;
+      if (!gestante) {
+        return history.push(`/crianca/cadastrar/${id}`)
+      }
 
       toast.success("Cuidador criado com sucesso!");
       history.push("/")
@@ -64,7 +76,7 @@ export default function Login() {
 
   return (
     <Container>
-      <h2>Cadastrar novo Coordenador</h2>
+      <h2>Cadastrar Cuidador</h2>
       <Form onSubmit={handleSubmit}>
         <label htmlFor="nome">
           Nome:
@@ -80,7 +92,7 @@ export default function Login() {
         </label>
         <label htmlFor="endereco">
           Endereço*:
-          <input type="password" value={endereco} onChange={e => setEndereco(e.target.value)} />
+          <input type="text" value={endereco} onChange={e => setEndereco(e.target.value)} />
         </label>
         <label htmlFor="bairro">
           Bairro*:
@@ -96,8 +108,18 @@ export default function Login() {
         </label>
         <label htmlFor="gestante">
           Gestante:
-          <input type="checkbox" value={gestante} onChange={e => setGestante(e.target.value)} />
+          <label htmlFor="gestante"></label><StyledCheckbox type="checkbox" checked={gestante} onChange={handleCheckboxChange} />
         </label>
+        {gestante && (
+        <label htmlFor="contato">
+          Quantas semanas de gravidez:
+          <input
+            type="number"
+            value={week_pregnant}
+            onChange={(e) => setWeek(e.target.value)}
+          />
+        </label>
+      )}
         <button type="submit">Cadastrar</button>
       </Form>
     </Container>

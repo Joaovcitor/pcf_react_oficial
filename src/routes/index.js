@@ -6,6 +6,9 @@ import Login from "../pages/Login";
 import Home from "../pages/Home";
 import MyRoute from "./MyRoute";
 import Criancas from "../pages/Criancas";
+import CadastrarCuidador from "../pages/CadastrarCuidador"
+import CadastrarCrianca from "../pages/CadastrarCrianca"
+import VisitarPorGeolocalizacao from "../pages/VisitarPorGeolocalizacao"
 import Familias from "../pages/Familias";
 import PlanosDeVisita from "../pages/PlanosDeVisita";
 import CriarPlanosDeVisitas from "../pages/CriarPlanosDeVisitas";
@@ -27,15 +30,15 @@ export default function Routes() {
         exact path="/familias"
         component={Familias}
         isClosed />
-        <MyRoute
+      <MyRoute
         exact path="/cuidador"
         component={Cuidadores}
         isClosed />
-        <MyRoute
+      <MyRoute
         exact path="/planos"
         component={PlanosDeVisita}
         isClosed />
-        <MyRoute
+      <MyRoute
         exact path="/planos/criarplano/:id"
         component={CriarPlanosDeVisitas}
         isClosed />
@@ -44,7 +47,19 @@ export default function Routes() {
         isClosed={false} />
       <MyRoute exact path="/cadastrar-coordenador"
         component={RegistrarCoordenador}
-        isClosed={false} />
+        isClosed />
+      <MyRoute exact path="/cuidador/cadastrar"
+        component={CadastrarCuidador}
+        isClosed />
+      <MyRoute exact path="/crianca/cadastrar/:id"
+        component={CadastrarCrianca}
+        isClosed />
+      <MyRoute exact path="/visitas-marcadas"
+        component={VisitarPorGeolocalizacao}
+        isClosed />
+        <MyRoute exact path="/visitas/realizar/:id"
+        component={VisitarPorGeolocalizacao}
+        isClosed />
       <MyRoute path="*" component={Page404} />
     </Switch>
   );
