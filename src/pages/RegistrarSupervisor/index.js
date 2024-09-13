@@ -48,7 +48,7 @@ export default function Login() {
     if (formsErrors) return;
 
     try {
-      await axios.post("/coordenador/cadastro", {
+      await axios.post("/coordenador/cadastrar-supervisor", {
         name, password, email, cpf, confirmepassword
       })
 

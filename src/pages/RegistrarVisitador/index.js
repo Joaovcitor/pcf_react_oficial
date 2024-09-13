@@ -3,17 +3,20 @@ import axios from "../../services/axios";
 import history from "../../services/history";
 
 import { toast } from "react-toastify";
-import { get } from "lodash"
+import { get } from "lodash";
 import { isEmail } from "validator";
 import { Container } from "../../styles/GlobalStyle";
-import { Form } from "./styled"
+import { Form } from "./styled";
 
 export default function Login() {
-  const [name, setNome] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmepassword, setConfirmarSenha] = useState('');
-  const [cpf, setCpf] = useState('');
+  const [name, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmepassword, setConfirmarSenha] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [cras, setCras] = useState("");
+  const [territorio, setTerritorio] = useState("");
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -22,57 +25,60 @@ export default function Login() {
 
     if (name.length < 3 || name.length > 255) {
       formsErrors = true;
-      toast.error("nome deve ter entre 3 a 255 caracteres")
+      toast.error("nome deve ter entre 3 a 255 caracteres");
     }
 
     if (!isEmail(email)) {
       formsErrors = true;
-      toast.error("e-mail inválido")
+      toast.error("e-mail inválido");
     }
 
     if (password.length < 3 || password.length > 255) {
       formsErrors = true;
-      toast.error("senha deve ter entre 3 a 255 caracteres")
+      toast.error("senha deve ter entre 3 a 255 caracteres");
     }
 
     if (cpf.length < 11 || cpf.length > 11) {
       formsErrors = true;
-      toast.error("CPF deve ter 11 digítos")
+      toast.error("CPF deve ter 11 digítos");
     }
 
     if (password !== confirmepassword) {
       formsErrors = true;
-      toast.error("Senhas não são iguais!")
+      toast.error("Senhas não são iguais!");
     }
 
     if (formsErrors) return;
 
     try {
-      await axios.post("/coordenador/cadastro", {
-        name, password, email, cpf, confirmepassword
-      })
+      await axios.post("/supervisor/cadastrar-visitador", {
+        name,
+        password,
+        email,
+        cpf,
+        confirmepassword,
+        cras,
+        territorio
+      });
 
-      toast.success("Coordenador cadastrado com sucesso!");
-      history.push("/")
-
+      toast.success("Visitador cadastrado com sucesso!");
+      history.push("/");
     } catch (e) {
-      const errors = get(e, 'response.data.errors', '');
-      if (typeof errors === 'string') {
+      const errors = get(e, "response.data.errors", "");
+      if (typeof errors === "string") {
         toast.error(errors);
       } else if (Array.isArray(errors)) {
-        errors.forEach(error => {
+        errors.forEach((error) => {
           toast.error(error);
         });
-      } else if (typeof errors === 'object') {
-        Object.values(errors).forEach(error => {
-          if (typeof error === 'string') {
+      } else if (typeof errors === "object") {
+        Object.values(errors).forEach((error) => {
+          if (typeof error === "string") {
             toast.error(error);
           }
         });
       }
-
     }
-
   }
 
   return (
@@ -81,23 +87,61 @@ export default function Login() {
       <Form onSubmit={handleSubmit}>
         <label htmlFor="nome">
           Nome:
-          <input type="text" value={name} onChange={e => setNome(e.target.value)} placeholder="Digite seu nome" />
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setNome(e.target.value)}
+            placeholder="Digite seu nome"
+          />
         </label>
         <label htmlFor="email">
           E-mail:
-          <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Digite seu e-mail" />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Digite seu e-mail"
+          />
         </label>
         <label htmlFor="password">
           Senha:
-          <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </label>
         <label htmlFor="confirmepassword">
           Confirme sua senha:
-          <input type="password" value={confirmepassword} onChange={e => setConfirmarSenha(e.target.value)} />
+          <input
+            type="password"
+            value={confirmepassword}
+            onChange={(e) => setConfirmarSenha(e.target.value)}
+          />
         </label>
         <label htmlFor="cpf">
           CPF:
-          <input type="text" value={cpf} onChange={e => setCpf(e.target.value)} />
+          <input
+            type="text"
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
+          />
+        </label>
+        <label htmlFor="territorio">
+          Território:
+          <input
+            type="text"
+            value={territorio}
+            onChange={(e) => setTerritorio(e.target.value)}
+          />
+        </label>
+        <label htmlFor="cras">
+          CRAS:
+          <input
+            type="text"
+            value={cras}
+            onChange={(e) => setCras(e.target.value)}
+          />
         </label>
         <button type="submit">Cadastrar</button>
       </Form>

@@ -13,35 +13,28 @@ export default function Header() {
       <Nav>
         <div>
           <IoPeopleSharp size={38} style={{ color: 'white' }}/>
-          <p>Famílias</p>
-          <Link className="links" to="/familias">
+          <p>Cadastrar Visitador</p>
+          <Link className="links" to="/cadastrar-visitador">
             Acessar
           </Link>
         </div>
         <div>
           <IoPersonAdd size={38} style={{ color: 'white' }} />
-          <p>Cadastrar Família</p>
+          <p>Visitadores</p>
           <Link className="links" to="/cuidador/cadastrar">
             Acessar
           </Link>
         </div>
         <div>
           <IoReader size={38} style={{ color: 'white' }} />
-          <p>Criar Planos de Visita</p>
-          <Link className="links" to="/planos">
+          <p>Notificações</p>
+          <Link className="links" to="/notificacoes">
             Acessar
           </Link>
         </div>
         <div>
           <IoPeopleCircleSharp size={38} style={{color: 'white'}} />
-          <p>Cuidadores</p>
-          <Link className="links" to="/">
-            Acessar
-          </Link>
-        </div>
-        <div>
-          <CiCompass1 size={38} style={{color: 'white'}} />
-          <p>Realizar Visitas</p>
+          <p>Validar Adesão</p>
           <Link className="links" to="/">
             Acessar
           </Link>

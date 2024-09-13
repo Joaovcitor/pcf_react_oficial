@@ -36,7 +36,6 @@ export const StyledCheckbox = styled.input`
   }
 
   &:checked::after {
-    content: '✔';
     display: block;
     color: white;
     text-align: center;
@@ -48,6 +47,8 @@ export const StyledCheckbox = styled.input`
     border-color: #0056b3;
   }
 `;
+
+
 
 export const Form = styled.form`
 display: flex;

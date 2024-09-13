@@ -6,6 +6,7 @@ import { Div } from "./styled"
 import { toast } from "react-toastify";
 import FerramentasVisitadores from "../../components/FerramentasVisitadores"
 import FerramentasSupervisores from "../../components/FerramentasSupervisores"
+import FerramentaCoordenador from "../../components/FerramentasCoordenador"
 
 export default function Visitador() {
   const [users, setUsers] = useState({});
@@ -27,7 +28,7 @@ export default function Visitador() {
       case "supervisor":
         return <FerramentasSupervisores/>
       case "coordenador":
-        return toast.success("Você é coordenador")
+        return <FerramentaCoordenador/>
     }
   }
 
@@ -43,14 +44,7 @@ export default function Visitador() {
     <Div>
       <h2>Olá, {users.name}</h2>
       <Link to="/">Editar Perfil</Link>
-      <div className="dados">
-        <nav>
-          <p>Planos criados: </p>
-        </nav>
-        <nav className="beneficiarios">
-          <p>Beneficiários: {childrens.length}</p>
-        </nav>
-      </div>
+
     {renderizaComponente()}
     </Div>
   );

@@ -16,7 +16,7 @@ export default function Login() {
   const [cpf, setCpf] = useState('');
   const [bairro, setBairro] = useState('');
   const [contato, setContato] = useState('');
-  const [dataDeNascimento, setDataNascimento] = useState('');
+  const [born, setDataNascimento] = useState('');
   const [gestante, setGestante] = useState(false);
   const [week_pregnant, setWeek] = useState(0);
 
@@ -43,7 +43,7 @@ export default function Login() {
 
     try {
       const response = await axios.post("/cuidador/cadastro", {
-        name, endereco, rg, cpf, bairro, contato, gestante, dataDeNascimento, week_pregnant
+        name, endereco, rg, cpf, bairro, contato, gestante, born, week_pregnant
       })
 
       console.log(gestante)
@@ -102,9 +102,9 @@ export default function Login() {
           Contato:
           <input type="text" value={contato} onChange={e => setContato(e.target.value)} />
         </label>
-        <label htmlFor="dataDeNascimento">
+        <label htmlFor="born">
           Data de Nascimento*:
-          <input type="date" value={dataDeNascimento} onChange={e => setDataNascimento(e.target.value)} />
+          <input type="date" value={born} onChange={e => setDataNascimento(e.target.value)} />
         </label>
         <label htmlFor="gestante">
           Gestante:

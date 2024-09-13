@@ -9,6 +9,14 @@ import { Nav, Section } from "./styled";
 export default function Header() {
   return (
     <Section>
+      <div className="dados">
+        <nav>
+          <p>Planos criados: </p>
+        </nav>
+        <nav className="beneficiarios">
+          <p>Beneficiários: </p>
+        </nav>
+      </div>
       <h3>Serviços e ferramentas</h3>
       <Nav>
         <div>
