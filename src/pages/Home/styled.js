@@ -24,7 +24,7 @@ export const Div = styled.div`
   }
 
   h2 {
-    color: white;
+    color: black;
     display: flex;
     justify-content: center;
     margin-top: 15px;

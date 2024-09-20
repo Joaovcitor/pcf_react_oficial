@@ -25,7 +25,7 @@ export const Nav = styled.nav`
   padding: 10px;
 
   a {
-    color: #fff;
+    color: black;
     margin: 0 10px 0 0;
     font-weight: bold;
   }
@@ -34,7 +34,7 @@ export const Nav = styled.nav`
     margin-bottom: 10px;
     padding: 10px;
     margin: 10px;
-    background-color: ${primaryColor};
+    background-color: #2DA657;
     text-align: center;
     border-radius: 5px;
     justify-content: center;
@@ -42,7 +42,7 @@ export const Nav = styled.nav`
 
   .links {
     border: none;
-    background-color: blue;
+    background-color: #E3CD40;
     display: flex;
     margin-top: 25px;
     text-align: center;

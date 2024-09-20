@@ -12,16 +12,16 @@ export default function Header() {
       <h3>Serviços e ferramentas</h3>
       <Nav>
         <div>
-          <IoPeopleSharp size={38} style={{ color: 'white' }}/>
+          <IoPersonAdd size={38} style={{ color: 'white' }} />
           <p>Cadastrar Visitador</p>
           <Link className="links" to="/cadastrar-visitador">
             Acessar
           </Link>
         </div>
         <div>
-          <IoPersonAdd size={38} style={{ color: 'white' }} />
+          <IoPeopleSharp size={38} style={{ color: 'white' }}/>
           <p>Visitadores</p>
-          <Link className="links" to="/cuidador/cadastrar">
+          <Link className="links" to="/meus-visitadores">
             Acessar
           </Link>
         </div>

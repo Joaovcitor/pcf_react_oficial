@@ -11,8 +11,9 @@ export default createGlobalStyle`
   }
 
   body {
-    font-family: sans-serif;
-    background: ${primaryDarkColor};
+    font-family: Arial, Helvetica, sans-serif;
+    /* background: #1F3140; */
+    background-color: #2A2F45;
   }
 
   html, body, #root {

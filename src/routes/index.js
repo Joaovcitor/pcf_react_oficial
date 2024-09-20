@@ -5,17 +5,23 @@ import { toast } from "react-toastify";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import MyRoute from "./MyRoute";
-import Criancas from "../pages/Criancas";
-import CadastrarCuidador from "../pages/CadastrarCuidador";
-import CadastrarCrianca from "../pages/CadastrarCrianca";
-import VisitarPorGeolocalizacao from "../pages/VisitarPorGeolocalizacao";
-import Familias from "../pages/Familias";
-import PlanosDeVisita from "../pages/PlanosDeVisita";
-import CriarPlanosDeVisitas from "../pages/CriarPlanosDeVisitas";
-import Cuidadores from "../pages/Cuidadores";
-import RegistrarCoordenador from "../pages/RegistrarCoordenador";
-import RegistrarSupervisor from "../pages/RegistrarSupervisor";
-import RegistrarVisitador from "../pages/RegistrarVisitador";
+import Criancas from "../pages/Visitador/Criancas";
+import CadastrarCuidador from "../pages/Visitador/CadastrarCuidador";
+import CadastrarCrianca from "../pages/Visitador/CadastrarCrianca";
+import VisitarPorGeolocalizacao from "../pages/Visitador/VisitarPorGeolocalizacao";
+import RealizarVisitasPorGeolocalizacao from "../pages/Visitador/RealizarVisitasPorGeolocalizacao";
+import RealizarVisitasMarcadas from "../pages/Visitador/RealizarVisitasMarcadas";
+import Familias from "../pages/Visitador/Familias";
+import PlanosDeVisita from "../pages/Visitador/PlanosDeVisita";
+import CriarPlanosDeVisitas from "../pages/Visitador/CriarPlanosDeVisitas";
+import Cuidadores from "../pages/Visitador/Cuidadores";
+import RegistrarCoordenador from "../pages/Coordenador/RegistrarCoordenador";
+import RegistrarSupervisor from "../pages/Coordenador/RegistrarSupervisor";
+import RegistrarVisitador from "../pages/Supervisor/RegistrarVisitador";
+import PlanosDeVisitaDaCrianca from "../pages/Visitador/PlanosDeVisitaDaCrianca";
+import EditarPlanosDeVisitas from "../pages/Visitador/EditarPlanosDeVisitas";
+
+
 
 
 
@@ -75,8 +81,32 @@ export default function Routes() {
       />
       <MyRoute
         exact
+        path="/visitas/iniciar/:id"
+        component={RealizarVisitasMarcadas}
+        isClosed
+      />
+      <MyRoute
+        exact
         path="/visitas/realizar/:id"
-        component={VisitarPorGeolocalizacao}
+        component={RealizarVisitasPorGeolocalizacao}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/formularios/:id"
+        component={Criancas}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/planos/planos-do-beneficiario/:id"
+        component={PlanosDeVisitaDaCrianca}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/planos/editar/:id"
+        component={EditarPlanosDeVisitas}
         isClosed
       />
       <MyRoute path="*" component={Page404} />

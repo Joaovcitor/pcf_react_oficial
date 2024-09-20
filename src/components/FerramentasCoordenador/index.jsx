@@ -1,5 +1,4 @@
 import React from "react";
-import { CiCompass1 } from "react-icons/ci";
 import {
   IoPersonAdd,
   IoPeopleSharp,
@@ -7,7 +6,6 @@ import {
   IoPeopleCircleSharp,
 } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import { Nav, Section } from "./styled";
 
