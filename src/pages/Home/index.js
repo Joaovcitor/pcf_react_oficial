@@ -6,6 +6,7 @@ import { Div } from "./styled"
 import FerramentasVisitadores from "../../components/FerramentasVisitadores"
 import FerramentasSupervisores from "../../components/FerramentasSupervisores"
 import FerramentaCoordenador from "../../components/FerramentasCoordenador"
+import Notifications from "../../components/Notifications";
 
 export default function Visitador() {
   const [users, setUsers] = useState(null);
@@ -26,13 +27,28 @@ export default function Visitador() {
 
   function renderizaComponente() {
     if (!users) return null;
-    switch(users.role) {
+    switch (users.role) {
       case "visitador":
-        return <FerramentasVisitadores/>
+        return (
+          <>
+            <FerramentasVisitadores />
+            <Notifications endpoint={"minhas-notificacoes"} />
+          </>
+        )
       case "supervisor":
-        return <FerramentasSupervisores/>
+        return (
+          <>
+            <FerramentasSupervisores />
+            <Notifications endpoint={"supervisor-showall-notificacoes"} />
+          </>
+        )
       case "coordenador":
-        return <FerramentaCoordenador/>
+        return (
+          <>
+            <FerramentaCoordenador />
+            {/* <Notifications endpoint={"supervisor-showall-notificacoes"} /> API ainda não possui notificações para coordenadores */}
+          </>
+        )
     }
   }
   return (
@@ -43,7 +59,7 @@ export default function Visitador() {
           {renderizaComponente()}
         </>
       ) : (
-        <p>Carregando...</p> // Mensagem de carregamento enquanto busca os dados
+        <p>Carregando...</p>
       )}
     </Div>
   );

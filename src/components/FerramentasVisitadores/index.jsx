@@ -1,6 +1,11 @@
 import React from "react";
 import { CiCompass1 } from "react-icons/ci";
-import { IoPersonAdd, IoPeopleSharp, IoReader, IoPeopleCircleSharp } from "react-icons/io5";
+import {
+  IoPersonAdd,
+  IoPeopleSharp,
+  IoReader,
+  IoPeopleCircleSharp,
+} from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -9,7 +14,7 @@ import { Nav, Section } from "./styled";
 export default function Header() {
   return (
     <Section>
-      <div className="dados">
+      {/* <div className="dados">
         <nav>
           <p>Planos criados: </p>
         </nav>
@@ -17,38 +22,38 @@ export default function Header() {
           <p>Beneficiários: </p>
         </nav>
       </div>
-      <h3>Serviços e ferramentas</h3>
+      <h3>Serviços e ferramentas</h3> */}
       <Nav>
         <div>
-          <IoPeopleSharp size={38} style={{ color: 'white' }}/>
+          <IoPeopleSharp size={38} style={{ color: "white" }} />
           <p>Famílias</p>
           <Link className="links" to="/familias">
             Acessar
           </Link>
         </div>
         <div>
-          <IoPersonAdd size={38} style={{ color: 'white' }} />
+          <IoPersonAdd size={38} style={{ color: "white" }} />
           <p>Cadastrar Família</p>
           <Link className="links" to="/cuidador/cadastrar">
             Acessar
           </Link>
         </div>
         <div>
-          <IoReader size={38} style={{ color: 'white' }} />
+          <IoReader size={38} style={{ color: "white" }} />
           <p>Criar Planos de Visita</p>
           <Link className="links" to="/planos">
             Acessar
           </Link>
         </div>
         <div>
-          <IoPeopleCircleSharp size={38} style={{color: 'white'}} />
+          <IoPeopleCircleSharp size={38} style={{ color: "white" }} />
           <p>Cuidadores</p>
           <Link className="links" to="/cuidadores">
             Acessar
           </Link>
         </div>
         <div>
-          <CiCompass1 size={38} style={{color: 'white'}} />
+          <CiCompass1 size={38} style={{ color: "white" }} />
           <p>Realizar Visitas</p>
           <Link className="links" to="/visitas-marcadas">
             Acessar

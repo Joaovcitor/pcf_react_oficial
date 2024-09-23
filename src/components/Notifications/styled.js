@@ -19,9 +19,10 @@ h3 {
 
 export const Nav = styled.nav`
   padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+  align-items: start;
   padding: 10px;
 
   a {
@@ -34,10 +35,11 @@ export const Nav = styled.nav`
     margin-bottom: 10px;
     padding: 10px;
     margin: 10px;
-    background-color: ${primaryColor};
+    background-color: #0528F2;
     text-align: center;
     border-radius: 5px;
     justify-content: center;
+    color: white;
   }
 
   .links {
