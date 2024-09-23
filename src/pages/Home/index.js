@@ -7,6 +7,7 @@ import FerramentasVisitadores from "../../components/FerramentasVisitadores"
 import FerramentasSupervisores from "../../components/FerramentasSupervisores"
 import FerramentaCoordenador from "../../components/FerramentasCoordenador"
 import Notifications from "../../components/Notifications";
+import TabelaDevisitasDosVisitadores from "../../components/TabelaDeVisitasDosVisitadores"
 
 export default function Visitador() {
   const [users, setUsers] = useState(null);
@@ -33,6 +34,7 @@ export default function Visitador() {
           <>
             <FerramentasVisitadores />
             <Notifications endpoint={"minhas-notificacoes"} />
+            <TabelaDevisitasDosVisitadores />
           </>
         )
       case "supervisor":

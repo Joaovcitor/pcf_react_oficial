@@ -22,7 +22,9 @@ export default function Notifications({ endpoint }) {
       <Nav>
         {notificacoes.length > 0 ? (
           notificacoes.map((notificacaoItem) => (
-            <div key={notificacaoItem.id}>{notificacaoItem.descricao}</div>
+            <div key={notificacaoItem.id}>
+              <p>{notificacaoItem.descricao}</p>
+            </div>
           ))
         ) : (
           <p>Sem notificações no momento.</p>

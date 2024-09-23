@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { primaryColor } from "../../config/colors";
 
+import { Link } from 'react-router-dom';
+
 export const Section = styled.section`
 display: flex;
 justify-content: center;
@@ -17,28 +19,40 @@ h3 {
 }
 `
 
-export const Nav = styled.nav`
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 20px;
-  align-items: start;
-  padding: 10px;
+export const TableRow = styled.tr`
+  border-bottom: 1px solid #ddd;
 
-  a {
-    color: #fff;
-    margin: 0 10px 0 0;
-    font-weight: bold;
+  &:nth-child(even) {
+    background-color: #f3f3f3;
   }
+`;
+
+export const TableCell = styled.td`
+  padding: 12px 15px;
+`;
+
+export const StyledLink = styled(Link)`
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const Table = styled.table`
+  margin: 0 auto;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 10px;
+  color: white;
 
   div {
     margin-bottom: 10px;
     padding: 10px;
-    margin: 10px;
+    margin: 15px;
     background-color: #00070D;
-    -webkit-box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);
     text-align: center;
     border-radius: 5px;
     justify-content: center;

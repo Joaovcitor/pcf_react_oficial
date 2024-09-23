@@ -13,7 +13,8 @@ export default createGlobalStyle`
   body {
     font-family: Arial, Helvetica, sans-serif;
     /* background: #1F3140; */
-    background-color: #2A2F45;
+    /* background-color: #2A2F45; */
+    background-color: #F2EDDC;
   }
 
   html, body, #root {
