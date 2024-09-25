@@ -22,6 +22,21 @@ export const Div = styled.div`
   }
 `;
 
+export const Section = styled.section`
+background-color: #012126;
+max-width: 370px;
+margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  color: white;
+`
+
 export const Form = styled.form`
 display: flex;
 flex-direction: column;

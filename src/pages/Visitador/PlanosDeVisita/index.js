@@ -21,10 +21,11 @@ export default function PlanosDeVisita() {
       <h2>Criar Planos de visitas</h2>
 
       {childrens.map(child => {
-        return (<Nav key={child.id}>
-          <p>Nome: <span>{child.name}</span></p>
-          <Link className="link" to={`/planos/criarplano/${child.id}`}>Criar Plano</Link>
-        </Nav>)
+        return (
+          <Nav key={child.id}>
+            <p>Nome: <span>{child.name}</span></p>
+            <Link className="link" to={`/planos/criarplano/${child.id}`}>Criar Plano</Link>
+          </Nav>)
       })}
     </Div>
   );

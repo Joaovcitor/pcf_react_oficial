@@ -31,11 +31,23 @@ export const Div = styled.form`
     background-color: transparent;
     color: white;
     font-weight: bolder;
+    width: 180px;
+    text-align: center;
+    font-size: 18px;
   }
 
+  option {
+    color: black;
+    background-color: transparent;
+    font-size: 20px;
+  }
+
+
+
   textarea {
-    width: 250px;
+    width: 280px;
     height: 100px;
+    font-size: 18px;
   }
 
   input {

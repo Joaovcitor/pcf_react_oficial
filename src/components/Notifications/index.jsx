@@ -6,13 +6,24 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { Nav, Section } from "./styled";
+import { toast } from "react-toastify";
 
 export default function Notifications({ endpoint }) {
   const [notificacoes, setNotificacao] = useState([]);
   useEffect(() => {
     async function getData() {
-      const response = await axios.get(`/notificacoes/${endpoint}`);
-      setNotificacao(response.data.notificacoes);
+      try {
+        const response = await axios.get(`/notificacoes/${endpoint}`);
+        if (response.status === 200) {
+          return setNotificacao(response.data.notificacoes);
+        }
+      } catch (e) {
+        if (e.response && e.response.status === 404) {
+          toast.warn("Nenhuma notificação foi encontrada");
+        } else {
+          toast.error("Ocorreu um erro ao buscar suas notificações");
+        }
+      }
     }
     getData();
   }, [endpoint]);

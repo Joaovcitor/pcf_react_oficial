@@ -52,7 +52,7 @@ export default function Login() {
       })
 
       toast.success("Coordenador cadastrado com sucesso!");
-      history.push("/")
+      // history.push("/")
 
     } catch (e) {
       const errors = get(e, 'response.data.errors', '');

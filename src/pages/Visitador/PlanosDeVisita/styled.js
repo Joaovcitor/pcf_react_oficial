@@ -28,8 +28,11 @@ export const Div = styled.div`
 
 export const Nav = styled.nav`
   background-color: blue;
-  padding: 10px;
+  padding: 20px;
   border-radius: 10px;
+  box-shadow: -10px -2px 0px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: -10px -2px 0px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: -10px -2px 0px 0px rgba(0,0,0,0.75);
 
   span {
     color: #F2B441;

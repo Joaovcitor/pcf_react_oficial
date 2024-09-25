@@ -9,8 +9,12 @@ justify-content: center;
 text-align: center;
 flex-direction: column;
 
+p {
+  color: black;
+}
+
 h3 {
-  color: white;
+  color: black;
   display: flex;
   text-align: center;
   justify-content: center;

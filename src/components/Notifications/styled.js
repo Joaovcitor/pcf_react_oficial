@@ -7,6 +7,10 @@ justify-content: center;
 text-align: center;
 flex-direction: column;
 
+p {
+  color: black;
+}
+
 h3 {
   color: white;
   display: flex;

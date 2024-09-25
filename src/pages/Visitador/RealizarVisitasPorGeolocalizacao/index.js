@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "../../../services/axios";
 import { Div, Section, Sections } from "./styled";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 
 export default function dados({ match }) {
   const { id } = match.params;
@@ -26,7 +27,7 @@ export default function dados({ match }) {
           return (
             <Section key={visitas.id}>
               <p>
-                Data da realização da visita: {visitas.data_que_vai_ser_realizada}
+                Data da realização da visita: {format(new Date(visitas.data_que_vai_ser_realizada), "dd/mm/yyyy")}
               </p>
               <Link
                 className="links"
@@ -40,6 +41,7 @@ export default function dados({ match }) {
         })}
       </Div>
       <h2>Visitas pendentes</h2>
+
     </Sections>
   );
 }

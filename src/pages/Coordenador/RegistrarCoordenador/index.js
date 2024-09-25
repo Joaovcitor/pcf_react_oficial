@@ -3,21 +3,16 @@ import axios from "../../../services/axios";
 import history from "../../../services/history";
 
 import { toast } from "react-toastify";
-import { get } from "lodash"
 import { isEmail } from "validator";
-import { Container } from "../../../styles/GlobalStyle";
-import { Form } from "./styled"
+import { get } from "lodash"
+import { Form, Section } from "./styled"
 
 export default function Login() {
   const [name, setNome] = useState('');
-  const [endereco, setEndereco] = useState('');
-  const [rg, setRg] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmepassword, setConfirmarSenha] = useState('');
   const [cpf, setCpf] = useState('');
-  const [bairro, setBairro] = useState('');
-  const [contato, setContato] = useState('');
-  const [dataDeNascimento, setDataNascimento] = useState('');
-  const [gestante, setGestante] = useState('');
-
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -29,19 +24,34 @@ export default function Login() {
       toast.error("nome deve ter entre 3 a 255 caracteres")
     }
 
+    if (!isEmail(email)) {
+      formsErrors = true;
+      toast.error("e-mail inválido")
+    }
+
+    if (password.length < 3 || password.length > 255) {
+      formsErrors = true;
+      toast.error("senha deve ter entre 3 a 255 caracteres")
+    }
+
     if (cpf.length < 11 || cpf.length > 11) {
       formsErrors = true;
       toast.error("CPF deve ter 11 digítos")
+    }
+
+    if (password !== confirmepassword) {
+      formsErrors = true;
+      toast.error("Senhas não são iguais!")
     }
 
     if (formsErrors) return;
 
     try {
       await axios.post("/coordenador/cadastro", {
-        name, endereco, rg, cpf, bairro, contato, gestante, dataDeNascimento
+        name, password, email, cpf, confirmepassword
       })
 
-      toast.success("Cuidador criado com sucesso!");
+      toast.success("Coordenador cadastrado com sucesso!");
       history.push("/")
 
     } catch (e) {
@@ -59,47 +69,37 @@ export default function Login() {
           }
         });
       }
+
     }
+
   }
 
   return (
-    <Container>
-      <h2>Cadastrar novo Coordenador</h2>
+    <Section>
+      <h2>Cadastrar novo coordenador</h2>
       <Form onSubmit={handleSubmit}>
         <label htmlFor="nome">
           Nome:
           <input type="text" value={name} onChange={e => setNome(e.target.value)} placeholder="Digite seu nome" />
         </label>
+        <label htmlFor="email">
+          E-mail:
+          <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Digite seu e-mail" />
+        </label>
+        <label htmlFor="password">
+          Senha:
+          <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+        </label>
+        <label htmlFor="confirmepassword">
+          Confirme sua senha:
+          <input type="password" value={confirmepassword} onChange={e => setConfirmarSenha(e.target.value)} />
+        </label>
         <label htmlFor="cpf">
-          CPF*:
-          <input type="text" value={cpf} onChange={e => setCpf(e.target.value)} placeholder="Digite seu e-mail" />
-        </label>
-        <label htmlFor="rg">
-          RG:
-          <input type="tex" value={rg} onChange={e => setRg(e.target.value)} />
-        </label>
-        <label htmlFor="endereco">
-          Endereço*:
-          <input type="password" value={endereco} onChange={e => setEndereco(e.target.value)} />
-        </label>
-        <label htmlFor="bairro">
-          Bairro*:
-          <input type="text" value={bairro} onChange={e => setBairro(e.target.value)} />
-        </label>
-        <label htmlFor="contato">
-          Contato:
-          <input type="text" value={contato} onChange={e => setContato(e.target.value)} />
-        </label>
-        <label htmlFor="dataDeNascimento">
-          Data de Nascimento*:
-          <input type="date" value={dataDeNascimento} onChange={e => setDataNascimento(e.target.value)} />
-        </label>
-        <label htmlFor="gestante">
-          Gestante:
-          <input type="checkbox" value={gestante} onChange={e => setGestante(e.target.value)} />
+          CPF:
+          <input type="text" value={cpf} onChange={e => setCpf(e.target.value)} />
         </label>
         <button type="submit">Cadastrar</button>
       </Form>
-    </Container>
+    </Section>
   );
 }

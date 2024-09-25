@@ -32,7 +32,7 @@ export const Div = styled.div`
 export const Sections = styled.section`
 text-align: center;
   h2 {
-    color: white;
+    color: black;
   }
 `
 

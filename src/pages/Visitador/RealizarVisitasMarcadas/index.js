@@ -11,13 +11,6 @@ export default function Dados({ match }) {
   const [dataInicio, setDataInicio] = useState(null);
   const [dataFim, setDataFim] = useState(null);
 
-  function teste() {
-    const data_inicio = new Date().toLocaleString();
-    const data_fim = new Date().toLocaleString();
-    console.log("Fim: " + data_fim)
-    console.log("inicio: " + data_inicio)
-  }
-
   async function iniciarVisita(e) {
     e.preventDefault();
 
@@ -25,18 +18,15 @@ export default function Dados({ match }) {
     setDataInicio(data_inicio);
 
     try {
-      const response = await axios.post(`/visitasporgeolo/realizarvisita/${id}`, {
+      await axios.post(`/visitasporgeolo/realizarvisita/${id}`, {
         idVisita: id,
         latitude: location.latitude,
         longitude: location.longitude,
         hora_inicio: data_inicio
       });
 
-      if (response.data.success) {
-        toast.success("Visita iniciada com sucesso!");
-      } else {
-        toast.error("Erro ao iniciar a visita.");
-      }
+      toast.success("Visita iniciada com sucesso!");
+
     } catch (error) {
       console.warn("Erro ao iniciar a visita: " + error.message);
     }
@@ -49,14 +39,20 @@ export default function Dados({ match }) {
     setDataFim(data_fim);
 
     try {
-      const response = await axios.post(`/visitasporgeolo/finalizar-visita/${id}`, {
+      const verificarVisitaFinalizada = await axios.get(`/visitasporgeolo/verificar-visita/${id}`);
+      console.log(verificarVisitaFinalizada.data.visita.longitude)
+      if (!verificarVisitaFinalizada.data.visita.latitude && !verificarVisitaFinalizada.data.visita.longitude) {
+        return toast.warning("Primeiro inicie a visita!")
+      }
+      await axios.put(`/visitasporgeolo/finalizar-visita/${id}`, {
         id,
         latitude_final: location_final.latitude_final,
         longitude_final: location_final.longitude_final,
         hora_fim: dataFim,
       });
 
-      toast.warn(response.data)
+      toast.success("Visita finalizada")
+
     } catch (error) {
       toast.error("Ocorreu um erro ao finalizar a visita.")
       console.warn(error);

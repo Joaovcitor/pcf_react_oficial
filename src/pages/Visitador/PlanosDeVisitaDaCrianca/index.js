@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
+import { format, parseISO } from "date-fns";
 import { Div, Section } from "./styled";
 import { Link } from "react-router-dom";
 
@@ -24,7 +25,9 @@ export default function Login({ match }) {
       <Div>
         {plano.map(planos => (
           <Section key={planos.id}>
-            <p>Criado no dia {planos.createdAt}</p>
+            <p>Criado no dia {planos.createdAt
+              ? format(new Date(planos.createdAt), "dd/MM/yyyy")
+              : "Data inválida"}</p>
             <p>Objetivo: {planos.objetivo}</p>
             <p>Dificuldade da atividade: {planos.grau_de_dificuldade_objetivo}</p>
             <p>Momento 1: {planos.etapa1}</p>
