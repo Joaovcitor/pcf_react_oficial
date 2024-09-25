@@ -2,33 +2,25 @@
 import React, { useEffect, useState } from "react";
 import { Div } from "./styled";
 import { get } from "lodash";
-import BuscarCriancasPorId from "../../../utils/BuscarCriancasPorId";
 import { toast } from "react-toastify";
 import axios from "../../../services/axios"
 
 export default function Login({ match }) {
   const { id } = match.params;
-  const [child, setChild] = useState(null);
   const [dayOfVisit, setDayOfVisit] = useState(null);
   const [period, setPeriod] = useState(null);
 
 
-  useEffect(() => {
-    async function fetchChildData() {
-      const childData = await BuscarCriancasPorId(id);
-      setChild(childData);
+  const handleSubmitEdit = async (e) => {
+    if (dayOfVisit.value === "Selecione" || period.value === "Selecione") {
+      return toast.error("Selecione os campos")
     }
-
-    fetchChildData();
-  }, [id]);
-
-  const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await axios.post(`/tabelas/create/${id}`, {
-        dayOfVisit, period, childVisited: child.name,
+      await axios.put(`/tabelas/edit/${id}`, {
+        dayOfVisit, period,
       });
-      toast.success("Tabela criada com sucesso!")
+      toast.success("Tabela editada com sucesso!")
     } catch (e) {
       const errors = get(e, 'response.data.errors', '');
       if (typeof errors === 'string') {
@@ -47,13 +39,34 @@ export default function Login({ match }) {
     }
   }
 
-  if (!child) {
-    return <p>Carregando...</p>;
+  const handleSubmitDelete = async (e) => {
+
+    e.preventDefault()
+    try {
+      await axios.delete(`/tabelas/delete/${id}`);
+      toast.success("Tabela deletada com sucesso!")
+      history.push("/")
+    } catch (e) {
+      const errors = get(e, 'response.data.errors', '');
+      if (typeof errors === 'string') {
+        toast.error(errors);
+      } else if (Array.isArray(errors)) {
+        errors.forEach(error => {
+          toast.error(error);
+        });
+      } else if (typeof errors === 'object') {
+        Object.values(errors).forEach(error => {
+          if (typeof error === 'string') {
+            toast.error(error);
+          }
+        });
+      }
+    }
   }
 
   return (
-    <Div onSubmit={handleSubmit}>
-      <h2>Criar tabela de visita do {child.name}</h2>
+    <Div>
+      <h2>Editar tabela de visita</h2>
       <p>Qual a o dia da semana dessa visita?</p>
       <select name="dayOfVisita" onChange={e => setDayOfVisit(e.target.value)} id="dayOfVisita">
         <option value="Selecione">Selecione</option>
@@ -69,7 +82,8 @@ export default function Login({ match }) {
         <option value="Manhã">Manhã</option>
         <option value="Tarde">Tarde</option>
       </select>
-      <button type="submit">Criar</button>
+      <button onClick={handleSubmitEdit}>Editar</button>
+      <button onClick={handleSubmitDelete}>Excluir</button>
     </Div>
   );
 }

@@ -38,7 +38,10 @@ export default function Notifications() {
                     <td>{visita.childVisited}</td>
                     <td>{visita.period}</td>
                     <td>
-                      <Link to={`/tabelas/editar`} className="links">
+                      <Link
+                        to={`/tabelas/editar/${visita.id}`}
+                        className="links"
+                      >
                         Acessar
                       </Link>
                     </td>
