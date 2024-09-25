@@ -20,6 +20,8 @@ import RegistrarSupervisor from "../pages/Coordenador/RegistrarSupervisor";
 import RegistrarVisitador from "../pages/Supervisor/RegistrarVisitador";
 import PlanosDeVisitaDaCrianca from "../pages/Visitador/PlanosDeVisitaDaCrianca";
 import EditarPlanosDeVisitas from "../pages/Visitador/EditarPlanosDeVisitas";
+import Tabelas from "../pages/Visitador/Tabelas";
+
 
 
 
@@ -107,6 +109,12 @@ export default function Routes() {
         exact
         path="/planos/editar/:id"
         component={EditarPlanosDeVisitas}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/tabelas/criar/:id"
+        component={Tabelas}
         isClosed
       />
       <MyRoute path="*" component={Page404} />

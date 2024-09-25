@@ -38,7 +38,7 @@ export default function Login({ match }) {
         </Info>
         <Info>
           <p>Tabela de visita</p>
-          <Link>Acessar</Link>
+          <Link to={`/tabelas/criar/${child.id}`}>Acessar</Link>
         </Info>
       </Infos>
       <h1>Em breve terá um relatório de desempenho da criança</h1>
