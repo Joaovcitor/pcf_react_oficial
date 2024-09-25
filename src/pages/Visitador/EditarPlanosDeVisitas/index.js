@@ -12,7 +12,10 @@ export default function PlanosDeVisita({ match }) {
     etapa1: "",
     etapa2: "",
     etapa3: "",
+    observacao: "",
+    conseguiu_fazer: "",
   });
+  const [visitaFeita, setVisitaFeita] = useState({})
 
   useEffect(() => {
     async function getDataPlanos() {
@@ -24,7 +27,10 @@ export default function PlanosDeVisita({ match }) {
           etapa1: plano.etapa1 || "",
           etapa2: plano.etapa2 || "",
           etapa3: plano.etapa3 || "",
+          observacao: plano.observacao || "",
+          conseguiu_fazer: plano.conseguiu_fazer || ""
         });
+        setVisitaFeita(response.data.visitaFeita)
       } catch (error) {
         console.log(error)
         toast.error('Erro ao buscar os dados do plano.');
@@ -93,6 +99,23 @@ export default function PlanosDeVisita({ match }) {
         onChange={handleInputChange}
         id="etapa3"
       />
+      {visitaFeita.finalizou ? (
+        <>
+          <p>Observação</p>
+          <textarea
+            name="observacao"
+            value={formData.observacao}
+            onChange={handleInputChange}
+            id="observacao"
+          />
+          <p>Conseguiu fazer:</p>
+          <select name="conseguiu_fazer" value={formData.conseguiu_fazer} onChange={handleInputChange} id="conseguiu_fazer">
+            <option value="Com ajuda">Com ajuda</option>
+            <option value="Sem ajuda">Sem ajuda</option>
+            <option value="Não quis fazer">Não quis fazer</option>
+          </select>
+        </>
+      ) : (<p>Você não terminou essa visita</p>)}
       <button type="submit">Editar Plano</button>
     </Div>
   );

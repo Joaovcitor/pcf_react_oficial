@@ -33,6 +33,10 @@ export const Div = styled.form`
     font-weight: bolder;
   }
 
+  option {
+    color: black;
+  }
+
   textarea {
     width: 250px;
     height: 100px;
