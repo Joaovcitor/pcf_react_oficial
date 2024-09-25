@@ -27,7 +27,7 @@ export default function dados({ match }) {
           return (
             <Section key={visitas.id}>
               <p>
-                Data da realização da visita: {format(new Date(visitas.data_que_vai_ser_realizada), "dd/mm/yyyy")}
+                Data da realização da visita: {format(new Date(visitas.data_que_vai_ser_realizada), "dd/MM/yyyy HH:mm")}
               </p>
               <Link
                 className="links"
