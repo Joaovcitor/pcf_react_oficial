@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
+import history from "../../../services/history";
 import { Div } from "./styled";
 import { get } from "lodash";
 import { toast } from "react-toastify";
@@ -21,6 +22,7 @@ export default function Login({ match }) {
         dayOfVisit, period,
       });
       toast.success("Tabela editada com sucesso!")
+      history.push("/")
     } catch (e) {
       const errors = get(e, 'response.data.errors', '');
       if (typeof errors === 'string') {

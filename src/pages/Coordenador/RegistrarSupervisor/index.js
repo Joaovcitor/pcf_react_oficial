@@ -51,8 +51,8 @@ export default function Login() {
         name, password, email, cpf, confirmepassword
       })
 
-      toast.success("Coordenador cadastrado com sucesso!");
-      // history.push("/")
+      toast.success("Supervisor cadastrado com sucesso!");
+      history.push("/")
 
     } catch (e) {
       const errors = get(e, 'response.data.errors', '');

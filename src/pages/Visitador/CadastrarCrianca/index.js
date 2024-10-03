@@ -14,7 +14,7 @@ export default function Login({ match }) {
   const { id } = match.params;
   const [name, setNome] = useState("");
   const [nis, setNis] = useState("");
-  const [isBpc, setBpc] = useState("");
+  const [isBpc, setBpc] = useState(false);
   const [sexo, setSexo] = useState("");
   const [born, setDataNascimento] = useState("");
   const [cuidador, setCaregiver] = useState("");
@@ -34,6 +34,8 @@ export default function Login({ match }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    console.log(sexo)
+
 
     let formsErrors = false;
 
@@ -53,6 +55,7 @@ export default function Login({ match }) {
         nis,
         caregiverId: id,
       });
+
 
       toast.success("criança criada com sucesso!");
       history.push("/");
@@ -103,6 +106,7 @@ export default function Login({ match }) {
           onChange={(e) => setSexo(e.target.value)}
           id="sexo"
         >
+          <option value="Selecione">Selecione</option>
           <option value="Masculino">Masculino</option>
           <option value="Feminino">Feminino</option>
         </select>

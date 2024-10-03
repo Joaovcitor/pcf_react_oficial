@@ -4,11 +4,12 @@ export const Div = styled.div`
  display: flex;
   justify-content: center;
   flex-direction: column;
+  text-align: center;
   margin: 20px;
 
   p {
     font-size: 18px;
-    color: white;
+    color: black;
   }
 
   h2 {
@@ -22,6 +23,12 @@ export const Div = styled.div`
     color: white;
     text-align: center;
     font-size: 18px;
+  }
+
+  button {
+    width: 200px;
+    margin: 0 auto;
+    margin-bottom: 10px;
   }
 `;
 

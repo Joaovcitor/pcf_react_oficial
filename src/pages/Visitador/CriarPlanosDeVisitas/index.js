@@ -99,6 +99,7 @@ export default function PlanosDeVisita({ match }) {
       <textarea name="objetivo" onChange={e => setObjetivo(e.target.value)} id="objetivo"></textarea>
       <p>Qual a dificuldade dessa atividade?</p>
       <select name="grau_de_dificuldade_objetivo" onChange={e => setGrau(e.target.value)} id="grau_de_dificuldade_objetivo">
+        <option value="Selecione">Selecione</option>
         <option value="Fácil">Fácil</option>
         <option value="Média">Média</option>
         <option value="Dificil">Dificil</option>

@@ -13,7 +13,7 @@ export default function PlanosDeVisita({ match }) {
     etapa2: "",
     etapa3: "",
     observacao: "",
-    conseguiu_fazer: "",
+    conseguiu_fazer: "Com ajuda",
   });
   const [visitaFeita, setVisitaFeita] = useState({})
 
@@ -28,7 +28,7 @@ export default function PlanosDeVisita({ match }) {
           etapa2: plano.etapa2 || "",
           etapa3: plano.etapa3 || "",
           observacao: plano.observacao || "",
-          conseguiu_fazer: plano.conseguiu_fazer || ""
+          conseguiu_fazer: plano.conseguiu_fazer || "Com ajuda"
         });
         setVisitaFeita(response.data.visitaFeita)
       } catch (error) {
