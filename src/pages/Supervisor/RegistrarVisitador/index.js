@@ -19,37 +19,7 @@ export default function Login() {
 
 
   async function handleSubmit(e) {
-    e.preventDefault();
-
-    let formsErrors = false;
-
-    if (name.length < 3 || name.length > 255) {
-      formsErrors = true;
-      toast.error("nome deve ter entre 3 a 255 caracteres");
-    }
-
-    if (!isEmail(email)) {
-      formsErrors = true;
-      toast.error("e-mail inválido");
-    }
-
-    if (password.length < 3 || password.length > 255) {
-      formsErrors = true;
-      toast.error("senha deve ter entre 3 a 255 caracteres");
-    }
-
-    if (cpf.length < 11 || cpf.length > 11) {
-      formsErrors = true;
-      toast.error("CPF deve ter 11 digítos");
-    }
-
-    if (password !== confirmepassword) {
-      formsErrors = true;
-      toast.error("Senhas não são iguais!");
-    }
-
-    if (formsErrors) return;
-
+    e.preventDefault()
     try {
       await axios.post("/supervisor/cadastrar-visitador", {
         name,

@@ -22,6 +22,7 @@ import PlanosDeVisitaDaCrianca from "../pages/Visitador/PlanosDeVisitaDaCrianca"
 import EditarPlanosDeVisitas from "../pages/Visitador/EditarPlanosDeVisitas";
 import Tabelas from "../pages/Visitador/Tabelas";
 import EditarEExcluirTabelas from "../pages/Visitador/EditarEExcluirTabelas";
+import Visitadores from "../pages/Supervisor/Visitadores"
 
 
 import Page404 from "../pages/Page404";
@@ -116,6 +117,18 @@ export default function Routes() {
         exact
         path="/tabelas/editar/:id"
         component={EditarEExcluirTabelas}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/meus-visitadores"
+        component={Visitadores}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/cuidadores"
+        component={Cuidadores}
         isClosed
       />
       <MyRoute path="*" component={Page404} />
