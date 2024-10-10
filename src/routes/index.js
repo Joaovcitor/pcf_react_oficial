@@ -22,8 +22,8 @@ import PlanosDeVisitaDaCrianca from "../pages/Visitador/PlanosDeVisitaDaCrianca"
 import EditarPlanosDeVisitas from "../pages/Visitador/EditarPlanosDeVisitas";
 import Tabelas from "../pages/Visitador/Tabelas";
 import EditarEExcluirTabelas from "../pages/Visitador/EditarEExcluirTabelas";
-import Visitadores from "../pages/Supervisor/Visitadores"
-
+import Visitadores from "../pages/Supervisor/Visitadores";
+import Notifications from "../pages/Notificacoes/CriarNotificacoes";
 
 import Page404 from "../pages/Page404";
 
@@ -89,12 +89,7 @@ export default function Routes() {
         component={RealizarVisitasPorGeolocalizacao}
         isClosed
       />
-      <MyRoute
-        exact
-        path="/formularios/:id"
-        component={Criancas}
-        isClosed
-      />
+      <MyRoute exact path="/formularios/:id" component={Criancas} isClosed />
       <MyRoute
         exact
         path="/planos/planos-do-beneficiario/:id"
@@ -107,12 +102,7 @@ export default function Routes() {
         component={EditarPlanosDeVisitas}
         isClosed
       />
-      <MyRoute
-        exact
-        path="/tabelas/criar/:id"
-        component={Tabelas}
-        isClosed
-      />
+      <MyRoute exact path="/tabelas/criar/:id" component={Tabelas} isClosed />
       <MyRoute
         exact
         path="/tabelas/editar/:id"
@@ -125,12 +115,9 @@ export default function Routes() {
         component={Visitadores}
         isClosed
       />
-      <MyRoute
-        exact
-        path="/cuidadores"
-        component={Cuidadores}
-        isClosed
-      />
+      <MyRoute exact path="/cuidadores" component={Cuidadores} isClosed />
+      <MyRoute exact path="/notificacoes" component={Notifications} isClosed />
+
       <MyRoute path="*" component={Page404} />
     </Switch>
   );

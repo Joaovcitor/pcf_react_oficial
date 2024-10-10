@@ -34,6 +34,11 @@ export default function Notifications({ endpoint }) {
         {notificacoes.length > 0 ? (
           notificacoes.map((notificacaoItem) => (
             <div key={notificacaoItem.id}>
+              <p>
+                Tipo da notificação:{" "}
+                <span>{notificacaoItem.notificacao_tipo}</span>
+              </p>
+              <p>Descrição: </p>
               <p>{notificacaoItem.descricao}</p>
             </div>
           ))
