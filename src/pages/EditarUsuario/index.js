@@ -1,38 +1,36 @@
-import React, { useState } from "react";
-import axios from "../../../services/axios";
-import history from "../../../services/history";
+import React, { useEffect, useState } from "react";
+import axios from "../../services/axios";
+import history from "../../services/history";
 
 import { toast } from "react-toastify";
 import { get } from "lodash";
+import { useSelector, useDispatch } from "react-redux";
 import { isEmail } from "validator";
-import { Container } from "../../../styles/GlobalStyle";
+import { Container } from "../../styles/GlobalStyle";
 import { Form } from "./styled";
 
+import * as actions from "../../store/modules/auth/actions";
+
 export default function Login() {
-  const [name, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmepassword, setConfirmarSenha] = useState("");
-  const [cpf, setCpf] = useState("");
-  const [cras, setCras] = useState("");
-  const [territorio, setTerritorio] = useState("");
 
+  const dispatch = useDispatch();
+
+  const emailStored = useSelector((state) => state.auth.user.email);
+  const id = useSelector((state) => state.auth.user.id);
+
+  React.useEffect(() => {
+    if (!id) return;
+    setEmail(emailStored);
+  }, [id, emailStored]);
 
   async function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
+    dispatch(actions.registerRequest({ email, password, id }));
     try {
-      await axios.post("/supervisor/cadastrar-visitador", {
-        name,
-        password,
-        email,
-        cpf,
-        confirmepassword,
-        cras,
-        territorio
-      });
-
-      toast.success("Visitador cadastrado com sucesso!");
-      history.push("/");
+      toast.success("oi");
     } catch (e) {
       const errors = get(e, "response.data.errors", "");
       if (typeof errors === "string") {
@@ -53,17 +51,8 @@ export default function Login() {
 
   return (
     <Container>
-      <h2>Cadastrar novo Visitador</h2>
+      <h2>Editar suas informações</h2>
       <Form onSubmit={handleSubmit}>
-        <label htmlFor="nome">
-          Nome:
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setNome(e.target.value)}
-            placeholder="Digite seu nome"
-          />
-        </label>
         <label htmlFor="email">
           E-mail:
           <input
@@ -89,31 +78,7 @@ export default function Login() {
             onChange={(e) => setConfirmarSenha(e.target.value)}
           />
         </label>
-        <label htmlFor="cpf">
-          CPF:
-          <input
-            type="text"
-            value={cpf}
-            onChange={(e) => setCpf(e.target.value)}
-          />
-        </label>
-        <label htmlFor="territorio">
-          Território:
-          <input
-            type="text"
-            value={territorio}
-            onChange={(e) => setTerritorio(e.target.value)}
-          />
-        </label>
-        <label htmlFor="cras">
-          CRAS:
-          <input
-            type="text"
-            value={cras}
-            onChange={(e) => setCras(e.target.value)}
-          />
-        </label>
-        <button type="submit">Cadastrar</button>
+        <button type="submit">Editar</button>
       </Form>
     </Container>
   );

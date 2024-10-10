@@ -24,6 +24,7 @@ import Tabelas from "../pages/Visitador/Tabelas";
 import EditarEExcluirTabelas from "../pages/Visitador/EditarEExcluirTabelas";
 import Visitadores from "../pages/Supervisor/Visitadores";
 import Notifications from "../pages/Notificacoes/CriarNotificacoes";
+import EditarUsuario from "../pages/EditarUsuario";
 
 import Page404 from "../pages/Page404";
 
@@ -117,6 +118,12 @@ export default function Routes() {
       />
       <MyRoute exact path="/cuidadores" component={Cuidadores} isClosed />
       <MyRoute exact path="/notificacoes" component={Notifications} isClosed />
+      <MyRoute
+        exact
+        path="/editar-usuario"
+        component={EditarUsuario}
+        isClosed
+      />
 
       <MyRoute path="*" component={Page404} />
     </Switch>
