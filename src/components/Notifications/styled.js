@@ -2,24 +2,24 @@ import styled from "styled-components";
 import { primaryColor } from "../../config/colors";
 
 export const Section = styled.section`
-display: flex;
-justify-content: center;
-text-align: center;
-flex-direction: column;
-
-p {
-  color: black;
-}
-
-h3 {
-  color: white;
   display: flex;
-  text-align: center;
   justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-}
-`
+  text-align: center;
+  flex-direction: column;
+
+  p {
+    color: white;
+  }
+
+  h3 {
+    color: white;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+`;
 
 export const Nav = styled.nav`
   padding: 20px;
@@ -39,10 +39,10 @@ export const Nav = styled.nav`
     margin-bottom: 10px;
     padding: 10px;
     margin: 10px;
-    background-color: #00070D;
-    -webkit-box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);
+    background-color: #00070d;
+    -webkit-box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
     text-align: center;
     border-radius: 5px;
     justify-content: center;

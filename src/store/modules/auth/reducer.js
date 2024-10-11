@@ -4,20 +4,33 @@ const initialState = {
   isLoggedIn: false,
   token: false,
   user: {},
-  isLoading: false
+  isLoading: false,
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case types.LOGIN_SUCCESS: {
-      const newState = { ...state }
+      const newState = { ...state };
       newState.isLoggedIn = true;
       newState.token = action.payload.token;
       newState.user = action.payload.user;
-      return newState
+      return newState;
     }
     case types.LOGIN_FAILURE: {
-      const newState = { ...initialState }
+      const newState = { ...initialState };
+      return newState;
+    }
+    case types.REGISTER_SUCCESS: {
+      const newState = { ...initialState };
+      newState.user.email = action.payload.email;
+      return newState;
+    }
+    case types.REGISTER_FAILURE: {
+      const newState = { ...initialState };
+      return newState;
+    }
+    case types.REGISTER_REQUEST: {
+      const newState = { ...initialState };
       return newState;
     }
     default:
