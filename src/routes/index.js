@@ -22,9 +22,15 @@ import PlanosDeVisitaDaCrianca from "../pages/Visitador/PlanosDeVisitaDaCrianca"
 import EditarPlanosDeVisitas from "../pages/Visitador/EditarPlanosDeVisitas";
 import Tabelas from "../pages/Visitador/Tabelas";
 import EditarEExcluirTabelas from "../pages/Visitador/EditarEExcluirTabelas";
+<<<<<<< HEAD
 import Visitadores from "../pages/Supervisor/Visitadores";
 import Notifications from "../pages/Notificacoes/CriarNotificacoes";
 import EditarUsuario from "../pages/EditarUsuario";
+=======
+import Visitadores from "../pages/Supervisor/Visitadores"
+import RelatoriosVisitadores from "../pages/Supervisor/RelatoriosVisitadores"
+
+>>>>>>> main
 
 import Page404 from "../pages/Page404";
 
@@ -124,7 +130,16 @@ export default function Routes() {
         component={EditarUsuario}
         isClosed
       />
+<<<<<<< HEAD
 
+=======
+      <MyRoute
+        exact
+        path="/visitadores/detalhes/:id"
+        component={RelatoriosVisitadores}
+        isClosed
+      />
+>>>>>>> main
       <MyRoute path="*" component={Page404} />
     </Switch>
   );
