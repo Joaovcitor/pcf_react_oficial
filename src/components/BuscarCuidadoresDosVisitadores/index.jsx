@@ -9,6 +9,7 @@ export default function dados() {
   useEffect(() => {
     async function getData() {
       const response = await axios.get("/cuidador/showcuidadores");
+      console.log(response.data);
       setCuidadores(response.data.cuidadores);
     }
     getData();
@@ -20,8 +21,10 @@ export default function dados() {
         return (
           <div key={cuidador.id}>
             <p>Nome: {cuidador.name}</p>
+            <p>Gravida: {cuidador.pregnant ? "Sim" : "Não"}</p>
+            {cuidador.pregnant ? <p>Semanas: {cuidador.week_pregnant}</p> : ""}
             <Link className="links" to={`/cuidadores/editar/${cuidador.id}`}>
-              Editar Informações
+              Ver Informações
             </Link>
           </div>
         );

@@ -22,15 +22,14 @@ import PlanosDeVisitaDaCrianca from "../pages/Visitador/PlanosDeVisitaDaCrianca"
 import EditarPlanosDeVisitas from "../pages/Visitador/EditarPlanosDeVisitas";
 import Tabelas from "../pages/Visitador/Tabelas";
 import EditarEExcluirTabelas from "../pages/Visitador/EditarEExcluirTabelas";
-<<<<<<< HEAD
 import Visitadores from "../pages/Supervisor/Visitadores";
 import Notifications from "../pages/Notificacoes/CriarNotificacoes";
 import EditarUsuario from "../pages/EditarUsuario";
-=======
-import Visitadores from "../pages/Supervisor/Visitadores"
 import RelatoriosVisitadores from "../pages/Supervisor/RelatoriosVisitadores"
+import VisitasFeitasPelosVisitadores from "../pages/Supervisor/VisitasFeitasPelosVisitadores"
+import ValidarBeneficiarios from "../pages/Supervisor/ValidarBeneficiarios"
+import Supervisores from "../pages/Coordenador/Supervisores"
 
->>>>>>> main
 
 import Page404 from "../pages/Page404";
 
@@ -130,17 +129,31 @@ export default function Routes() {
         component={EditarUsuario}
         isClosed
       />
-<<<<<<< HEAD
-
-=======
       <MyRoute
         exact
         path="/visitadores/detalhes/:id"
         component={RelatoriosVisitadores}
         isClosed
       />
->>>>>>> main
+      <MyRoute
+        exact
+        path="/visitas/:id"
+        component={VisitasFeitasPelosVisitadores}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/beneficiarios-pendente"
+        component={ValidarBeneficiarios}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/supervisores"
+        component={Supervisores}
+        isClosed
+      />
       <MyRoute path="*" component={Page404} />
-    </Switch>
+    </Switch >
   );
 }

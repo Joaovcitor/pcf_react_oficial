@@ -29,24 +29,6 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
     dispatch(actions.registerRequest({ email, password, id }));
-    try {
-      toast.success("oi");
-    } catch (e) {
-      const errors = get(e, "response.data.errors", "");
-      if (typeof errors === "string") {
-        toast.error(errors);
-      } else if (Array.isArray(errors)) {
-        errors.forEach((error) => {
-          toast.error(error);
-        });
-      } else if (typeof errors === "object") {
-        Object.values(errors).forEach((error) => {
-          if (typeof error === "string") {
-            toast.error(error);
-          }
-        });
-      }
-    }
   }
 
   return (

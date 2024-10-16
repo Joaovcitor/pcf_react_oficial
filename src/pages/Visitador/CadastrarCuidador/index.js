@@ -43,7 +43,7 @@ export default function Login() {
 
     try {
       const response = await axios.post("/cuidador/cadastro", {
-        name, endereco, rg, cpf, bairro, contato, gestante, born, week_pregnant
+        name, endereco, rg, cpf, bairro, contato, pregnant: gestante, born, week_pregnant
       })
 
       console.log(gestante)

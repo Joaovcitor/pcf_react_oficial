@@ -1,6 +1,11 @@
 import React from "react";
 import { CiCompass1 } from "react-icons/ci";
-import { IoPersonAdd, IoPeopleSharp, IoReader, IoPeopleCircleSharp } from "react-icons/io5";
+import {
+  IoPersonAdd,
+  IoPeopleSharp,
+  IoReader,
+  IoPeopleCircleSharp,
+} from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -12,30 +17,30 @@ export default function Header() {
       <h3>Serviços e ferramentas</h3>
       <Nav>
         <div>
-          <IoPersonAdd size={38} style={{ color: 'white' }} />
+          <IoPersonAdd size={38} style={{ color: "white" }} />
           <p>Cadastrar Visitador</p>
           <Link className="links" to="/cadastrar-visitador">
             Acessar
           </Link>
         </div>
         <div>
-          <IoPeopleSharp size={38} style={{ color: 'white' }}/>
+          <IoPeopleSharp size={38} style={{ color: "white" }} />
           <p>Visitadores</p>
           <Link className="links" to="/meus-visitadores">
             Acessar
           </Link>
         </div>
         <div>
-          <IoReader size={38} style={{ color: 'white' }} />
+          <IoReader size={38} style={{ color: "white" }} />
           <p>Notificações</p>
           <Link className="links" to="/notificacoes">
             Acessar
           </Link>
         </div>
         <div>
-          <IoPeopleCircleSharp size={38} style={{color: 'white'}} />
+          <IoPeopleCircleSharp size={38} style={{ color: "white" }} />
           <p>Validar Adesão</p>
-          <Link className="links" to="/">
+          <Link className="links" to="/beneficiarios-pendente">
             Acessar
           </Link>
         </div>
