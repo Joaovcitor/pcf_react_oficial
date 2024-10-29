@@ -26,11 +26,11 @@ export default function Login({ match }) {
       <Infos>
         <Info>
           <p>Formulários 5</p>
-          <Link>Acessar</Link>
+          <Link to={`/formularios5/${child.id}`}>Acessar</Link>
         </Info>
         <Info>
           <p>Formulários 7</p>
-          <Link>Acessar</Link>
+          <Link to={`/formularios7/${child.id}`}>Acessar</Link>
         </Info>
         <Info>
           <p>Planos de visita</p>

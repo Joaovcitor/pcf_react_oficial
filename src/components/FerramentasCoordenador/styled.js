@@ -29,15 +29,34 @@ export const Nav = styled.nav`
     margin: 0 10px 0 0;
     font-weight: bold;
   }
+  p {
+    color: black;
+  }
 
   div {
-    margin-bottom: 10px;
-    padding: 10px;
-    margin: 10px;
-    background-color: ${primaryColor};
-    text-align: center;
-    border-radius: 5px;
-    justify-content: center;
+    box-sizing: border-box;
+  width: 200px;
+  height: 200px;
+  background: rgba(217, 217, 217, 0.58);
+  border: 1px solid white;
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(6px);
+  border-radius: 17px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  user-select: none;
+  font-weight: bolder;
+  color: black;
+  flex-direction: column;
+  margin-left: 10px;
+  &:hover {
+    border: 1px solid black;
+  transform: scale(1.05);
+  }
   }
 
   .links {

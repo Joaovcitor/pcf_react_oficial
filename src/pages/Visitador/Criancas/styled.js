@@ -24,14 +24,18 @@ export const Section = styled.section`
 `;
 
 export const Info = styled.nav`
-  background-color: #2DA657;
   border-radius: 8px;
   padding: 20px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 250px;
+  width: 190px;
+ background: white;
+ border-radius: 10px;
+ transition: border-radius 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   margin: 0 auto;
   justify-content: space-around;
+  box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(190, 190, 190),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
 
   p {
     font-size: 1.2rem;

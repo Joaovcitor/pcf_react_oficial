@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "../../../styles/GlobalStyle";
+import { Div } from "../../../styles/GlobalStyle";
 import BuscarCuidadoresDosVisitadores from "../../../components/BuscarCuidadoresDosVisitadores"
 
 export default function Login() {

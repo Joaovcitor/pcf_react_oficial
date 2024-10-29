@@ -1,216 +1,195 @@
 import React from "react";
 import { Container } from "../../../styles/GlobalStyle";
+import {
+  Questionnaire,
+  Question,
+  Label,
+  Answers,
+  AnswerLabel,
+  Area,
+  SubmitButton,
+} from "./styled";
 
 export default function Etapa1() {
   return (
     <Container>
-      <div className="questionnaire">
-        <div className="question">
-          <label>Dá mostras de prazer e desconforto?</label>
-          <div className="answers">
-            <label>
+      <Questionnaire>
+        <Question>
+          <Label>Compreende grande parte do que escuta?</Label>
+          <Answers>
+            <AnswerLabel>
               <input type="radio" name="q1" value="Consegue fazer sozinho" />{" "}
               Consegue fazer sozinho
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q1" value="Consegue fazer com Ajuda" />{" "}
               Consegue fazer com Ajuda
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q1" value="Ainda não consegue fazer" />{" "}
               Ainda não consegue fazer
-            </label>
-          </div>
-          <div className="area">Comunicação e linguagem</div>
-        </div>
-        <div className="question">
-          <label>Sorri frente ao rosto de uma pessoa?</label>
-          <div className="answers">
-            <label>
+            </AnswerLabel>
+          </Answers>
+          <Area>Comunicação e linguagem</Area>
+        </Question>
+
+        <Question>
+          <Label>Fala frases com quatro ou mais palavras?</Label>
+          <Answers>
+            <AnswerLabel>
               <input type="radio" name="q2" value="Consegue fazer sozinho" />{" "}
               Consegue fazer sozinho
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q2" value="Consegue fazer com Ajuda" />{" "}
               Consegue fazer com Ajuda
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q2" value="Ainda não consegue fazer" />{" "}
               Ainda não consegue fazer
-            </label>
-          </div>
-          <div className="area">Sócioafetivo</div>
-        </div>
-        <div className="question">
-          <label>Emite sons como forma de comunicação?</label>
-          <div className="answers">
-            <label>
+            </AnswerLabel>
+          </Answers>
+          <Area>Comunicação e linguagem</Area>
+        </Question>
+
+        <Question>
+          <Label>Imita atitude simples dos adultos?</Label>
+          <Answers>
+            <AnswerLabel>
               <input type="radio" name="q3" value="Consegue fazer sozinho" />{" "}
               Consegue fazer sozinho
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q3" value="Consegue fazer com Ajuda" />{" "}
               Consegue fazer com Ajuda
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q3" value="Ainda não consegue fazer" />{" "}
               Ainda não consegue fazer
-            </label>
-          </div>
-          <div className="area">Comunicação e linguagem</div>
-        </div>
-        <div className="question">
-          <label>Mantém firme a cabeça, quando levantada</label>
-          <div className="answers">
-            <label>
+            </AnswerLabel>
+          </Answers>
+          <Area>Comunicação e linguagem</Area>
+        </Question>
+
+        <Question>
+          <Label>Corre com segurança?</Label>
+          <Answers>
+            <AnswerLabel>
               <input type="radio" name="q4" value="Consegue fazer sozinho" />{" "}
               Consegue fazer sozinho
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q4" value="Consegue fazer com Ajuda" />{" "}
               Consegue fazer com Ajuda
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q4" value="Ainda não consegue fazer" />{" "}
               Ainda não consegue fazer
-            </label>
-          </div>
-          <div className="area">Motora</div>
-        </div>
-        <div className="question">
-          <label>
-            Colocado de bruços, levanta a cabeça e parte do tronco
-            momentaneamente?
-          </label>
-          <div className="answers">
-            <label>
+            </AnswerLabel>
+          </Answers>
+          <Area>Motora</Area>
+        </Question>
+
+        <Question>
+          <Label>
+            Pula com os dois pés juntos e/ou fica em um pé só?
+          </Label>
+          <Answers>
+            <AnswerLabel>
               <input type="radio" name="q5" value="Consegue fazer sozinho" />{" "}
               Consegue fazer sozinho
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q5" value="Consegue fazer com Ajuda" />{" "}
               Consegue fazer com Ajuda
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q5" value="Ainda não consegue fazer" />{" "}
               Ainda não consegue fazer
-            </label>
-          </div>
-          <div className="area">Motora</div>
-        </div>
-        <div className="question">
-          <label>Agarra casualmente objetos colocados ao seu alcance?</label>
-          <div className="answers">
-            <label>
+            </AnswerLabel>
+          </Answers>
+          <Area>Motora</Area>
+        </Question>
+
+        <Question>
+          <Label>Seleciona objetos semelhantes por cor e forma?</Label>
+          <Answers>
+            <AnswerLabel>
               <input type="radio" name="q6" value="Consegue fazer sozinho" />{" "}
               Consegue fazer sozinho
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q6" value="Consegue fazer com Ajuda" />{" "}
               Consegue fazer com Ajuda
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q6" value="Ainda não consegue fazer" />{" "}
               Ainda não consegue fazer
-            </label>
-          </div>
-          <div className="area">Motora</div>
-        </div>
-        <div className="question">
-          <label>
-            Fixa seu olhar durante alguns segundos no rosto das pessoas ou nos
-            objetos?
-          </label>
-          <div className="answers">
-            <label>
+            </AnswerLabel>
+          </Answers>
+          <Area>Cognitiva</Area>
+        </Question>
+
+        <Question>
+          <Label>
+            Constrói torres ou pontes com mais de três elementos?
+          </Label>
+          <Answers>
+            <AnswerLabel>
               <input type="radio" name="q7" value="Consegue fazer sozinho" />{" "}
               Consegue fazer sozinho
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q7" value="Consegue fazer com Ajuda" />{" "}
               Consegue fazer com Ajuda
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q7" value="Ainda não consegue fazer" />{" "}
               Ainda não consegue fazer
-            </label>
-          </div>
-          <div className="area">Cognitiva</div>
-        </div>
-        <div className="question">
-          <label> Segue com seu olhar pessoas ou objetos em movimento?</label>
-          <div className="answers">
-            <label>
+            </AnswerLabel>
+          </Answers>
+          <Area>Cognitiva</Area>
+        </Question>
+
+        <Question>
+          <Label>Faz rabisco e risco no papel?</Label>
+          <Answers>
+            <AnswerLabel>
               <input type="radio" name="q8" value="Consegue fazer sozinho" />{" "}
               Consegue fazer sozinho
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q8" value="Consegue fazer com Ajuda" />{" "}
               Consegue fazer com Ajuda
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q8" value="Ainda não consegue fazer" />{" "}
               Ainda não consegue fazer
-            </label>
-          </div>
-          <div className="area">Cognitiva</div>
-        </div>
-        <div className="question">
-          <label>Reconhece e reage à voz da mãe/cuidador?</label>
-          <div className="answers">
-            <label>
+            </AnswerLabel>
+          </Answers>
+          <Area>Motora</Area>
+        </Question>
+
+        <Question>
+          <Label>Reconhece e reage à voz da mãe/cuidador?</Label>
+          <Answers>
+            <AnswerLabel>
               <input type="radio" name="q9" value="Consegue fazer sozinho" />{" "}
               Consegue fazer sozinho
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q9" value="Consegue fazer com Ajuda" />{" "}
               Consegue fazer com Ajuda
-            </label>
-            <label>
+            </AnswerLabel>
+            <AnswerLabel>
               <input type="radio" name="q9" value="Ainda não consegue fazer" />{" "}
               Ainda não consegue fazer
-            </label>
-          </div>
-          <div className="area">Cognitiva</div>
-        </div>
-        <div className="question">
-          <label>Segura e transfere objetos de uma mão para outra?</label>
-          <div className="answers">
-            <label>
-              <input type="radio" name="q10" value="Consegue fazer sozinho" />{" "}
-              Consegue fazer sozinho
-            </label>
-            <label>
-              <input type="radio" name="q10" value="Consegue fazer com Ajuda" />{" "}
-              Consegue fazer com Ajuda
-            </label>
-            <label>
-              <input type="radio" name="q10" value="Ainda não consegue fazer" />{" "}
-              Ainda não consegue fazer
-            </label>
-          </div>
-          <div className="area">Socioafetiva</div>
-        </div>
-        <div className="question">
-          <label>Segura e transfere objetos de uma mão para outra?</label>
-          <div className="answers">
-            <label>
-              <input type="radio" name="q11" value="Consegue fazer sozinho" />{" "}
-              Consegue fazer sozinho
-            </label>
-            <label>
-              <input type="radio" name="q11" value="Consegue fazer com Ajuda" />{" "}
-              Consegue fazer com Ajuda
-            </label>
-            <label>
-              <input type="radio" name="q11" value="Ainda não consegue fazer" />{" "}
-              Ainda não consegue fazer
-            </label>
-          </div>
-          <div className="area">Socioafetiva</div>
-        </div>
-      </div>
-      <button type="submit">Enviar</button>
+            </AnswerLabel>
+          </Answers>
+          <Area>Cognitiva</Area>
+        </Question>
+        <SubmitButton type="submit">Enviar</SubmitButton>
+      </Questionnaire>
     </Container>
   );
 }

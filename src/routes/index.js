@@ -29,6 +29,8 @@ import RelatoriosVisitadores from "../pages/Supervisor/RelatoriosVisitadores"
 import VisitasFeitasPelosVisitadores from "../pages/Supervisor/VisitasFeitasPelosVisitadores"
 import ValidarBeneficiarios from "../pages/Supervisor/ValidarBeneficiarios"
 import Supervisores from "../pages/Coordenador/Supervisores"
+import Formulario5 from "../pages/Formularios/Formularios5"
+import Relatorios from "../pages/Coordenador/RelatoriosVisitadores"
 
 
 import Page404 from "../pages/Page404";
@@ -151,6 +153,18 @@ export default function Routes() {
         exact
         path="/supervisores"
         component={Supervisores}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/formularios5/:id"
+        component={Formulario5}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/relatorios"
+        component={Relatorios}
         isClosed
       />
       <MyRoute path="*" component={Page404} />

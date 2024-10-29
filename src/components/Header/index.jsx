@@ -40,8 +40,6 @@ export default function Header() {
           <FaSignInAlt size={24} />
         </Link>
       )}
-
-      {isLoggedIn && <FaCircle size={24} color="#FFF" />}
     </Nav>
   );
 }

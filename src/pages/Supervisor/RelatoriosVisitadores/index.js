@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import axios from "../../../services/axios";
 import { Link } from "react-router-dom";
 import { Div } from "./styled";
+import GraficoBarrasVisitadores from "../../../components/GraficoDeBarraVisitadores";
+import GraficoBarrasCriancas from "../../../components/GraficoDeBarraCriancas";
 
 export default function Visitadores({ match }) {
   const { id } = match.params;
@@ -66,24 +68,24 @@ export default function Visitadores({ match }) {
       <div>
         <h3>Relatórios gerais do <span>{visitador.name}</span></h3>
       </div>
-      <div className="dados">
-        <nav>
-          {child.length < 30 ? (
-            <div className="naoBateu">
-              <p>Quantidade de beneficiários: {child.length}</p>
-              <p>Não bateu a meta</p>
-            </div>
-          ) : (
-            <div className="bateu">
-              <p>Quantidade de beneficiários: {child.length}</p>
-              <p>Bateu a meta</p>
-            </div>
-          )}
-          <p>Quantidade de planos criados: {planos.length}</p>
-          <p>Visitas Feitas: {visitasFeitas.length}</p>
-        </nav>
-      </div>
+      <form onSubmit={handleSearch}>
+        <label>Início do Mês:</label>
+        <input
+          type="date"
+          value={inicioMes}
+          onChange={(e) => setInicioMes(e.target.value)}
+        />
 
+        <label>Fim do Mês:</label>
+        <input
+          type="date"
+          value={fimMes}
+          onChange={(e) => setFimMes(e.target.value)}
+        />
+
+        <button type="submit">Gerar relatório</button>
+      </form>
+      <GraficoBarrasVisitadores childrens={child} visitas={visitasFeitas} planos={planos}></GraficoBarrasVisitadores>
       {child.length > 0 ? (
         child.map(crianca => (
           <div className="criancas" key={crianca.id}>
@@ -98,25 +100,9 @@ export default function Visitadores({ match }) {
       )}
 
       <div>
-        <form onSubmit={handleSearch}>
-          <label>Início do Mês:</label>
-          <input
-            type="date"
-            value={inicioMes}
-            onChange={(e) => setInicioMes(e.target.value)}
-          />
 
-          <label>Fim do Mês:</label>
-          <input
-            type="date"
-            value={fimMes}
-            onChange={(e) => setFimMes(e.target.value)}
-          />
-
-          <button type="submit">Pesquisar Planos</button>
-        </form>
         <div className="dados-pesquisados">
-          <h3>Planos</h3>
+          <h3>Planos {planos.length}</h3>
           {planos.length > 0 ? (
             planos.map((plano) => (
               <div className="criancas" key={plano.id}>

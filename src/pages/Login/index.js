@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 
 import { toast } from "react-toastify";
 import { isEmail } from "validator";
-import {get} from "lodash"
+import { get } from "lodash"
 
 import * as actions from "../../store/modules/auth/actions"
 
@@ -32,18 +32,16 @@ export default function Login(props) {
 
     if (formsErrors) return;
 
-    dispatch(actions.loginRequest({email, password, prevPath}))
+    dispatch(actions.loginRequest({ email, password, prevPath }))
   }
 
   return (
-    <Container>
-      <h2>Login</h2>
-      <Form onSubmit={handleSubmit}>
-        <label htmlFor="email">E-mail: <input type="text" value={email} onChange={e => setEmail(e.target.value)} placeholder="Seu e-mail" /></label>
-        <label htmlFor="password">Senha: <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Sua senha" /></label>
-        <button type="submit">Acessar</button>
-      </Form>
-    </Container>
+    <Form onSubmit={handleSubmit}>
+      <p>Login</p>
+      <label htmlFor="email">E-mail: <input type="text" value={email} onChange={e => setEmail(e.target.value)} placeholder="Seu e-mail" /></label>
+      <label htmlFor="password">Senha: <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Sua senha" /></label>
+      <button type="submit">Acessar</button>
+    </Form>
 
   );
 }

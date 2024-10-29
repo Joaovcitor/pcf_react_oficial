@@ -35,18 +35,22 @@ export const Nav = styled.nav`
     font-weight: bold;
   }
 
+  p {
+    color: #05060f;
+  font-size: 1rem;
+  line-height: 1.25;
+  font-weight: 700;
+  }
+
   div {
-    margin-bottom: 10px;
-    padding: 10px;
-    margin: 10px;
-    background-color: #00070d;
-    -webkit-box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
-    box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
-    text-align: center;
-    border-radius: 5px;
-    justify-content: center;
-    color: white;
+    width: 240px;
+  background: #00ffa0;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 0.5vmin solid #05060f;
+  box-shadow: 0.4rem 0.4rem #05060f;
+  overflow: hidden;
+  color: black;
   }
 
   .links {

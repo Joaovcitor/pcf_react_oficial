@@ -52,15 +52,21 @@ export const Table = styled.table`
   padding: 10px;
   color: white;
 
+  p {
+    color: #05060f;
+  font-size: 1rem;
+  line-height: 1.25;
+  font-weight: 700;
+  }
+
   div {
-    margin-bottom: 10px;
-    padding: 10px;
-    margin: 15px;
-    background-color: #00070D;
-    text-align: center;
-    border-radius: 5px;
-    justify-content: center;
-    color: white;
+  background: #00ffa0;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 0.5vmin solid #05060f;
+  box-shadow: 0.4rem 0.4rem #05060f;
+  overflow: hidden;
+  color: black;
   }
 
   .links {

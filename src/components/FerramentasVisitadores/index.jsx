@@ -14,46 +14,37 @@ import { Nav, Section } from "./styled";
 export default function Header() {
   return (
     <Section>
-      {/* <div className="dados">
-        <nav>
-          <p>Planos criados: </p>
-        </nav>
-        <nav className="beneficiarios">
-          <p>Beneficiários: </p>
-        </nav>
-      </div>
-      <h3>Serviços e ferramentas</h3> */}
       <Nav>
         <div>
-          <IoPeopleSharp size={38} style={{ color: "white" }} />
+          <IoPeopleSharp size={38} style={{ color: "black" }} />
           <p>Famílias</p>
           <Link className="links" to="/familias">
             Acessar
           </Link>
         </div>
         <div>
-          <IoPersonAdd size={38} style={{ color: "white" }} />
+          <IoPersonAdd size={38} style={{ color: "black" }} />
           <p>Cadastrar Família</p>
           <Link className="links" to="/cuidador/cadastrar">
             Acessar
           </Link>
         </div>
         <div>
-          <IoReader size={38} style={{ color: "white" }} />
+          <IoReader size={38} style={{ color: "black" }} />
           <p>Criar Planos de Visita</p>
           <Link className="links" to="/planos">
             Acessar
           </Link>
         </div>
         <div>
-          <IoPeopleCircleSharp size={38} style={{ color: "white" }} />
+          <IoPeopleCircleSharp size={38} style={{ color: "black" }} />
           <p>Cuidadores</p>
           <Link className="links" to="/cuidadores">
             Acessar
           </Link>
         </div>
         <div>
-          <CiCompass1 size={38} style={{ color: "white" }} />
+          <CiCompass1 size={38} style={{ color: "black" }} />
           <p>Realizar Visitas</p>
           <Link className="links" to="/visitas-marcadas">
             Acessar

@@ -1,16 +1,6 @@
 import styled from "styled-components";
 
 export const Div = styled.div`
-  width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-
-  .dados-pesquisados {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
 
   form {
     display: flex;
@@ -18,6 +8,7 @@ export const Div = styled.div`
     flex-direction: column;
     padding: 10px;
     text-align: center;
+    align-items: center;
 
     input {
       width: 190px;
@@ -39,11 +30,8 @@ export const Div = styled.div`
     font-size: 1.8rem;
     text-align: center;
     margin-bottom: 20px;
+    margin-top: 20px;
     color: #333;
-
-    span {
-      color: #007BFF; /* Destaque para o nome do visitador */
-    }
   }
 
   .dados {
@@ -52,7 +40,7 @@ export const Div = styled.div`
 
     nav {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
       flex-wrap: wrap;
 
@@ -67,6 +55,18 @@ export const Div = styled.div`
         }
       }
 
+      .bateu {
+        background-color: #0F8C3B;
+        padding: 20px;
+        border-radius: 4px;
+        width: 200px;
+
+        p {
+          color: white;
+          font-weight: bold;
+        }
+      }
+
       p {
         font-size: 1rem;
         color: #333;
@@ -75,54 +75,31 @@ export const Div = styled.div`
   }
 
   .criancas {
-   position: relative;
-  width: 280px;
-  height: 180px;
-  padding: 20px;
-  margin: 0 auto;
-  margin-bottom: 15px;
-  display: flex;
-  background: #fff;
-  border: solid 4px #333;
-  box-shadow: -5px 5px #333;
-  transition: all 0.2s ease-in-out;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  cursor: pointer;
-
-  @media (max-width: 768px) {
-  .criancas {
-    width: 220px;
-    height: 160px;
-  }
-}
-
-@media (max-width: 480px) {
-  .criancas {
-    width: 180px;
-    height: 140px;
+    background-color: #0F8C3B;
     padding: 15px;
-  }
-}
+    border: 1px solid #DDD;
+    width: 300px;
+    margin: 0 auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    text-align: center;
 
     .links {
-      background-color: white;
-  color: black;
-  border-radius: 10em;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  border: 1px solid black;
-  box-shadow: 0 0 0 0 black;
-  margin-bottom: 10px;
-  &:hover {
-    transform: translateY(-4px) translateX(-2px);
-  box-shadow: 2px 5px 0 0 black;
-  }
+      display: inline-block;
+      margin-right: 15px;
+      margin-top: 5px;
+      padding: 5px 10px;
+      background-color: #F2D4AE;
+      color: black;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.9rem;
+
+      &:hover {
+        background-color: #0056b3;
+        color: white;
+      }
     }
 
     p {

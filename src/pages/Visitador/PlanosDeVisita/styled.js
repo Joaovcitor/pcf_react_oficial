@@ -1,59 +1,47 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const Div = styled.div`
+export const CardContainer = styled.div`
+  position: relative;
+  width: 270px;
+  height: 140px;
+  padding: 20px;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  display: flex;
+  background: #fff;
+  border: solid 4px #333;
+  box-shadow: -5px 5px #333;
+  transition: all .2s ease-in-out;
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
+  text-align: center;
+`;
 
-  h2 {
-    color: white;
-  }
+export const CardImage = styled.div`
+  width: 13rem;
+  height: 10rem;
+  background: #3bbdc4;
+  border-radius: 1rem;
+`;
 
+export const CardContent = styled.div`
   p {
-    font-size: 18px;
-    /* margin-left: 15px; */
-    color: black;
-  }
-
-  input {
-    border: none;
-    border-bottom: solid 1px black;
-    background-color: transparent;
-    color: white;
-    text-align: center;
-    font-size: 18px;
+    &:first-child {
+      font-weight: 800;
+    }
   }
 `;
 
-export const Nav = styled.nav`
-  background-color: blue;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: -10px -2px 0px 0px rgba(0,0,0,0.75);
-  -webkit-box-shadow: -10px -2px 0px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: -10px -2px 0px 0px rgba(0,0,0,0.75);
+export const CardButton = styled.button`
+  background: #2c7bce;
+  color: #fff;
+  font-weight: 800;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: background 0.3s ease;
 
-  span {
-    color: #F2B441;
-    font-weight: bolder;
+  &:hover {
+    background: #2196f3;
   }
-
-  p {
-    color: white;
-  }
-
-  .link {
-    color: black;
-    display: flex;
-    background-color: #F2B441;
-    padding: 5px;
-    border-radius: 4px;
-    width: 120px;
-    margin: 0 auto;
-    text-align: center;
-    justify-content: center;
-    margin-top: 10px;
-  }
-
 `;
