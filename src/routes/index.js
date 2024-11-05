@@ -53,7 +53,7 @@ export default function Routes() {
         exact
         path="/cadastrar-coordenador"
         component={RegistrarCoordenador}
-        isClosed
+        isClosed={false}
       />
       <MyRoute
         exact

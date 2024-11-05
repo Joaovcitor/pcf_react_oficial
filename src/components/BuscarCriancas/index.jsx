@@ -21,7 +21,7 @@ export default function dados() {
         return (
           <div key={child.id}>
             <p>Nome: {child.name}</p>
-            <Link className="links" to={`/visitas/realizar/${child.id}`}>
+            <Link className="link" to={`/visitas/realizar/${child.id}`}>
               Realizar Visitas
             </Link>
           </div>

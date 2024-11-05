@@ -1,79 +1,68 @@
 import styled from "styled-components";
-import { primaryColor } from "../../config/colors";
 
-export const Section = styled.section`
-display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-
-h3 {
-  color: white;
+export const Div = styled.div`
   display: flex;
-  text-align: center;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
-}
-div {
-    margin-bottom: 10px;
-    padding: 10px;
-    margin: 10px;
-    background-color: #E3CD40;
-    width: 200px;
-    margin: 0 auto;
-    margin-top: 20px;
-    text-align: center;
-    border-radius: 5px;
-    justify-content: center;
+  flex-direction: column;
+
+  p {
+    font-size: 18px;
+    color: white;
+    font-weight: bolder;
   }
 
-  .links {
-    border: none;
-    background-color: blue;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    margin-top: 7px;
-    padding: 5px;
-    border-radius: 4px;
+  h2 {
     color: white;
   }
-`
 
-export const Nav = styled.nav`
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 10px;
-
-  a {
-    color: #fff;
-    margin: 0 10px 0 0;
-    font-weight: bold;
-  }
-
-  div {
-    margin-bottom: 10px;
-    padding: 10px;
-    margin: 10px;
-    background-color: ${primaryColor};
-    text-align: center;
-    border-radius: 5px;
-    justify-content: center;
-  }
-
-  .links {
+  input {
     border: none;
-    background-color: blue;
-    display: flex;
-    margin-top: 25px;
+    border-bottom: solid 1px black;
+    background-color: transparent;
+    color: white;
     text-align: center;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
+    font-size: 18px;
+  }
+`;
+
+export const Section = styled.section`
+position: relative;
+  width: 220px;
+  height: 120px;
+  padding: 20px;
+  margin-bottom: 15px;
+  display: flex;
+  background: #fff;
+  border: solid 4px #333;
+  box-shadow: -5px 5px #333;
+  transition: all .2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  cursor: pointer;
+  margin: 0 auto;
+
+  .link {
+    background-color: white;
+  color: black;
+  border-radius: 10em;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid black;
+  box-shadow: 0 0 0 0 black;
+  &:hover {
+    transform: translateY(-4px) translateX(-2px);
+  box-shadow: 2px 5px 0 0 black;
+  }
+  }
+
+  p {
+    color: black;
+    margin-bottom: 20px;
   }
 `;

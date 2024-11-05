@@ -15,7 +15,7 @@ function* loginRequest({ payload }) {
 
     const { token } = response.data;
 
-    sessionStorage.setItem("token", token);
+    sessionStorage.setItem("jwt", token);
 
     toast.success("Você fez login com sucesso!");
 

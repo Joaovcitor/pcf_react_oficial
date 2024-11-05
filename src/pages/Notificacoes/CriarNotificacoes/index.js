@@ -106,6 +106,7 @@ export default function PlanosDeVisita() {
           onChange={(e) => setId(e.target.value)}
           id="grau_de_dificuldade_objetivo"
         >
+          <option value="Selecione">Selecione</option>
           {(visitadores && visitadores.length > 0 ? visitadores : []).map(
             (visitador) => {
               return (
