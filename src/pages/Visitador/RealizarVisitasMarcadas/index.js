@@ -3,11 +3,15 @@ import React, { useEffect, useState } from "react";
 import axios from "../../../services/axios";
 import { Div } from "./styled";
 import { toast } from "react-toastify";
+import LocalizacaoReal from "../../../components/LocalizacaoReal";
 
 export default function Dados({ match }) {
   const { id } = match.params;
   const [location, setLocation] = useState({ latitude: null, longitude: null });
-  const [location_final, setLocationFinal] = useState({ latitude_final: null, longitude_final: null });
+  const [location_final, setLocationFinal] = useState({
+    latitude_final: null,
+    longitude_final: null,
+  });
   const [dataInicio, setDataInicio] = useState(null);
   const [dataFim, setDataFim] = useState(null);
 
@@ -22,11 +26,10 @@ export default function Dados({ match }) {
         idVisita: id,
         latitude: location.latitude,
         longitude: location.longitude,
-        hora_inicio: data_inicio
+        hora_inicio: data_inicio,
       });
 
       toast.success("Visita iniciada com sucesso!");
-
     } catch (error) {
       console.warn("Erro ao iniciar a visita: " + error.message);
     }
@@ -39,10 +42,15 @@ export default function Dados({ match }) {
     setDataFim(data_fim);
 
     try {
-      const verificarVisitaFinalizada = await axios.get(`/visitasporgeolo/verificar-visita/${id}`);
-      console.log(verificarVisitaFinalizada.data.visita.longitude)
-      if (!verificarVisitaFinalizada.data.visita.latitude && !verificarVisitaFinalizada.data.visita.longitude) {
-        return toast.warning("Primeiro inicie a visita!")
+      const verificarVisitaFinalizada = await axios.get(
+        `/visitasporgeolo/verificar-visita/${id}`
+      );
+      console.log(verificarVisitaFinalizada.data.visita.longitude);
+      if (
+        !verificarVisitaFinalizada.data.visita.latitude &&
+        !verificarVisitaFinalizada.data.visita.longitude
+      ) {
+        return toast.warning("Primeiro inicie a visita!");
       }
       await axios.put(`/visitasporgeolo/finalizar-visita/${id}`, {
         id,
@@ -51,10 +59,9 @@ export default function Dados({ match }) {
         hora_fim: dataFim,
       });
 
-      toast.success("Visita finalizada")
-
+      toast.success("Visita finalizada");
     } catch (error) {
-      toast.error("Ocorreu um erro ao finalizar a visita.")
+      toast.error("Ocorreu um erro ao finalizar a visita.");
       console.warn(error);
     }
   }
@@ -97,7 +104,10 @@ export default function Dados({ match }) {
 
   return (
     <Div>
-      <p>Importante, ao iniciar a visita você sofrerá bloqueio nos seguintes recursos:</p>
+      <p>
+        Importante, ao iniciar a visita você sofrerá bloqueio nos seguintes
+        recursos:
+      </p>
       <ul>
         <li>Criar Planos de visitas</li>
         <li>Cadastrar novos usuários</li>
@@ -106,9 +116,11 @@ export default function Dados({ match }) {
       <button onClick={iniciarVisita} type="submit">
         Iniciar a visita
       </button>
-      <button onClick={finalizarVisita} type="submit" >
+      <button onClick={finalizarVisita} type="submit">
         Finalizar a visita
       </button>
+      <p>Sua localização:</p>
+      <LocalizacaoReal></LocalizacaoReal>
     </Div>
   );
 }

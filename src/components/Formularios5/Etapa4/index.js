@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import React, { useEffect, useState } from "react";
-import { get } from "lodash"
+import { get } from "lodash";
 
 import { Container } from "../../../styles/GlobalStyle";
 import {
@@ -14,7 +14,7 @@ import {
   SubmitButton,
 } from "./styled";
 
-import axios from "../../../services/axios"
+import axios from "../../../services/axios";
 import { toast } from "react-toastify";
 
 export default function Etapa4({ id }) {
@@ -55,32 +55,39 @@ export default function Etapa4({ id }) {
     }
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       await axios.post("/form5-etapa4/create", {
-        q1, q2, q3, q4, q5, q6, q7, id: id
+        q1,
+        q2,
+        q3,
+        q4,
+        q5,
+        q6,
+        q7,
+        id: id,
       });
-      toast.success("Formulário criado com sucesso!")
+      toast.info("Cliquei");
+      toast.success("Formulário criado com sucesso!");
     } catch (e) {
-      const errors = get(e, 'response.data.errors', '');
-      if (typeof errors === 'string') {
+      const errors = get(e, "response.data.errors", "");
+      if (typeof errors === "string") {
         toast.error(errors);
       } else if (Array.isArray(errors)) {
-        errors.forEach(error => {
+        errors.forEach((error) => {
           toast.error(error);
         });
-      } else if (typeof errors === 'object') {
-        Object.values(errors).forEach(error => {
-          if (typeof error === 'string') {
+      } else if (typeof errors === "object") {
+        Object.values(errors).forEach((error) => {
+          if (typeof error === "string") {
             toast.error(error);
           }
         });
       }
     }
-  }
+  };
   return (
     <Container>
       <Questionnaire onSubmit={handleSubmit}>
@@ -159,7 +166,10 @@ export default function Etapa4({ id }) {
         </Question>
 
         <Question>
-          <Label>Pode fazer coisas simples, como ninar uma boneca ou passear com um bichinho de brinquedo</Label>
+          <Label>
+            Pode fazer coisas simples, como ninar uma boneca ou passear com um
+            bichinho de brinquedo
+          </Label>
           <Answers>
             <AnswerLabel>
               <input

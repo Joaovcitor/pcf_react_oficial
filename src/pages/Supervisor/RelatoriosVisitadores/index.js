@@ -19,7 +19,6 @@ export default function Visitadores({ match }) {
   const [visitasFeitas, setVisitasFeitas] = useState([]);
   const [AllVisitasFeitas, setAllVisitasFeitas] = useState([]);
 
-
   useEffect(() => {
     async function getData() {
       try {
@@ -28,6 +27,7 @@ export default function Visitadores({ match }) {
         setChildrens(response.data.child);
         setAllPlanos(response.data.planos);
         setAllVisitasFeitas(response.data.visitasFeitas);
+        console.log(response.data.visitasFeitas);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       }
@@ -55,7 +55,7 @@ export default function Visitadores({ match }) {
     });
 
     setPlanos(filteredPlanos);
-    setVisitasFeitas(filteredVisitas)
+    setVisitasFeitas(filteredVisitas);
   };
 
   const handleSearch = (e) => {
@@ -66,7 +66,9 @@ export default function Visitadores({ match }) {
   return (
     <Div>
       <div>
-        <h3>Relatórios gerais do <span>{visitador.name}</span></h3>
+        <h3>
+          Relatórios gerais do <span>{visitador.name}</span>
+        </h3>
       </div>
       <form onSubmit={handleSearch}>
         <label>Início do Mês:</label>
@@ -85,14 +87,20 @@ export default function Visitadores({ match }) {
 
         <button type="submit">Gerar relatório</button>
       </form>
-      <GraficoBarrasVisitadores childrens={child} visitas={visitasFeitas} planos={planos}></GraficoBarrasVisitadores>
+      <GraficoBarrasVisitadores
+        childrens={child}
+        visitas={visitasFeitas}
+        planos={planos}
+      ></GraficoBarrasVisitadores>
       {child.length > 0 ? (
-        child.map(crianca => (
+        child.map((crianca) => (
           <div className="criancas" key={crianca.id}>
             <p>Nome: {crianca.name}</p>
             <p>Idade: {crianca.idade}</p>
             <Link className="links">Editar informações da criança</Link>
-            <Link to={`/visitas/${crianca.id}`} className="links">Ver visitas</Link>
+            <Link to={`/visitas/${crianca.id}`} className="links">
+              Ver visitas
+            </Link>
           </div>
         ))
       ) : (
@@ -100,13 +108,14 @@ export default function Visitadores({ match }) {
       )}
 
       <div>
-
         <div className="dados-pesquisados">
           <h3>Planos {planos.length}</h3>
           {planos.length > 0 ? (
             planos.map((plano) => (
               <div className="criancas" key={plano.id}>
-                <p><span>Objetivo:</span> {plano.objetivo}</p>
+                <p>
+                  <span>Objetivo:</span> {plano.objetivo}
+                </p>
                 <p>Momento 1: {plano.etapa1}</p>
                 <p>Momento 2: {plano.etapa2}</p>
                 <p>Momento 3: {plano.etapa3}</p>

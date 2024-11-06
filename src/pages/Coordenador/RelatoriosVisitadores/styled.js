@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Div = styled.div`
-
   form {
     display: flex;
     justify-content: center;
@@ -34,6 +33,17 @@ export const Div = styled.div`
     color: #333;
   }
 
+  .naoBateu {
+    background-color: #cc2235;
+    padding: 10px;
+    border-radius: 5px;
+    width: 250px;
+    margin: 0 auto;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+  }
+
   .dados {
     margin-bottom: 20px;
     text-align: center;
@@ -42,10 +52,9 @@ export const Div = styled.div`
       display: flex;
       justify-content: space-around;
       align-items: center;
-      flex-wrap: wrap;
-
+      flex-direction: column;
       .naoBateu {
-        background-color: #CC2235;
+        background-color: #cc2235;
         padding: 10px;
         border-radius: 5px;
 
@@ -56,7 +65,7 @@ export const Div = styled.div`
       }
 
       .bateu {
-        background-color: #0F8C3B;
+        background-color: #0f8c3b;
         padding: 20px;
         border-radius: 4px;
         width: 200px;
@@ -75,9 +84,9 @@ export const Div = styled.div`
   }
 
   .criancas {
-    background-color: #0F8C3B;
+    background-color: #0f8c3b;
     padding: 15px;
-    border: 1px solid #DDD;
+    border: 1px solid #ddd;
     width: 300px;
     margin: 0 auto;
     border-radius: 8px;
@@ -89,7 +98,7 @@ export const Div = styled.div`
       margin-right: 15px;
       margin-top: 5px;
       padding: 5px 10px;
-      background-color: #F2D4AE;
+      background-color: #f2d4ae;
       color: black;
       text-decoration: none;
       border: none;
@@ -146,8 +155,6 @@ export const Div = styled.div`
   }
 `;
 
-
-
 export const PlanosContainer = styled.div`
   margin: 20px 0;
 
@@ -190,4 +197,3 @@ export const VisitasList = styled.ul`
     margin: 5px 0;
   }
 `;
-
