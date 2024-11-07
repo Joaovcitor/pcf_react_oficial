@@ -27,7 +27,6 @@ export const Div = styled.div`
 `;
 
 export const Section = styled.section`
-position: relative;
   width: 220px;
   height: 120px;
   padding: 20px;

@@ -9,7 +9,6 @@ export default function dados() {
   useEffect(() => {
     async function getData() {
       const response = await axios.get("/crianca/infoall");
-      console.log(response.data.children);
       setChildres(response.data.children);
     }
     getData();
