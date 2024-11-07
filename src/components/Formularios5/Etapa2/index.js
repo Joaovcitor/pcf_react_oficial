@@ -69,7 +69,7 @@ export default function Etapa1({ id }) {
     e.preventDefault();
 
     try {
-      await axios.post("/form5-etapa4/create", {
+      await axios.post("/form5-etapa2/create", {
         q1, q2, q3, q4, q5, q6, q7, q8, q9, id: id
       });
       toast.success("Formulário criado com sucesso!")
@@ -92,7 +92,7 @@ export default function Etapa1({ id }) {
   }
   return (
     <Container>
-      <Questionnaire>
+      <Questionnaire onSubmit={handleSubmit}>
         <Question>
           <Label>Reconhece pessoas próximas e chora na frente de estranhos?</Label>
           <Answers>

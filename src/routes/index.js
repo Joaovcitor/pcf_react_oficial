@@ -163,6 +163,12 @@ export default function Routes() {
       />
       <MyRoute
         exact
+        path="/formularios7/:id"
+        component={Formulario5}
+        isClosed
+      />
+      <MyRoute
+        exact
         path="/relatorios"
         component={Relatorios}
         isClosed
