@@ -63,7 +63,6 @@ export default function Etapa1({ id }) {
         q4,
         q5,
         q6,
-        q7,
         id: id,
       });
       toast.info("Cliquei");
@@ -87,7 +86,7 @@ export default function Etapa1({ id }) {
   };
   return (
     <Container>
-      <Questionnaire>
+      <Questionnaire onSubmit={handleSubmit}>
         <Question>
           <Label>Caminha com equilíbrio?</Label>
           <Answers>

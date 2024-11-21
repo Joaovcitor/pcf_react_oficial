@@ -1,111 +1,479 @@
-import React from "react";
-import { Container } from "../../../styles/GlobalStyle";
+/* eslint-disable react/prop-types */
+import React, { useEffect, useState } from "react";
+import { get } from "lodash"
 
-export default function Etapa1() {
+import { Container } from "../../../styles/GlobalStyle";
+import {
+  Questionnaire,
+  Question,
+  Label,
+  Answers,
+  AnswerLabel,
+  Area,
+  SubmitButton,
+} from "./styled";
+
+import axios from "../../../services/axios"
+import { toast } from "react-toastify";
+
+export default function Etapa1({ id }) {
+  const [q1, setQ1] = useState("");
+  const [q2, setQ2] = useState("");
+  const [q3, setQ3] = useState("");
+  const [q4, setQ4] = useState("");
+  const [q5, setQ5] = useState("");
+  const [q6, setQ6] = useState("");
+  const [q7, setQ7] = useState("");
+  const [q8, setQ8] = useState("");
+  const [q9, setQ9] = useState("");
+  const [q10, setQ10] = useState("");
+
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    switch (name) {
+      case "q1":
+        setQ1(value);
+        break;
+      case "q2":
+        setQ2(value);
+        break;
+      case "q3":
+        setQ3(value);
+        break;
+      case "q4":
+        setQ4(value);
+        break;
+      case "q5":
+        setQ5(value);
+        break;
+      case "q6":
+        setQ6(value);
+        break;
+      case "q7":
+        setQ7(value);
+        break;
+      case "q8":
+        setQ8(value);
+        break;
+      case "q9":
+        setQ9(value);
+        break;
+      case "q10":
+        setQ10(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post("/form5-etapa1/create", {
+        q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, id: id
+      });
+      toast.success("Formulário criado com sucesso!")
+    } catch (e) {
+      const errors = get(e, 'response.data.errors', '');
+      if (typeof errors === 'string') {
+        toast.error(errors);
+      } else if (Array.isArray(errors)) {
+        errors.forEach(error => {
+          toast.error(error);
+        });
+      } else if (typeof errors === 'object') {
+        Object.values(errors).forEach(error => {
+          if (typeof error === 'string') {
+            toast.error(error);
+          }
+        });
+      }
+    }
+  }
   return (
     <Container>
-      <div className="questionnaire">
-        <div className="question">
-          <label>Dá mostras de prazer e desconforto?</label>
-          <div className="answers">
-            <label><input type="radio" name="q1" value="Consegue fazer sozinho" /> Consegue fazer sozinho</label>
-            <label><input type="radio" name="q1" value="Consegue fazer com Ajuda" /> Consegue fazer com Ajuda</label>
-            <label><input type="radio" name="q1" value="Ainda não consegue fazer" /> Ainda não consegue fazer</label>
-          </div>
-          <div className="area">Comunicação e linguagem</div>
-        </div>
-        <div className="question">
-          <label>Sorri frente ao rosto de uma pessoa?</label>
-          <div className="answers">
-            <label><input type="radio" name="q2" value="Consegue fazer sozinho" /> Consegue fazer sozinho</label>
-            <label><input type="radio" name="q2" value="Consegue fazer com Ajuda" /> Consegue fazer com Ajuda</label>
-            <label><input type="radio" name="q2" value="Ainda não consegue fazer" /> Ainda não consegue fazer</label>
-          </div>
-          <div className="area">Sócioafetivo</div>
-        </div>
-        <div className="question">
-          <label>Emite sons como forma de comunicação?</label>
-          <div className="answers">
-            <label><input type="radio" name="q3" value="Consegue fazer sozinho" /> Consegue fazer sozinho</label>
-            <label><input type="radio" name="q3" value="Consegue fazer com Ajuda" /> Consegue fazer com Ajuda</label>
-            <label><input type="radio" name="q3" value="Ainda não consegue fazer" /> Ainda não consegue fazer</label>
-          </div>
-          <div className="area">Comunicação e linguagem</div>
-        </div>
-        <div className="question">
-          <label>Mantém firme a cabeça, quando levantada</label>
-          <div className="answers">
-            <label><input type="radio" name="q4" value="Consegue fazer sozinho" /> Consegue fazer sozinho</label>
-            <label><input type="radio" name="q4" value="Consegue fazer com Ajuda" /> Consegue fazer com Ajuda</label>
-            <label><input type="radio" name="q4" value="Ainda não consegue fazer" /> Ainda não consegue fazer</label>
-          </div>
-          <div className="area">Motora</div>
-        </div>
-        <div className="question">
-          <label>Colocado de bruços, levanta a cabeça e parte do tronco momentaneamente?</label>
-          <div className="answers">
-            <label><input type="radio" name="q5" value="Consegue fazer sozinho" /> Consegue fazer sozinho</label>
-            <label><input type="radio" name="q5" value="Consegue fazer com Ajuda" /> Consegue fazer com Ajuda</label>
-            <label><input type="radio" name="q5" value="Ainda não consegue fazer" /> Ainda não consegue fazer</label>
-          </div>
-          <div className="area">Motora</div>
-        </div>
-        <div className="question">
-          <label>Agarra casualmente objetos colocados ao seu alcance?</label>
-          <div className="answers">
-            <label><input type="radio" name="q6" value="Consegue fazer sozinho" /> Consegue fazer sozinho</label>
-            <label><input type="radio" name="q6" value="Consegue fazer com Ajuda" /> Consegue fazer com Ajuda</label>
-            <label><input type="radio" name="q6" value="Ainda não consegue fazer" /> Ainda não consegue fazer</label>
-          </div>
-          <div className="area">Motora</div>
-        </div>
-        <div className="question">
-          <label>Fixa seu olhar durante alguns segundos no rosto das pessoas ou nos objetos?</label>
-          <div className="answers">
-            <label><input type="radio" name="q7" value="Consegue fazer sozinho" /> Consegue fazer sozinho</label>
-            <label><input type="radio" name="q7" value="Consegue fazer com Ajuda" /> Consegue fazer com Ajuda</label>
-            <label><input type="radio" name="q7" value="Ainda não consegue fazer" /> Ainda não consegue fazer</label>
-          </div>
-          <div className="area">Cognitiva</div>
-        </div>
-        <div className="question">
-          <label> Segue com seu olhar pessoas ou objetos em movimento?</label>
-          <div className="answers">
-            <label><input type="radio" name="q8" value="Consegue fazer sozinho" /> Consegue fazer sozinho</label>
-            <label><input type="radio" name="q8" value="Consegue fazer com Ajuda" /> Consegue fazer com Ajuda</label>
-            <label><input type="radio" name="q8" value="Ainda não consegue fazer" /> Ainda não consegue fazer</label>
-          </div>
-          <div className="area">Cognitiva</div>
-        </div>
-        <div className="question">
-          <label>Reconhece e reage à voz da mãe/cuidador?</label>
-          <div className="answers">
-            <label><input type="radio" name="q9" value="Consegue fazer sozinho" /> Consegue fazer sozinho</label>
-            <label><input type="radio" name="q9" value="Consegue fazer com Ajuda" /> Consegue fazer com Ajuda</label>
-            <label><input type="radio" name="q9" value="Ainda não consegue fazer" /> Ainda não consegue fazer</label>
-          </div>
-          <div className="area">Cognitiva</div>
-        </div>
-        <div className="question">
-          <label>Segura e transfere objetos de uma mão para outra?</label>
-          <div className="answers">
-            <label><input type="radio" name="q10" value="Consegue fazer sozinho" /> Consegue fazer sozinho</label>
-            <label><input type="radio" name="q10" value="Consegue fazer com Ajuda" /> Consegue fazer com Ajuda</label>
-            <label><input type="radio" name="q10" value="Ainda não consegue fazer" /> Ainda não consegue fazer</label>
-          </div>
-          <div className="area">Socioafetiva</div>
-        </div>
-        <div className="question">
-          <label>Segura e transfere objetos de uma mão para outra?</label>
-          <div className="answers">
-            <label><input type="radio" name="q11" value="Consegue fazer sozinho" /> Consegue fazer sozinho</label>
-            <label><input type="radio" name="q11" value="Consegue fazer com Ajuda" /> Consegue fazer com Ajuda</label>
-            <label><input type="radio" name="q11" value="Ainda não consegue fazer" /> Ainda não consegue fazer</label>
-          </div>
-          <div className="area">Socioafetiva</div>
-        </div>
-      </div>
-      <button type="submit">Enviar</button>
+      <Questionnaire onSubmit={handleSubmit}>
+        <Question>
+          <Label>Dá mostras de prazer e desconforto?</Label>
+          <Answers>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q1"
+                value="Consegue fazer sozinho"
+                checked={q1 === "Consegue fazer sozinho"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer sozinho
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q1"
+                value="Consegue fazer com Ajuda"
+                checked={q1 === "Consegue fazer com Ajuda"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer com Ajuda
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q1"
+                value="Ainda não consegue fazer"
+                checked={q1 === "Ainda não consegue fazer"}
+                onChange={handleChange}
+              />{" "}
+              Ainda não consegue fazer
+            </AnswerLabel>
+          </Answers>
+          <Area>Comunicação e linguagem</Area>
+        </Question>
+
+        <Question>
+          <Label>Sorri frente ao rosto de uma pessoa?</Label>
+          <Answers>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q2"
+                value="Consegue fazer sozinho"
+                checked={q2 === "Consegue fazer sozinho"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer sozinho
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q2"
+                value="Consegue fazer com Ajuda"
+                checked={q2 === "Consegue fazer com Ajuda"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer com Ajuda
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q2"
+                value="Ainda não consegue fazer"
+                checked={q2 === "Ainda não consegue fazer"}
+                onChange={handleChange}
+              />{" "}
+              Ainda não consegue fazer
+            </AnswerLabel>
+          </Answers>
+          <Area>Sócioafetivo</Area>
+        </Question>
+
+        <Question>
+          <Label>Emite sons como forma de comunicação?</Label>
+          <Answers>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q3"
+                value="Consegue fazer sozinho"
+                checked={q3 === "Consegue fazer sozinho"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer sozinho
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q3"
+                value="Consegue fazer com Ajuda"
+                checked={q3 === "Consegue fazer com Ajuda"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer com Ajuda
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q3"
+                value="Ainda não consegue fazer"
+                checked={q3 === "Ainda não consegue fazer"}
+                onChange={handleChange}
+              />{" "}
+              Ainda não consegue fazer
+            </AnswerLabel>
+          </Answers>
+          <Area>Comunicação e linguagem</Area>
+        </Question>
+
+        <Question>
+          <Label>Mantém firme a cabeça, quando levantada</Label>
+          <Answers>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q4"
+                value="Consegue fazer sozinho"
+                checked={q4 === "Consegue fazer sozinho"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer sozinho
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q4"
+                value="Consegue fazer com Ajuda"
+                checked={q4 === "Consegue fazer com Ajuda"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer com Ajuda
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q4"
+                value="Ainda não consegue fazer"
+                checked={q4 === "Ainda não consegue fazer"}
+                onChange={handleChange}
+              />{" "}
+              Ainda não consegue fazer
+            </AnswerLabel>
+          </Answers>
+          <Area>Motora</Area>
+        </Question>
+
+        <Question>
+          <Label>
+            Colocado de bruços, levanta a cabeça e parte do tronco
+            momentaneamente?
+          </Label>
+          <Answers>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q5"
+                value="Consegue fazer sozinho"
+                checked={q5 === "Consegue fazer sozinho"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer sozinho
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q5"
+                value="Consegue fazer com Ajuda"
+                checked={q5 === "Consegue fazer com Ajuda"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer com Ajuda
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q5"
+                value="Ainda não consegue fazer"
+                checked={q5 === "Ainda não consegue fazer"}
+                onChange={handleChange}
+              />{" "}
+              Ainda não consegue fazer
+            </AnswerLabel>
+          </Answers>
+          <Area>Motora</Area>
+        </Question>
+
+        <Question>
+          <Label>Agarra casualmente objetos colocados ao seu alcance?</Label>
+          <Answers>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q6"
+                value="Consegue fazer sozinho"
+                checked={q6 === "Consegue fazer sozinho"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer sozinho
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q6"
+                value="Consegue fazer com Ajuda"
+                checked={q6 === "Consegue fazer com Ajuda"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer com Ajuda
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q6"
+                value="Ainda não consegue fazer"
+                checked={q6 === "Ainda não consegue fazer"}
+                onChange={handleChange}
+              />{" "}
+              Ainda não consegue fazer
+            </AnswerLabel>
+          </Answers>
+          <Area>Motora</Area>
+        </Question>
+
+        <Question>
+          <Label>
+            Fixa seu olhar durante alguns segundos no rosto das pessoas ou nos
+            objetos?
+          </Label>
+          <Answers>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q7"
+                value="Consegue fazer sozinho"
+                checked={q7 === "Consegue fazer sozinho"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer sozinho
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q7"
+                value="Consegue fazer com Ajuda"
+                checked={q7 === "Consegue fazer com Ajuda"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer com Ajuda
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q7"
+                value="Ainda não consegue fazer"
+                checked={q7 === "Ainda não consegue fazer"}
+                onChange={handleChange}
+              />{" "}
+              Ainda não consegue fazer
+            </AnswerLabel>
+          </Answers>
+          <Area>Cognitiva</Area>
+        </Question>
+
+        <Question>
+          <Label>Segue com seu olhar pessoas ou objetos em movimento?</Label>
+          <Answers>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q8"
+                value="Consegue fazer sozinho"
+                checked={q8 === "Consegue fazer sozinho"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer sozinho
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q8"
+                value="Consegue fazer com Ajuda"
+                checked={q8 === "Consegue fazer com Ajuda"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer com Ajuda
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q8"
+                value="Ainda não consegue fazer"
+                checked={q8 === "Ainda não consegue fazer"}
+                onChange={handleChange}
+              />{" "}
+              Ainda não consegue fazer
+            </AnswerLabel>
+          </Answers>
+          <Area>Cognitiva</Area>
+        </Question>
+
+        <Question>
+          <Label>Reconhece e reage à voz da mãe/cuidador?</Label>
+          <Answers>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q9"
+                value="Consegue fazer sozinho"
+                checked={q9 === "Consegue fazer sozinho"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer sozinho
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q9"
+                value="Consegue fazer com Ajuda"
+                checked={q9 === "Consegue fazer com Ajuda"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer com Ajuda
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q9"
+                value="Ainda não consegue fazer"
+                checked={q9 === "Ainda não consegue fazer"}
+                onChange={handleChange}
+              />{" "}
+              Ainda não consegue fazer
+            </AnswerLabel>
+          </Answers>
+          <Area>Cognitiva</Area>
+        </Question>
+
+        <Question>
+          <Label>Segura e transfere objetos de uma mão para outra?</Label>
+          <Answers>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q10"
+                value="Consegue fazer sozinho"
+                checked={q10 === "Consegue fazer sozinho"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer sozinho
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q10"
+                value="Consegue fazer com Ajuda"
+                checked={q10 === "Consegue fazer com Ajuda"}
+                onChange={handleChange}
+              />{" "}
+              Consegue fazer com Ajuda
+            </AnswerLabel>
+            <AnswerLabel>
+              <input
+                type="radio"
+                name="q10"
+                value="Ainda não consegue fazer"
+                checked={q10 === "Ainda não consegue fazer"}
+                onChange={handleChange}
+              />{" "}
+              Ainda não consegue fazer
+            </AnswerLabel>
+          </Answers>
+          <Area>Socioafetiva</Area>
+        </Question>
+
+        <SubmitButton type="submit">Enviar</SubmitButton>
+      </Questionnaire>
     </Container>
   );
 }

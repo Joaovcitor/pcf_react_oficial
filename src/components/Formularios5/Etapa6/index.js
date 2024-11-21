@@ -96,7 +96,7 @@ export default function Etapa1({ id }) {
   };
   return (
     <Container>
-      <Questionnaire>
+      <Questionnaire onSubmit={handleSubmit}>
         <Question>
           <Label>Sobe e desce degraus baixos?</Label>
           <Answers>

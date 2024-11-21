@@ -11,7 +11,6 @@ import Etapa6 from "../../../components/Formularios5/Etapa6"
 import Etapa7 from "../../../components/Formularios5/Etapa7"
 
 import axios from "../../../services/axios"
-import { toast } from "react-toastify";
 
 
 export default function Login({ match }) {
@@ -42,23 +41,27 @@ export default function Login({ match }) {
     return { anos, meses, dias };
   }
 
+
+
   function renderizarEtapasComBaseNaIdade() {
-    const idade = calcularIdadeCompleta(child.id);
+    const idade = calcularIdadeCompleta(child.born);
     if (idade.anos === 1 && idade.meses <= 6) {
-      return <Etapa5></Etapa5>
+      return <Etapa5 id={id}></Etapa5>
     } else if (idade.anos === 1 && idade.meses <= 11 && idade.anos <= 2) {
-      return <Etapa6></Etapa6>
+      return <Etapa6 id={id}></Etapa6>
     } else if (idade.anos === 2 || idade.anos === 3) {
-      return <Etapa7></Etapa7>
+      return <Etapa7 id={id}></Etapa7>
     }
 
     if (idade.meses <= 3) {
-      return <Etapa1></Etapa1>
+      return <Etapa1 id={id}></Etapa1>
     } else if (idade.meses >= 3 && idade.meses <= 6 && idade.dias < 1) {
-      return <Etapa2></Etapa2>
-    } else if (idade.meses >= 6 && idade.meses <= 9 && idade.dias < 1) {
-      return <Etapa3></Etapa3>
-    } else if (idade.meses >= 9 && idade.meses <= 12) {
+      return <Etapa2 id={id}></Etapa2>
+    } else if (idade.meses >= 6 && idade.meses <= 9 && idade.dias < 30) {
+      console.log("6 e 9 meses")
+      return <Etapa3 id={id}></Etapa3>
+    } else if (idade.dias > 1 && idade.meses >= 9 && idade.meses <= 12) {
+      console.log("9 e 12 meses", idade.meses)
       return <Etapa4 id={id}></Etapa4>
     }
   }
