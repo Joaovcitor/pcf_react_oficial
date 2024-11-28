@@ -4,7 +4,7 @@ import { toast } from "react-toastify"; // Adicione esta importação
 
 // Criação de instância do Axios
 const api = axios.create({
-  baseURL: "http://pcfnovo.logicmasters.com.br/apiv1",
+  baseURL: "https://pcfnovo.logicmasters.com.br/apiv1",
   withCredentials: true,
 });
 
