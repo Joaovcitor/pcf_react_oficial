@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Div, Section } from "./styled";
 import { Link } from "react-router-dom";
-import { differenceInYears, differenceInMonths, differenceInDays, subYears, subMonths } from "date-fns"
+import {
+  differenceInYears,
+  differenceInMonths,
+  differenceInDays,
+  subYears,
+  subMonths,
+} from "date-fns";
 
 import axios from "../../../services/axios";
 
@@ -13,16 +19,7 @@ export default function Login() {
       setFamilia(response.data.children);
     }
     getData();
-  }, [])
-
-  function formatarDataPtBr(data) {
-    const dateObject = new Date(data);
-    return dateObject.toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
-  }
+  }, []);
 
   function calcularIdadeCompleta(dataNascimento) {
     const hoje = new Date();
@@ -40,16 +37,18 @@ export default function Login() {
   }
 
   for (let i = 0; i < children.length; i++) {
-    console.log(calcularIdadeCompleta(children[i].born))
+    console.log(calcularIdadeCompleta(children[i].born));
   }
   return (
     <Div>
       <h2>Quantidade de beneficiários: {children.length}</h2>
-      {children.map(child => (
+      {children.map((child) => (
         <Section key={child.id}>
           <p>Nome: {child.name}</p>
           <p>Idade: {calcularIdadeCompleta(child.born)}</p>
-          <Link className="link" to={`/formularios/${child.id}`}>Acessar</Link>
+          <Link className="link" to={`/formularios/${child.id}`}>
+            Acessar
+          </Link>
         </Section>
       ))}
     </Div>

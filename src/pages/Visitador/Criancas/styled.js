@@ -10,7 +10,7 @@ export const Section = styled.section`
     color: black;
   }
   h2 {
-    color: white;
+    color: black;
   }
 
   input {
@@ -28,14 +28,15 @@ export const Info = styled.nav`
   padding: 20px;
   text-align: center;
   width: 190px;
- background: white;
- border-radius: 10px;
- transition: border-radius 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: white;
+  border-radius: 10px;
+  transition: border-radius 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   margin: 0 auto;
   justify-content: space-around;
-  box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1),
-             0 0  0 2px rgb(190, 190, 190),
-             0.3em 0.3em 1em rgba(0,0,0,0.3);
+  box-shadow:
+    inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgb(190, 190, 190),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 
   p {
     font-size: 1.2rem;
@@ -53,13 +54,13 @@ export const Info = styled.nav`
     font-weight: 600;
     cursor: pointer;
   }
-`
+`;
 
 export const Infos = styled.div`
- display: grid;
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 16px;
   padding: 16px;
-`
+`;
 
 export const Paragrafo = styled.p``;

@@ -5,16 +5,20 @@ export const Div = styled.form`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #0B8C38;
-  width: 300px;
-  margin: 0 auto;
-  margin-top: 20px;
+  width: 330px;
+  background: white;
+  border-radius: 10px;
+  transition: border-radius 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow:
+    inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgb(190, 190, 190),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
   padding: 10px;
-  border-radius: 5px;
-  text-align: center;
+  margin: 0 auto;
+  margin-top: 30px;
 
   h2 {
-    color: white;
+    color: black;
   }
 
   p {
@@ -59,7 +63,7 @@ export const Nav = styled.nav`
   border-radius: 10px;
 
   span {
-    color: #F2B441;
+    color: #f2b441;
     font-weight: bolder;
   }
 
@@ -70,7 +74,7 @@ export const Nav = styled.nav`
   .link {
     color: black;
     display: flex;
-    background-color: #F2B441;
+    background-color: #f2b441;
     padding: 5px;
     border-radius: 4px;
     width: 120px;
@@ -79,5 +83,4 @@ export const Nav = styled.nav`
     justify-content: center;
     margin-top: 10px;
   }
-
 `;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Div, Nav } from "./styled";
+import { Div, Nav, StyledDateInput } from "./styled";
 import { get } from "lodash";
 import axios from "../../../services/axios";
 import { toast } from "react-toastify";
@@ -9,20 +9,20 @@ export default function PlanosDeVisita({ match }) {
   // eslint-disable-next-line react/prop-types
   const { id } = match.params;
   const [child, setChildrens] = useState([]);
-  const [dia_a_ser_realizada_a_visita, setDia] = useState('');
-  const [objetivo, setObjetivo] = useState('');
-  const [grau_de_dificuldade_objetivo, setGrau] = useState('');
-  const [etapa1, setEtapa1] = useState('');
-  const [etapa2, setEtapa2] = useState('');
-  const [etapa3, setEtapa3] = useState('');
+  const [dia_a_ser_realizada_a_visita, setDia] = useState("");
+  const [objetivo, setObjetivo] = useState("");
+  const [grau_de_dificuldade_objetivo, setGrau] = useState("");
+  const [etapa1, setEtapa1] = useState("");
+  const [etapa2, setEtapa2] = useState("");
+  const [etapa3, setEtapa3] = useState("");
 
   useEffect(() => {
     async function getData() {
       const response = await axios.get(`/crianca/info/${id}`);
-      setChildrens(response.data.child)
+      setChildrens(response.data.child);
     }
 
-    getData()
+    getData();
   }, []);
 
   async function handleSubmit(e) {
@@ -51,7 +51,9 @@ export default function PlanosDeVisita({ match }) {
       });
 
       if (!response.data.plano || !response.data.plano.id) {
-        return toast.error("Erro ao criar o plano. Verifique a resposta do servidor.");
+        return toast.error(
+          "Erro ao criar o plano. Verifique a resposta do servidor."
+        );
       }
 
       // Segunda chamada: agendar a visita com base no plano criado
@@ -63,18 +65,17 @@ export default function PlanosDeVisita({ match }) {
 
       toast.success("Plano criado com sucesso e visita agendada");
       history.push(`/planos/criarplano/${id}`);
-
     } catch (e) {
-      const errors = get(e, 'response.data.errors', '');
-      if (typeof errors === 'string') {
+      const errors = get(e, "response.data.errors", "");
+      if (typeof errors === "string") {
         toast.error(errors);
       } else if (Array.isArray(errors)) {
-        errors.forEach(error => {
+        errors.forEach((error) => {
           toast.error(error);
         });
-      } else if (typeof errors === 'object') {
-        Object.values(errors).forEach(error => {
-          if (typeof error === 'string') {
+      } else if (typeof errors === "object") {
+        Object.values(errors).forEach((error) => {
+          if (typeof error === "string") {
             toast.error(error);
           }
         });
@@ -82,34 +83,51 @@ export default function PlanosDeVisita({ match }) {
     }
   }
 
-
   return (
     <Div onSubmit={handleSubmit}>
       <h2>Criar Plano de visita</h2>
 
-      <h3>Plano de visita do: <span>{child.name}</span></h3>
       <p>Quando você vai realizar a visita?</p>
-      <input
-        type="datetime-local"
+      <StyledDateInput
         name="dia_a_ser_realizada_a_visita"
-        onChange={e => setDia(e.target.value)}
+        onChange={(e) => setDia(e.target.value)}
         id="dia_a_ser_realizada_a_visita"
       />
       <p>Objetivo:</p>
-      <textarea name="objetivo" onChange={e => setObjetivo(e.target.value)} id="objetivo"></textarea>
+      <textarea
+        name="objetivo"
+        onChange={(e) => setObjetivo(e.target.value)}
+        id="objetivo"
+      ></textarea>
       <p>Qual a dificuldade dessa atividade?</p>
-      <select name="grau_de_dificuldade_objetivo" onChange={e => setGrau(e.target.value)} id="grau_de_dificuldade_objetivo">
+      <select
+        name="grau_de_dificuldade_objetivo"
+        onChange={(e) => setGrau(e.target.value)}
+        id="grau_de_dificuldade_objetivo"
+      >
         <option value="Selecione">Selecione</option>
         <option value="Fácil">Fácil</option>
         <option value="Média">Média</option>
         <option value="Dificil">Dificil</option>
       </select>
       <p>Momento 1:</p>
-      <textarea name="etapa1" onChange={e => setEtapa1(e.target.value)} id="etapa1"></textarea>
+      <textarea
+        name="etapa1"
+        onChange={(e) => setEtapa1(e.target.value)}
+        id="etapa1"
+      ></textarea>
       <p>Momento 2:</p>
-      <textarea name="etapa2" onChange={e => setEtapa2(e.target.value)} id="etapa2"></textarea>
+      <textarea
+        name="etapa2"
+        onChange={(e) => setEtapa2(e.target.value)}
+        id="etapa2"
+      ></textarea>
       <p>Momento 3:</p>
-      <textarea name="etapa3" onChange={e => setEtapa3(e.target.value)} id="etapa3"></textarea>
+      <textarea
+        name="etapa3"
+        onChange={(e) => setEtapa3(e.target.value)}
+        id="etapa3"
+      ></textarea>
       <button type="submit">Criar Plano</button>
     </Div>
   );
