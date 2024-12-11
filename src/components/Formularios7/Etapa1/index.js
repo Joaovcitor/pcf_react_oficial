@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
-import { get } from "lodash"
+import React, { useState } from "react";
+import { get } from "lodash";
 
 import { Container } from "../../../styles/GlobalStyle";
 import {
@@ -13,7 +13,7 @@ import {
   SubmitButton,
 } from "./styled";
 
-import axios from "../../../services/axios"
+import axios from "../../../services/axios";
 import { toast } from "react-toastify";
 
 export default function Etapa1({ id }) {
@@ -27,7 +27,6 @@ export default function Etapa1({ id }) {
   const [q8, setQ8] = useState("");
   const [q9, setQ9] = useState("");
   const [q10, setQ10] = useState("");
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -67,32 +66,41 @@ export default function Etapa1({ id }) {
     }
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       await axios.post("/form5-etapa1/create", {
-        q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, id: id
+        q1,
+        q2,
+        q3,
+        q4,
+        q5,
+        q6,
+        q7,
+        q8,
+        q9,
+        q10,
+        id: id,
       });
-      toast.success("Formulário criado com sucesso!")
+      toast.success("Formulário criado com sucesso!");
     } catch (e) {
-      const errors = get(e, 'response.data.errors', '');
-      if (typeof errors === 'string') {
+      const errors = get(e, "response.data.errors", "");
+      if (typeof errors === "string") {
         toast.error(errors);
       } else if (Array.isArray(errors)) {
-        errors.forEach(error => {
+        errors.forEach((error) => {
           toast.error(error);
         });
-      } else if (typeof errors === 'object') {
-        Object.values(errors).forEach(error => {
-          if (typeof error === 'string') {
+      } else if (typeof errors === "object") {
+        Object.values(errors).forEach((error) => {
+          if (typeof error === "string") {
             toast.error(error);
           }
         });
       }
     }
-  }
+  };
   return (
     <Container>
       <Questionnaire onSubmit={handleSubmit}>

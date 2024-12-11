@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Questionnaire = styled.div`
+export const Questionnaire = styled.form`
   display: flex;
   flex-direction: column;
   gap: 20px;

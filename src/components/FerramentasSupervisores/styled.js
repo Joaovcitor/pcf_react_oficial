@@ -8,7 +8,7 @@ export const Section = styled.section`
   flex-direction: column;
 
   h3 {
-    color: white;
+    color: black;
     display: flex;
     text-align: center;
     justify-content: center;

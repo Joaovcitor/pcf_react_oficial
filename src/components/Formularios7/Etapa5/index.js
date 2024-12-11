@@ -65,8 +65,8 @@ export default function Etapa1({ id }) {
         q6,
         id: id,
       });
-      toast.info("Cliquei");
       toast.success("Formulário criado com sucesso!");
+      toast.info("Cliquei");
     } catch (e) {
       const errors = get(e, "response.data.errors", "");
       if (typeof errors === "string") {
@@ -236,9 +236,7 @@ export default function Etapa1({ id }) {
         </Question>
 
         <Question>
-          <Label>
-            Bebe segurando o copo com a própria mão?
-          </Label>
+          <Label>Bebe segurando o copo com a própria mão?</Label>
           <Answers>
             <AnswerLabel>
               <input

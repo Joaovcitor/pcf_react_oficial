@@ -25,13 +25,13 @@ import EditarEExcluirTabelas from "../pages/Visitador/EditarEExcluirTabelas";
 import Visitadores from "../pages/Supervisor/Visitadores";
 import Notifications from "../pages/Notificacoes/CriarNotificacoes";
 import EditarUsuario from "../pages/EditarUsuario";
-import RelatoriosVisitadores from "../pages/Supervisor/RelatoriosVisitadores"
-import VisitasFeitasPelosVisitadores from "../pages/Supervisor/VisitasFeitasPelosVisitadores"
-import ValidarBeneficiarios from "../pages/Supervisor/ValidarBeneficiarios"
-import Supervisores from "../pages/Coordenador/Supervisores"
-import Formulario5 from "../pages/Formularios/Formularios5"
-import Relatorios from "../pages/Coordenador/RelatoriosVisitadores"
-
+import RelatoriosVisitadores from "../pages/Supervisor/RelatoriosVisitadores";
+import VisitasFeitasPelosVisitadores from "../pages/Supervisor/VisitasFeitasPelosVisitadores";
+import ValidarBeneficiarios from "../pages/Supervisor/ValidarBeneficiarios";
+import Supervisores from "../pages/Coordenador/Supervisores";
+import Formulario5 from "../pages/Formularios/Formularios5";
+import Formulario7 from "../pages/Formularios/Formularios7";
+import Relatorios from "../pages/Coordenador/RelatoriosVisitadores";
 
 import Page404 from "../pages/Page404";
 
@@ -149,12 +149,7 @@ export default function Routes() {
         component={ValidarBeneficiarios}
         isClosed
       />
-      <MyRoute
-        exact
-        path="/supervisores"
-        component={Supervisores}
-        isClosed
-      />
+      <MyRoute exact path="/supervisores" component={Supervisores} isClosed />
       <MyRoute
         exact
         path="/formularios5/:id"
@@ -164,16 +159,11 @@ export default function Routes() {
       <MyRoute
         exact
         path="/formularios7/:id"
-        component={Formulario5}
+        component={Formulario7}
         isClosed
       />
-      <MyRoute
-        exact
-        path="/relatorios"
-        component={Relatorios}
-        isClosed
-      />
+      <MyRoute exact path="/relatorios" component={Relatorios} isClosed />
       <MyRoute path="*" component={Page404} />
-    </Switch >
+    </Switch>
   );
 }
