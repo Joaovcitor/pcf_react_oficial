@@ -4,9 +4,11 @@ import axios from "../../../services/axios";
 import { Div } from "./styled";
 import { toast } from "react-toastify";
 import LocalizacaoReal from "../../../components/LocalizacaoReal";
+import BeneficiarioNaoEstaEmCasa from "../../../components/JustificarBeneficiario";
 
 export default function Dados({ match }) {
   const { id } = match.params;
+  const [visita, setVisita] = useState([]);
   const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [location_final, setLocationFinal] = useState({
     latitude_final: null,
@@ -15,12 +17,25 @@ export default function Dados({ match }) {
   const [dataInicio, setDataInicio] = useState(null);
   const [dataFim, setDataFim] = useState(null);
 
+  useEffect(() => {
+    async function getDados() {
+      const verificarVisitaFinalizada = await axios.get(
+        `/visitasporgeolo/verificar-visita/${id}`
+      );
+      setVisita(verificarVisitaFinalizada.data.visita);
+    }
+    getDados();
+  }, [id]);
+
   async function iniciarVisita(e) {
     e.preventDefault();
 
     const data_inicio = new Date().toISOString();
     setDataInicio(data_inicio);
 
+    if (!visita.beneficiario_em_casa) {
+      return toast.warn("Você disse que esse beneficiário não está em casa!");
+    }
     try {
       await axios.post(`/visitasporgeolo/realizarvisita/${id}`, {
         idVisita: id,
@@ -45,13 +60,18 @@ export default function Dados({ match }) {
       const verificarVisitaFinalizada = await axios.get(
         `/visitasporgeolo/verificar-visita/${id}`
       );
-      console.log(verificarVisitaFinalizada.data.visita.longitude);
+
+      if (!visita.beneficiario_em_casa) {
+        return toast.warn("Você disse que esse beneficiário não está em casa!");
+      }
+
       if (
         !verificarVisitaFinalizada.data.visita.latitude &&
         !verificarVisitaFinalizada.data.visita.longitude
       ) {
         return toast.warning("Primeiro inicie a visita!");
       }
+
       await axios.put(`/visitasporgeolo/finalizar-visita/${id}`, {
         id,
         latitude_final: location_final.latitude_final,
@@ -104,15 +124,6 @@ export default function Dados({ match }) {
 
   return (
     <Div>
-      <p>
-        Importante, ao iniciar a visita você sofrerá bloqueio nos seguintes
-        recursos:
-      </p>
-      <ul>
-        <li>Criar Planos de visitas</li>
-        <li>Cadastrar novos usuários</li>
-        <li>Iniciar outras visitas</li>
-      </ul>
       <button onClick={iniciarVisita} type="submit">
         Iniciar a visita
       </button>
@@ -121,6 +132,16 @@ export default function Dados({ match }) {
       </button>
       <p>Sua localização:</p>
       <LocalizacaoReal></LocalizacaoReal>
+      <br />
+
+      {visita.latitude && visita.longitude ? (
+        ""
+      ) : (
+        <>
+          <p>PREENCHA APENAS SE O BENEFICIÁRIO NÃO ESTIVER EM CASA!</p>
+          <BeneficiarioNaoEstaEmCasa id={visita.id}></BeneficiarioNaoEstaEmCasa>
+        </>
+      )}
     </Div>
   );
 }
