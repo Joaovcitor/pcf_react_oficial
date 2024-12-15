@@ -8,6 +8,7 @@ import MyRoute from "./MyRoute";
 import Criancas from "../pages/Visitador/Criancas";
 import CadastrarCuidador from "../pages/Visitador/CadastrarCuidador";
 import CadastrarCrianca from "../pages/Visitador/CadastrarCrianca";
+import TodasAsVisitas from "../pages/Coordenador/VisitasFeitasPelosVisitadores";
 import VisitarPorGeolocalizacao from "../pages/Visitador/VisitarPorGeolocalizacao";
 import RealizarVisitasPorGeolocalizacao from "../pages/Visitador/RealizarVisitasPorGeolocalizacao";
 import RealizarVisitasMarcadas from "../pages/Visitador/RealizarVisitasMarcadas";
@@ -79,6 +80,7 @@ export default function Routes() {
         component={CadastrarCrianca}
         isClosed
       />
+      <MyRoute exact path="/visitas" component={TodasAsVisitas} isClosed />
       <MyRoute
         exact
         path="/visitas-marcadas"

@@ -18,7 +18,13 @@ const Mapa = ({ visita }) => {
 
   return (
     <MapContainer
-      center={[visita.latitude, visita.longitude]}
+      center={
+        visita.latitude_beneficiario && visita.longitude_beneficiario
+          ? [visita.latitude_beneficiario, visita.longitude_beneficiario]
+          : visita.latitude && visita.longitude
+            ? [visita.latitude, visita.longitude]
+            : [0, 0]
+      }
       zoom={13}
       style={{
         height: "50vh",
@@ -33,7 +39,20 @@ const Mapa = ({ visita }) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Marker key={visita.id} position={[visita.latitude, visita.longitude]} />
+      {visita.latitude_beneficiario && visita.longitude_beneficiario ? (
+        <Marker
+          key={`${visita.id}-beneficiario`}
+          position={[
+            visita.latitude_beneficiario,
+            visita.longitude_beneficiario,
+          ]}
+        />
+      ) : visita.latitude && visita.longitude ? (
+        <Marker
+          key={`${visita.id}-default`}
+          position={[visita.latitude, visita.longitude]}
+        />
+      ) : null}
     </MapContainer>
   );
 };

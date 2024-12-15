@@ -23,7 +23,6 @@ export default function Visitadores() {
     async function getData() {
       try {
         const response = await axios.get(`/detalhes/relatorio-geral`);
-        console.log(response.data);
         setVisitador(response.data.visitador);
         setChildrens(response.data.childrens);
         setCaregivers(response.data.caregivers);
@@ -90,11 +89,11 @@ export default function Visitadores() {
       visitasNaoFinalizadas: visitas.filter(
         (v) => v.visita_marcada_finalizada !== true
       ),
+      visitasInvalidas: visitas.filter((v) => v.visita_mentirosa === true),
     };
   };
 
   const numerosVisitas = visitasQuantidadesRealizadas();
-  console.log(numerosVisitas.visitasFeitas.length);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -142,6 +141,7 @@ export default function Visitadores() {
         visitador={visitador}
         childrens={childrens}
         visitas={visitas}
+        visitasInvalidas={numerosVisitas.visitasInvalidas}
         planos={planos}
       />
       <GraficoBarrasCriancas caregiver={caregivers} childrens={childrens} />

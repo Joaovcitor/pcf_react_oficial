@@ -36,6 +36,13 @@ export default function Header() {
           </Link>
         </div>
         <div>
+          <IoReader size={38} style={{ color: "black" }} />
+          <p>Ver todas as visitas</p>
+          <Link className="links" to="/visitas">
+            Acessar
+          </Link>
+        </div>
+        <div>
           <IoPeopleCircleSharp size={38} style={{ color: "black" }} />
           <p>Notificações</p>
           <Link className="links" to="/notificacoes">

@@ -28,9 +28,9 @@ export default function dados() {
             >
               Mais Detalhes
             </Link>
-            <Link className="links" to={`/visitadores/editar/${visitador.id}`}>
+            {/* <Link className="links" to={`/visitadores/editar/${visitador.id}`}>
               Editar Informações
-            </Link>
+            </Link> // vou aguardar o que a prefeitura tem a dizer sobre o que pode ou não ser permitido editar dos visitadores!*/}
           </div>
         );
       })}
