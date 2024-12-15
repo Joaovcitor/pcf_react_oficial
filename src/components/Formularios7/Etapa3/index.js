@@ -66,7 +66,7 @@ export default function Etapa3({ id }) {
     e.preventDefault();
     toast.info("Cliquei");
     try {
-      await axios.post("/form5-etapa3/create", {
+      await axios.post("/form7-etapa3/create", {
         q1,
         q2,
         q3,

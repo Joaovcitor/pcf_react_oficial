@@ -56,7 +56,7 @@ export default function Etapa1({ id }) {
     e.preventDefault();
 
     try {
-      await axios.post("/form5-etapa5/create", {
+      const response = await axios.post("/form7-etapa5/create", {
         q1,
         q2,
         q3,
@@ -65,7 +65,9 @@ export default function Etapa1({ id }) {
         q6,
         id: id,
       });
-      toast.success("Formulário criado com sucesso!");
+      if (response.status === 200) {
+        toast.success("Formulário criado com sucesso!");
+      }
       toast.info("Cliquei");
     } catch (e) {
       const errors = get(e, "response.data.errors", "");

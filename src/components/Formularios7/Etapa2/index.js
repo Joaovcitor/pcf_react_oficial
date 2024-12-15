@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import React, { useEffect, useState } from "react";
-import { get } from "lodash"
+import { get } from "lodash";
 
 import { Container } from "../../../styles/GlobalStyle";
 import {
@@ -14,7 +14,7 @@ import {
   SubmitButton,
 } from "./styled";
 
-import axios from "../../../services/axios"
+import axios from "../../../services/axios";
 import { toast } from "react-toastify";
 
 export default function Etapa1({ id }) {
@@ -27,7 +27,6 @@ export default function Etapa1({ id }) {
   const [q7, setQ7] = useState("");
   const [q8, setQ8] = useState("");
   const [q9, setQ9] = useState("");
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -64,37 +63,47 @@ export default function Etapa1({ id }) {
     }
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await axios.post("/form5-etapa2/create", {
-        q1, q2, q3, q4, q5, q6, q7, q8, q9, id: id
+      await axios.post("/form7-etapa2/create", {
+        q1,
+        q2,
+        q3,
+        q4,
+        q5,
+        q6,
+        q7,
+        q8,
+        q9,
+        id: id,
       });
-      toast.success("Formulário criado com sucesso!")
+      toast.success("Formulário criado com sucesso!");
     } catch (e) {
-      const errors = get(e, 'response.data.errors', '');
-      if (typeof errors === 'string') {
+      const errors = get(e, "response.data.errors", "");
+      if (typeof errors === "string") {
         toast.error(errors);
       } else if (Array.isArray(errors)) {
-        errors.forEach(error => {
+        errors.forEach((error) => {
           toast.error(error);
         });
-      } else if (typeof errors === 'object') {
-        Object.values(errors).forEach(error => {
-          if (typeof error === 'string') {
+      } else if (typeof errors === "object") {
+        Object.values(errors).forEach((error) => {
+          if (typeof error === "string") {
             toast.error(error);
           }
         });
       }
     }
-  }
+  };
   return (
     <Container>
       <Questionnaire onSubmit={handleSubmit}>
         <Question>
-          <Label>Reconhece pessoas próximas e chora na frente de estranhos?</Label>
+          <Label>
+            Reconhece pessoas próximas e chora na frente de estranhos?
+          </Label>
           <Answers>
             <AnswerLabel>
               <input
@@ -168,7 +177,10 @@ export default function Etapa1({ id }) {
         </Question>
 
         <Question>
-          <Label>Muda de posição de barriga para baixo para a posição de costas e vice-versa?</Label>
+          <Label>
+            Muda de posição de barriga para baixo para a posição de costas e
+            vice-versa?
+          </Label>
           <Answers>
             <AnswerLabel>
               <input
@@ -242,9 +254,7 @@ export default function Etapa1({ id }) {
         </Question>
 
         <Question>
-          <Label>
-            Senta sem apoio por algum tempo?
-          </Label>
+          <Label>Senta sem apoio por algum tempo?</Label>
           <Answers>
             <AnswerLabel>
               <input
@@ -318,9 +328,7 @@ export default function Etapa1({ id }) {
         </Question>
 
         <Question>
-          <Label>
-            Procura com os olhos objetos à sua frente?
-          </Label>
+          <Label>Procura com os olhos objetos à sua frente?</Label>
           <Answers>
             <AnswerLabel>
               <input

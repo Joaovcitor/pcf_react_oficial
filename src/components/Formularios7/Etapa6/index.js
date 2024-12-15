@@ -25,7 +25,6 @@ export default function Etapa1({ id }) {
   const [q8, setQ8] = useState("");
   const [q9, setQ9] = useState("");
 
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     switch (name) {
@@ -65,7 +64,7 @@ export default function Etapa1({ id }) {
     e.preventDefault();
 
     try {
-      await axios.post("/form5-etapa6/create", {
+      await axios.post("/form7-etapa6/create", {
         q1,
         q2,
         q3,
@@ -246,9 +245,7 @@ export default function Etapa1({ id }) {
         </Question>
 
         <Question>
-          <Label>
-            Nomeia alguns objetos cotidianos?
-          </Label>
+          <Label>Nomeia alguns objetos cotidianos?</Label>
           <Answers>
             <AnswerLabel>
               <input
@@ -322,9 +319,7 @@ export default function Etapa1({ id }) {
         </Question>
 
         <Question>
-          <Label>
-            Segura um brinquedo enquanto caminha?
-          </Label>
+          <Label>Segura um brinquedo enquanto caminha?</Label>
           <Answers>
             <AnswerLabel>
               <input

@@ -70,7 +70,7 @@ export default function Etapa1({ id }) {
     e.preventDefault();
 
     try {
-      await axios.post("/form5-etapa1/create", {
+      await axios.post("/form7-etapa1/create", {
         q1,
         q2,
         q3,
