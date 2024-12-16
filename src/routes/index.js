@@ -33,6 +33,7 @@ import Supervisores from "../pages/Coordenador/Supervisores";
 import Formulario5 from "../pages/Formularios/Formularios5";
 import Formulario7 from "../pages/Formularios/Formularios7";
 import Relatorios from "../pages/Coordenador/RelatoriosVisitadores";
+import RelatoriosSupervisores from "../pages/Coordenador/RelatoriosSupervisores";
 
 import Page404 from "../pages/Page404";
 
@@ -165,6 +166,12 @@ export default function Routes() {
         isClosed
       />
       <MyRoute exact path="/relatorios" component={Relatorios} isClosed />
+      <MyRoute
+        exact
+        path="/meus-supervisores/detalhes/:id"
+        component={RelatoriosSupervisores}
+        isClosed
+      />
       <MyRoute path="*" component={Page404} />
     </Switch>
   );

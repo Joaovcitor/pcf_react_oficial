@@ -4,12 +4,15 @@ import axios from "../../../services/axios";
 import { Link } from "react-router-dom";
 import { Div } from "./styled";
 import GraficoBarrasVisitadores from "../../../components/GraficoDeBarraVisitadores";
-import GraficoBarrasCriancas from "../../../components/GraficoDeBarraCriancas";
+import RelatoriosDeVisitadoresIndividuais from "../../../utils/relatoriosVisitadores";
+import { toast } from "react-toastify";
 
 export default function Visitadores({ match }) {
   const { id } = match.params;
   const [visitador, setVisitador] = useState([]);
   const [child, setChildrens] = useState([]);
+
+  const [user, setUser] = useState([]);
 
   // states de pesquisa
   const [inicioMes, setInicioMes] = useState("");
@@ -19,24 +22,41 @@ export default function Visitadores({ match }) {
   const [visitasFeitas, setVisitasFeitas] = useState([]);
   const [AllVisitasFeitas, setAllVisitasFeitas] = useState([]);
 
+  async function carregarRelatorios(endPoint) {
+    try {
+      const dados = await RelatoriosDeVisitadoresIndividuais(`${endPoint}`);
+      setVisitador(dados.visitador);
+      setChildrens(dados.childrens);
+      setAllPlanos(dados.planos);
+      setAllVisitasFeitas(dados.visitasFeitas);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  switch (user.role) {
+    case "coordenador":
+      carregarRelatorios(`coordenador/visitador/${id}`);
+      break;
+    case "supervisor":
+      carregarRelatorios(`visitador/${id}`);
+      break;
+  }
+
   useEffect(() => {
     async function getData() {
       try {
-        const response = await axios.get(`/detalhes/visitador/${id}`);
-        setVisitador(response.data.visitador);
-        setChildrens(response.data.child);
-        setAllPlanos(response.data.planos);
-        setAllVisitasFeitas(response.data.visitasFeitas);
-        console.log(response.data.visitasFeitas);
+        const response = await axios.get(``);
+        console.log(response.data);
+        setUser(response.data.user);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       }
     }
 
     getData();
-  }, [id]);
+  }, []);
 
-  // Função para filtrar planos com base nas datas
   const filterPlanosByDate = () => {
     const filteredPlanos = allPlanos.filter((plano) => {
       const createdAt = new Date(plano.createdAt);

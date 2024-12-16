@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { primaryColor } from "../../config/colors";
 
 export const Section = styled.section`
-display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 20px;
   margin-top: 20px;
 
@@ -11,19 +11,19 @@ display: grid;
     color: black;
   }
 
-h3 {
-  color: white;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-}
-div {
+  h3 {
+    color: white;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+  div {
     margin-bottom: 10px;
     padding: 10px;
     margin: 10px;
-    background-color: #E3CD40;
+    background-color: #e3cd40;
     width: 200px;
     margin: 0 auto;
     margin-top: 20px;
@@ -45,7 +45,7 @@ div {
     border-radius: 4px;
     color: white;
   }
-`
+`;
 
 export const Nav = styled.nav`
   padding: 20px;

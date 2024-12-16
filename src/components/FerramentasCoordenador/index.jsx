@@ -42,13 +42,13 @@ export default function Header() {
             Acessar
           </Link>
         </div>
-        <div>
+        {/* <div>
           <IoPeopleCircleSharp size={38} style={{ color: "black" }} />
           <p>Notificações</p>
           <Link className="links" to="/notificacoes">
             Acessar
           </Link>
-        </div>
+        </div> */}
       </Nav>
     </Section>
   );

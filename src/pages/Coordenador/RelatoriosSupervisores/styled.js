@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
 export const Div = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
   margin: 0 auto;
   padding: 20px;
+  justify-content: center;
+  align-items: center;
 
   h3 {
     font-size: 1.8rem;
@@ -12,7 +16,7 @@ export const Div = styled.div`
     color: #333;
 
     span {
-      color: #007BFF; /* Destaque para o nome do visitador */
+      color: #007bff; /* Destaque para o nome do visitador */
     }
   }
 
@@ -27,7 +31,7 @@ export const Div = styled.div`
       flex-wrap: wrap;
 
       .naoBateu {
-        background-color: #CC2235;
+        background-color: #cc2235;
         padding: 10px;
         border-radius: 5px;
 
@@ -45,20 +49,23 @@ export const Div = styled.div`
   }
 
   .criancas {
-    background-color: red;
-    padding: 15px;
-    border: 1px solid #DDD;
-    width: 300px;
+    width: 190px;
+    background: rgb(236, 236, 236);
+    box-shadow:
+      rgba(0, 0, 0, 0.4) 0px 2px 4px,
+      rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+      rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     border-radius: 8px;
     margin-bottom: 10px;
     text-align: center;
+    padding: 20px;
 
     .links {
       display: inline-block;
       margin-right: 15px;
       margin-top: 5px;
       padding: 5px 10px;
-      background-color: #007BFF;
+      background-color: #007bff;
       color: white;
       text-decoration: none;
       border: none;

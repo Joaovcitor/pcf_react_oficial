@@ -53,15 +53,19 @@ export const Div = styled.div`
       justify-content: space-around;
       align-items: center;
       flex-direction: column;
+      background-color: #cc2235;
+      width: 250px;
+      padding: 10px;
+      border-radius: 4px;
+      margin: 0 auto;
+      margin-bottom: 15px;
+      p {
+        color: white;
+        font-weight: bold;
+      }
       .naoBateu {
-        background-color: #cc2235;
         padding: 10px;
         border-radius: 5px;
-
-        p {
-          color: #ffff;
-          font-weight: bold;
-        }
       }
 
       .bateu {
@@ -76,10 +80,10 @@ export const Div = styled.div`
         }
       }
 
-      p {
+      /* p {
         font-size: 1rem;
         color: #333;
-      }
+      } */
     }
   }
 
