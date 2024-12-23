@@ -16,21 +16,21 @@ export default function Header() {
     <Section>
       <Nav>
         <div>
-          <IoPeopleSharp size={38} style={{ color: "black" }} />
+          <IoPeopleSharp size={38} style={{ color: "white" }} />
           <p>Famílias</p>
           <Link className="links" to="/familias">
             Acessar
           </Link>
         </div>
         <div>
-          <IoPersonAdd size={38} style={{ color: "black" }} />
+          <IoPersonAdd size={38} style={{ color: "white" }} />
           <p>Cadastrar Família</p>
           <Link className="links" to="/cuidador/cadastrar">
             Acessar
           </Link>
         </div>
         <div>
-          <IoReader size={38} style={{ color: "black" }} />
+          <IoReader size={38} style={{ color: "white" }} />
           <p>Criar Planos de Visita</p>
           <Link className="links" to="/planos">
             Acessar
@@ -44,7 +44,7 @@ export default function Header() {
           </Link>
         </div> */}
         <div>
-          <CiCompass1 size={38} style={{ color: "black" }} />
+          <CiCompass1 size={38} style={{ color: "white" }} />
           <p>Realizar Visitas</p>
           <Link className="links" to="/visitas-marcadas">
             Acessar

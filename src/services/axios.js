@@ -19,9 +19,6 @@ api.interceptors.response.use(
       if (error.response.status === 401 || error.response.status === 403) {
         toast.error("Você não está autorizado a acessar esta página.");
         history.push("/login");
-      } else {
-        // Outros status com mensagens genéricas
-        toast.error("Ocorreu um erro. Por favor, tente novamente.");
       }
     } else if (error.request) {
       console.error("Problema de rede ou servidor não respondeu.");

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "../../services/axios";
 
-import { Div } from "./styled"
-import FerramentasVisitadores from "../../components/FerramentasVisitadores"
-import FerramentasSupervisores from "../../components/FerramentasSupervisores"
-import FerramentaCoordenador from "../../components/FerramentasCoordenador"
+import { Div } from "./styled";
+import FerramentasVisitadores from "../../components/FerramentasVisitadores";
+import FerramentasSupervisores from "../../components/FerramentasSupervisores";
+import FerramentaCoordenador from "../../components/FerramentasCoordenador";
 import Notifications from "../../components/Notifications";
-import TabelaDevisitasDosVisitadores from "../../components/TabelaDeVisitasDosVisitadores"
+import TabelaDevisitasDosVisitadores from "../../components/TabelaDeVisitasDosVisitadores";
 
 export default function Visitador() {
   const [users, setUsers] = useState(null);
@@ -17,13 +17,12 @@ export default function Visitador() {
       const response = await axios.get("/");
       setUsers(response.data.user);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
-
+  };
 
   React.useEffect(() => {
-    fetchData()
+    fetchData();
   }, []);
 
   function renderizaComponente() {
@@ -36,33 +35,24 @@ export default function Visitador() {
             <Notifications endpoint={"minhas-notificacoes"} />
             <TabelaDevisitasDosVisitadores />
           </>
-        )
+        );
       case "supervisor":
         return (
           <>
             <FerramentasSupervisores />
             <Notifications endpoint={"supervisor-showall-notificacoes"} />
           </>
-        )
+        );
       case "coordenador":
         return (
           <>
             <FerramentaCoordenador />
             {/* <Notifications endpoint={"supervisor-showall-notificacoes"} /> API ainda não possui notificações para coordenadores */}
           </>
-        )
+        );
     }
   }
   return (
-    <Div>
-      {users ? (
-        <>
-          <h2>Olá, {users.name}</h2>
-          {renderizaComponente()}
-        </>
-      ) : (
-        <p>Carregando...</p>
-      )}
-    </Div>
+    <Div>{users ? <>{renderizaComponente()}</> : <p>Carregando...</p>}</Div>
   );
 }

@@ -2,20 +2,20 @@ import styled from "styled-components";
 import { primaryColor } from "../../config/colors";
 
 export const Section = styled.section`
-display: flex;
-justify-content: center;
-text-align: center;
-flex-direction: column;
-
-h3 {
-  color: white;
   display: flex;
-  text-align: center;
   justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-}
-`
+  text-align: center;
+  flex-direction: column;
+
+  h3 {
+    color: white;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+`;
 
 export const Nav = styled.nav`
   padding: 20px;
@@ -30,15 +30,17 @@ export const Nav = styled.nav`
   }
 
   p {
-    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
   }
 
   div {
     box-sizing: border-box;
     width: 200px;
     height: 200px;
-    background: rgba(217, 217, 217, 0.58);
-    border: 1px solid white;
+    /* background: rgba(217, 217, 217, 0.58); */
+    background-color: #085a8c;
+    border: 1px solid #011126;
     box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
     backdrop-filter: blur(6px);
     border-radius: 17px;
@@ -61,7 +63,7 @@ export const Nav = styled.nav`
 
   .links {
     border: none;
-    background-color: #E3CD40;
+    background-color: #e3cd40;
     display: flex;
     margin-top: 25px;
     text-align: center;
