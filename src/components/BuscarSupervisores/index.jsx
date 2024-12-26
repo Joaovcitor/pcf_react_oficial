@@ -20,20 +20,20 @@ export default function dados() {
         return (
           <div key={supervisor.id}>
             <p>Nome: {supervisor.name}</p>
-            {/* <p>Território: {supervisor.territorio}</p>
-            <p>CRAS: {supervisor.cras}</p> */}
+            <p>Território: {supervisor.territorio}</p>
+            <p>CRAS: {supervisor.cras}</p>
             <Link
               className="links"
               to={`/meus-supervisores/detalhes/${supervisor.id}`}
             >
               Mais Detalhes
             </Link>
-            {/* <Link
+            <Link
               className="links"
               to={`/meus-supervisores/editar/${supervisor.id}`}
             >
               Editar Informações
-            </Link> */}
+            </Link>
           </div>
         );
       })}

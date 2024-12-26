@@ -36,13 +36,13 @@ export default function Header() {
             Acessar
           </Link>
         </div>
-        {/* <div>
+        <div>
           <IoPeopleCircleSharp size={38} style={{ color: "black" }} />
           <p>Cuidadores</p>
           <Link className="links" to="/cuidadores">
             Acessar
           </Link>
-        </div> */}
+        </div>
         <div>
           <CiCompass1 size={38} style={{ color: "white" }} />
           <p>Realizar Visitas</p>

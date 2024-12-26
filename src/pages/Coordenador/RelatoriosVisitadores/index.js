@@ -146,7 +146,6 @@ export default function Visitadores() {
       />
       <GraficoBarrasCriancas caregiver={caregivers} childrens={childrens} />
       <div className="dados">
-        <h2>Visitadores</h2>
         {visitador.map((visi) => {
           return (
             <nav key={visi.id}>
@@ -154,7 +153,6 @@ export default function Visitadores() {
               <p>Quantidade de planos: {planosVisitadores()}</p>
               <p>Quantidade de criancas: {criancasVisitadores()}</p>
               <p>Quantidade de visitas feitas: {visitasVisitadores()}</p>
-              <Link to={`/visitadores/detalhes/${visi.id}`}>Detalhes</Link>
             </nav>
           );
         })}
