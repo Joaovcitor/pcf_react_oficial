@@ -13,10 +13,13 @@ import axios from "../../../services/axios";
 
 export default function Login() {
   const [children, setFamilia] = useState([]);
+  const [pregnants, setPregnants] = useState([]);
   useEffect(() => {
     async function getData() {
       const response = await axios.get("/familias/showfamilias");
+      console.log(response.data)
       setFamilia(response.data.children);
+      setPregnants(response.data.gravidas)
     }
     getData();
   }, []);
@@ -47,6 +50,17 @@ export default function Login() {
           <p>Nome: {child.name}</p>
           <p>Idade: {calcularIdadeCompleta(child.born)}</p>
           <Link className="link" to={`/formularios/${child.id}`}>
+            Acessar
+          </Link>
+        </Section>
+      ))}
+      <h2>Quantidade de Grávidas: {pregnants.length}</h2>
+      {pregnants.map((pregnant) => (
+        <Section key={pregnant.id}>
+          <p>Nome: {pregnant.name}</p>
+          <p>Idade: {calcularIdadeCompleta(pregnant.born)}</p>
+          <p>Semanas: {pregnant.week_pregnant}</p>
+          <Link className="link" to={`/formularios/${pregnant.id}`}>
             Acessar
           </Link>
         </Section>

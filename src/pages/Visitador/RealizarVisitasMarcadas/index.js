@@ -31,7 +31,6 @@ export default function Dados({ match }) {
     e.preventDefault();
 
     const data_inicio = new Date().toISOString();
-    console.log(data_inicio);
     setDataInicio(data_inicio);
 
     if (!visita.beneficiario_em_casa) {
@@ -55,7 +54,6 @@ export default function Dados({ match }) {
     e.preventDefault();
 
     const data_fim = new Date().toISOString();
-    console.log(data_fim);
     setDataFim(data_fim);
 
     try {

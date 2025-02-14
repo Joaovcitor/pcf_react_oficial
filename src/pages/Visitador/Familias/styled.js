@@ -41,6 +41,8 @@ export const Section = styled.section`
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
   padding: 10px;
   margin: 0 auto;
+  margin-top: 15px;
+  margin-bottom: 20px;
 
   .link {
     background-color: white;

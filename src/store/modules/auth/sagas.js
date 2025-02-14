@@ -39,9 +39,9 @@ function* registerRequest({ payload }) {
 
   try {
     if (id) {
-      yield call(axios.post, "/visitadores/editarperfilvisitador", {
-        email,
-        password: password || undefined,
+      yield call(axios.patch, "/login/editar", {
+        email: email,
+        password: password
       });
       toast.success("Conta alterada com sucesso");
     }
@@ -61,7 +61,7 @@ function* registerRequest({ payload }) {
       });
     }
 
-    yield put(actions.registerFailure());
+    // yield put(actions.registerFailure());
   }
 }
 

@@ -27,21 +27,25 @@ export const Div = styled.div`
 `;
 
 export const Section = styled.section`
+
+div {
+
   width: 220px;
-  height: 120px;
   padding: 20px;
-  margin-bottom: 15px;
-  display: flex;
-  background: #fff;
-  border: solid 4px #333;
-  box-shadow: -5px 5px #333;
-  transition: all .2s ease-in-out;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  cursor: pointer;
-  margin: 0 auto;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    display: flex;
+    background: #fff;
+    border: solid 4px #333;
+    box-shadow: -5px 5px #333;
+    transition: all .2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 auto;
+  }
 
   .link {
     background-color: white;

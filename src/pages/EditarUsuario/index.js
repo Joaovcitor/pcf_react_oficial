@@ -1,9 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../services/axios";
-import history from "../../services/history";
-
-import { toast } from "react-toastify";
-import { get } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
 import { isEmail } from "validator";
 import { Container } from "../../styles/GlobalStyle";

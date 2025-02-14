@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Div, Nav } from "./styled";
+import { Div, Nav, RadioGroup } from "./styled";
 import { get } from "lodash";
 import axios from "../../../services/axios";
 import { toast } from "react-toastify";
@@ -13,12 +13,36 @@ export default function PlanosDeVisita() {
   const [descricao, setDescricao] = useState("");
   const [id, setId] = useState("");
 
+  const [user, setUser] = useState([]);
+
   useEffect(() => {
     async function getData() {
-      const response = await axios.get("/supervisor/info-dos-meus-visitadores");
-      setVisitadores(response.data.visitador);
+      const response = await axios.get("/");
+      console.log(response.data);
+      setUser(response.data.user);
     }
 
+    getData();
+  }, []);
+
+  useEffect(() => {
+    async function getData() {
+      switch (user.role) {
+        case "coordenador": {
+          const response = await axios.get("/coordenador/meus-visitadores");
+          console.log(response.data.visitadores);
+          setVisitadores(response.data.visitadores);
+          break;
+        }
+        case "supervisor": {
+          const response = await axios.get(
+            "/supervisor/info-dos-meus-visitadores"
+          );
+          setVisitadores(response.data.visitador);
+          break;
+        }
+      }
+    }
     getData();
   }, []);
 
@@ -39,13 +63,30 @@ export default function PlanosDeVisita() {
 
     try {
       if (todosVisitadores) {
-        await axios.post(
-          "/notificacoes/supervisor-create-varias-notificacoes",
-          {
-            notificacao_tipo,
-            descricao,
+        switch (user.role) {
+          case "coordenador": {
+            await axios.post(
+              "/notificacoes/coordenador-create-varias-notificacoes",
+              {
+                notificacao_tipo,
+                descricao,
+              }
+            );
+            toast.success("Notificações criada com sucesso");
+            break;
           }
-        );
+          case "supervisor": {
+            await axios.post(
+              "/notificacoes/supervisor-create-varias-notificacoes",
+              {
+                notificacao_tipo,
+                descricao,
+              }
+            );
+            toast.success("Notificações criada com sucesso");
+            break;
+          }
+        }
 
         return toast.success("Notificações criada com sucesso");
       }
@@ -122,17 +163,20 @@ export default function PlanosDeVisita() {
       )}
 
       <p>Qual o tipo dessa notificação:</p>
-      <select
-        name="grau_de_dificuldade_objetivo"
-        onChange={(e) => setTipo(e.target.value)}
-        id="grau_de_dificuldade_objetivo"
-      >
-        <option value="Selecione">Selecione</option>
-        <option value="Reunião">Reunião</option>
-        <option value="Falta">Falta</option>
-        <option value="Evento">Falta</option>
-        <option value="Outras">Outros</option>
-      </select>
+      <RadioGroup>
+        {["Reunião", "Falta", "Evento", "Outras"].map((tipo) => (
+          <label key={tipo} style={{ display: "block", marginBottom: "5px" }}>
+            <input
+              type="radio"
+              name="grau_de_dificuldade_objetivo"
+              value={tipo}
+              onChange={(e) => setTipo(e.target.value)}
+            />
+            {tipo}
+          </label>
+        ))}
+      </RadioGroup>
+
       <p>Descreva</p>
       <textarea
         name="objetivo"

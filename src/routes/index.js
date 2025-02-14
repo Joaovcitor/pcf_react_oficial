@@ -24,6 +24,7 @@ import EditarPlanosDeVisitas from "../pages/Visitador/EditarPlanosDeVisitas";
 import Tabelas from "../pages/Visitador/Tabelas";
 import EditarEExcluirTabelas from "../pages/Visitador/EditarEExcluirTabelas";
 import Visitadores from "../pages/Supervisor/Visitadores";
+import EditarVisitador from "../pages/Coordenador/Visitadores"
 import Notifications from "../pages/Notificacoes/CriarNotificacoes";
 import EditarUsuario from "../pages/EditarUsuario";
 import RelatoriosVisitadores from "../pages/Supervisor/RelatoriosVisitadores";
@@ -35,6 +36,8 @@ import Formulario7 from "../pages/Formularios/Formularios7";
 import Relatorios from "../pages/Coordenador/RelatoriosVisitadores";
 
 import Page404 from "../pages/Page404";
+import BuscarSupervisores from "../components/BuscarSupervisores";
+import DetalhesSupervisores from "../components/DetalhesSupervisores";
 
 export default function Routes() {
   return (
@@ -66,6 +69,12 @@ export default function Routes() {
         exact
         path="/cadastrar-visitador"
         component={RegistrarVisitador}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/visitadores/editar/:id"
+        component={EditarVisitador}
         isClosed
       />
       <MyRoute
@@ -152,6 +161,7 @@ export default function Routes() {
         isClosed
       />
       <MyRoute exact path="/supervisores" component={Supervisores} isClosed />
+      <MyRoute exact path="/meus-supervisores/detalhes/:id" component={DetalhesSupervisores} isClosed />
       <MyRoute
         exact
         path="/formularios5/:id"
