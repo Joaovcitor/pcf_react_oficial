@@ -53,13 +53,20 @@ export const Div = styled.div`
       justify-content: space-around;
       align-items: center;
       flex-direction: column;
+      background-color: #0f8c3b;
+      width: 240px;
+      margin: 0 auto;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 4px;
+
       .naoBateu {
         background-color: #cc2235;
         padding: 10px;
         border-radius: 5px;
 
         p {
-          color: #ffff;
+          color: white;
           font-weight: bold;
         }
       }
@@ -78,7 +85,7 @@ export const Div = styled.div`
 
       p {
         font-size: 1rem;
-        color: #333;
+        color: white;
       }
     }
   }

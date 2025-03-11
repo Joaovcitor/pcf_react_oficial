@@ -6,7 +6,14 @@ import { toast } from "react-toastify";
 import { get } from "lodash";
 import { isEmail } from "validator";
 import { Container } from "../../../styles/GlobalStyle";
-import { Form, StyledCheckbox } from "./styled";
+import {
+  Form,
+  StyledCheckbox,
+  Div,
+  Label,
+  RadioInput,
+  RadioGroup,
+} from "./styled";
 
 // eslint-disable-next-line react/prop-types
 export default function Login({ match }) {
@@ -34,8 +41,7 @@ export default function Login({ match }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(sexo)
-
+    console.log(sexo);
 
     let formsErrors = false;
 
@@ -55,7 +61,6 @@ export default function Login({ match }) {
         nis,
         caregiverId: id,
       });
-
 
       toast.success("criança criada com sucesso!");
       history.push("/");
@@ -78,8 +83,10 @@ export default function Login({ match }) {
   }
 
   return (
-    <Container>
-      <h2>Cadastrar criança do(a) {cuidador.name}</h2>
+    <Div>
+      <h2>
+        Cadastrar criança do(a) <span>{cuidador.name}</span>
+      </h2>
       <Form onSubmit={handleSubmit}>
         <label htmlFor="nome">
           Nome:
@@ -87,7 +94,7 @@ export default function Login({ match }) {
             type="text"
             value={name}
             onChange={(e) => setNome(e.target.value)}
-            placeholder="Digite seu nome"
+            placeholder="Digite o nome do beneficiário"
           />
         </label>
         <label htmlFor="nis">
@@ -96,20 +103,33 @@ export default function Login({ match }) {
             type="text"
             value={nis}
             onChange={(e) => setNis(e.target.value)}
-            placeholder="Digite seu e-mail"
+            placeholder="Digite o NIS"
           />
         </label>
         <label htmlFor="">Sexo:</label>
-        <select
-          name="sexo"
-          value={sexo}
-          onChange={(e) => setSexo(e.target.value)}
-          id="sexo"
-        >
-          <option value="Selecione">Selecione</option>
-          <option value="Masculino">Masculino</option>
-          <option value="Feminino">Feminino</option>
-        </select>
+        <RadioGroup>
+          <Label>
+            <RadioInput
+              type="radio"
+              name="sexo"
+              value="Masculino"
+              checked={sexo === "Masculino"}
+              onChange={(e) => setSexo(e.target.value)}
+            />
+            Masculino
+          </Label>
+
+          <Label>
+            <RadioInput
+              type="radio"
+              name="sexo"
+              value="Feminino"
+              checked={sexo === "Feminino"}
+              onChange={(e) => setSexo(e.target.value)}
+            />
+            Feminino
+          </Label>
+        </RadioGroup>
         <label htmlFor="bpc">
           Criança com BPC:
           <StyledCheckbox
@@ -128,6 +148,6 @@ export default function Login({ match }) {
         </label>
         <button type="submit">Cadastrar</button>
       </Form>
-    </Container>
+    </Div>
   );
 }

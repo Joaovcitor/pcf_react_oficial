@@ -5,11 +5,22 @@ export const Div = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: #1c0373;
+  width: 300px;
+  padding: 20px;
+  margin: 0 auto;
+  border-radius: 20px;
+  margin-top: 20px;
 
-  p {
+  span {
+    color: #f2ce1b;
+  }
+
+  h2 {
     font-size: 18px;
     /* margin-left: 15px; */
-    color: black;
+    color: white;
+    text-align: center;
   }
 
   input {
@@ -22,6 +33,34 @@ export const Div = styled.div`
   }
 `;
 
+export const Label = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+`;
+
+export const RadioInput = styled.input`
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #007bff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:checked {
+    background-color: #007bff;
+  }
+`;
+
+export const RadioGroup = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
 export const StyledCheckbox = styled.input`
   width: 20px;
   height: 20px;
@@ -31,7 +70,7 @@ export const StyledCheckbox = styled.input`
   outline: none;
 
   &:checked {
-    background-color: #0CF25D;
+    background-color: #0cf25d;
     border-color: #007bff;
   }
 
@@ -48,27 +87,26 @@ export const StyledCheckbox = styled.input`
   }
 `;
 
-
-
 export const Form = styled.form`
-display: flex;
-flex-direction: column;
-margin-top: 20px;
-
-label {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
-}
+  margin-top: 20px;
 
-input {
-  height: 40px;
-  font-size: 18px;
-  border: 1px solid #0D0D0D;
-  padding: 0 10px;
-  border-radius: 4px;
-  &:focus {
-    border: 1px solid red;
+  label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    color: white;
   }
-}
+
+  input {
+    height: 40px;
+    font-size: 18px;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 0 10px;
+    border-radius: 4px;
+    &:focus {
+      border: 1px solid red;
+    }
+  }
 `;

@@ -6,6 +6,7 @@ import {
   IoPeopleCircleSharp,
 } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { ImProfile } from "react-icons/im";
 
 import { Nav, Section } from "./styled";
 
@@ -46,6 +47,13 @@ export default function Header() {
           <IoPeopleCircleSharp size={38} style={{ color: "black" }} />
           <p>Notificações</p>
           <Link className="links" to="/notificacoes">
+            Acessar
+          </Link>
+        </div>
+        <div>
+          <ImProfile size={38} style={{ color: "white" }} />
+          <p>Administrativo</p>
+          <Link className="links" to="/administrativo">
             Acessar
           </Link>
         </div>

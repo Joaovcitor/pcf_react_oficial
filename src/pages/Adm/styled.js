@@ -10,8 +10,11 @@ export const Section = styled.section`
   gap: 20px;
   padding: 20px;
   background-color: #f2b441;
+  width: 75%;
+  margin: 0 auto;
   border-radius: 20px;
   margin-bottom: 20px;
+  margin-top: 20px;
 
   @media (max-width: 768px) {
     flex-direction: column;

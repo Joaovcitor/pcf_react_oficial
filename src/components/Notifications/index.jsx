@@ -29,8 +29,8 @@ export default function Notifications({ endpoint }) {
   }, [endpoint]);
   return (
     <Section>
-      <h4>Avisos e notificações</h4>
       <Nav>
+        <h4>Notificações</h4>
         {notificacoes.length > 0 ? (
           notificacoes.map((notificacaoItem) => (
             <div key={notificacaoItem.id}>
@@ -46,6 +46,40 @@ export default function Notifications({ endpoint }) {
           <p>Sem notificações no momento.</p>
         )}
       </Nav>
+      {/* <Nav>
+        <h4>Visitas Invalidadas</h4>
+        {notificacoes.length > 0 ? (
+          notificacoes.map((notificacaoItem) => (
+            <div key={notificacaoItem.id}>
+              <p>
+                Tipo da notificação:{" "}
+                <span>{notificacaoItem.notificacao_tipo}</span>
+              </p>
+              <p>Descrição: </p>
+              <p>{notificacaoItem.descricao}</p>
+            </div>
+          ))
+        ) : (
+          <p>Sem notificações no momento.</p>
+        )}
+      </Nav>
+      <Nav>
+        <h4>Faltas</h4>
+        {notificacoes.length > 0 ? (
+          notificacoes.map((notificacaoItem) => (
+            <div key={notificacaoItem.id}>
+              <p>
+                Tipo da notificação:{" "}
+                <span>{notificacaoItem.notificacao_tipo}</span>
+              </p>
+              <p>Descrição: </p>
+              <p>{notificacaoItem.descricao}</p>
+            </div>
+          ))
+        ) : (
+          <p>Você não possui nenhuma falta</p>
+        )}
+      </Nav> */}
     </Section>
   );
 }

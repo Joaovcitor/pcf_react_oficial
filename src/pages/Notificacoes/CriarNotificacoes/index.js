@@ -44,7 +44,7 @@ export default function PlanosDeVisita() {
       }
     }
     getData();
-  }, []);
+  }, [user.role]);
 
   const handleTodosVisitadoresChange = (event) => {
     setTodosVisitadores(event.target.checked);
@@ -60,6 +60,9 @@ export default function PlanosDeVisita() {
     if (!notificacao_tipo || descricao.length < 3) {
       return toast.error("Preencha todos os campos");
     }
+
+    console.log(typeof notificacao_tipo, notificacao_tipo);
+    console.log(typeof descricao, descricao);
 
     try {
       if (todosVisitadores) {
@@ -92,11 +95,24 @@ export default function PlanosDeVisita() {
       }
 
       if (umVisitador) {
-        await axios.post(`/notificacoes/supervisor-create-notificacoes`, {
-          id,
-          notificacao_tipo,
-          descricao,
-        });
+        switch (user.role) {
+          case "coordenador": {
+            await axios.post(`/notificacoes/coordenador-create-notificacoes`, {
+              id,
+              notificacao_tipo,
+              descricao,
+            });
+            break;
+          }
+          case "supervisor": {
+            await axios.post(`/notificacoes/supervisor-create-notificacoes`, {
+              id,
+              notificacao_tipo,
+              descricao,
+            });
+            break;
+          }
+        }
         return toast.success("Notificação criada com sucesso");
       }
     } catch (e) {

@@ -17,9 +17,9 @@ export default function Login() {
   useEffect(() => {
     async function getData() {
       const response = await axios.get("/familias/showfamilias");
-      console.log(response.data)
+      console.log(response.data);
       setFamilia(response.data.children);
-      setPregnants(response.data.gravidas)
+      setPregnants(response.data.gravidas);
     }
     getData();
   }, []);
@@ -60,7 +60,7 @@ export default function Login() {
           <p>Nome: {pregnant.name}</p>
           <p>Idade: {calcularIdadeCompleta(pregnant.born)}</p>
           <p>Semanas: {pregnant.week_pregnant}</p>
-          <Link className="link" to={`/formularios/${pregnant.id}`}>
+          <Link className="link" to={`/formularios/gravidas/${pregnant.id}`}>
             Acessar
           </Link>
         </Section>

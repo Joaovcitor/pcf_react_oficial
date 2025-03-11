@@ -6,6 +6,10 @@ import {
   IoReader,
   IoPeopleCircleSharp,
 } from "react-icons/io5";
+import { FiAlertTriangle } from "react-icons/fi";
+import { FaLocationDot } from "react-icons/fa6";
+import { ImProfile } from "react-icons/im";
+
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -37,16 +41,23 @@ export default function Header() {
           </Link>
         </div>
         <div>
-          <IoPeopleCircleSharp size={38} style={{ color: "black" }} />
+          <IoPeopleCircleSharp size={38} style={{ color: "white" }} />
           <p>Cuidadores</p>
           <Link className="links" to="/cuidadores">
             Acessar
           </Link>
         </div>
         <div>
-          <CiCompass1 size={38} style={{ color: "white" }} />
+          <FaLocationDot size={38} style={{ color: "white" }} />
           <p>Realizar Visitas</p>
           <Link className="links" to="/visitas-marcadas">
+            Acessar
+          </Link>
+        </div>
+        <div>
+          <ImProfile size={38} style={{ color: "white" }} />
+          <p>Administrativo</p>
+          <Link className="links" to="/administrativo">
             Acessar
           </Link>
         </div>

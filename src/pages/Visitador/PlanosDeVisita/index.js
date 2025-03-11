@@ -16,15 +16,15 @@ export default function PlanosDeVisita() {
 
   return (
     <div>
-      <h2>Criar Planos de visitas</h2>
       {childrens.map((child) => (
         <CardContainer key={child.id}>
           <CardContent>
-            <p>Nome: <span>{child.name}</span></p>
-            <p>Criar Plano de Visita</p>
+            <p>
+              Nome: <span>{child.name}</span>
+            </p>
           </CardContent>
           <Link to={`/planos/criarplano/${child.id}`}>
-            <CardButton>Acessar</CardButton>
+            <CardButton>Criar Plano</CardButton>
           </Link>
         </CardContainer>
       ))}

@@ -53,8 +53,6 @@ export default function TodasAsVisitas({ match }) {
     (visita) => visita.visita_mentirosa
   );
 
-  console.log(visitasInvalidas);
-
   const handleSubmitInvalidarVisita = () => {
     setHabilitar(true);
   };
@@ -73,12 +71,12 @@ export default function TodasAsVisitas({ match }) {
                 visita.longitude ? (
                   <>
                     <Mapa visita={visita} />
-                    <button
+                    {/* <button
                       onClick={() => handleSubmitValidarVisita(visita.id)}
                       type="button"
                     >
                       Validar Visita
-                    </button>
+                    </button> */}
                     <button
                       onClick={() => handleSubmitInvalidarVisita()}
                       type="button"

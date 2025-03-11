@@ -5,12 +5,13 @@ export const Div = styled.div`
   justify-content: center;
   /* align-items: center; */
   flex-direction: column;
-  background-color: #04bf8a;
+  background-color: rgb(255, 255, 255);
   border-radius: 4px;
   width: 310px;
   padding: 15px;
   margin: 0 auto;
   margin-top: 20px;
+  text-align: center;
 
   p {
     font-size: 18px;
@@ -22,7 +23,7 @@ export const Div = styled.div`
     border: none;
     border-bottom: solid 1px black;
     background-color: transparent;
-    color: white;
+    color: black;
     text-align: center;
     font-size: 18px;
   }
@@ -37,18 +38,18 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
-    color: white;
+    color: black;
     font-weight: bold;
   }
 
   input {
     height: 40px;
     font-size: 18px;
-    border: 1px solid rgb(255, 255, 255);
+    border: 1px solid rgb(0, 0, 0);
     padding: 0 10px;
     border-radius: 4px;
     &:focus {
-      border: 1px solid red;
+      border: 1px solid green;
     }
   }
 `;

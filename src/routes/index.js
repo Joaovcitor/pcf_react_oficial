@@ -24,7 +24,7 @@ import EditarPlanosDeVisitas from "../pages/Visitador/EditarPlanosDeVisitas";
 import Tabelas from "../pages/Visitador/Tabelas";
 import EditarEExcluirTabelas from "../pages/Visitador/EditarEExcluirTabelas";
 import Visitadores from "../pages/Supervisor/Visitadores";
-import EditarVisitador from "../pages/Coordenador/Visitadores"
+import EditarVisitador from "../pages/Coordenador/Visitadores";
 import Notifications from "../pages/Notificacoes/CriarNotificacoes";
 import EditarUsuario from "../pages/EditarUsuario";
 import RelatoriosVisitadores from "../pages/Supervisor/RelatoriosVisitadores";
@@ -38,6 +38,10 @@ import Relatorios from "../pages/Coordenador/RelatoriosVisitadores";
 import Page404 from "../pages/Page404";
 import BuscarSupervisores from "../components/BuscarSupervisores";
 import DetalhesSupervisores from "../components/DetalhesSupervisores";
+import FormsCuidadores from "../pages/Visitador/FormsCuidadores";
+import PedirSenhaNova from "../pages/Users/PedirSenhaNova";
+import ResetarSenha from "../pages/Users/ResetarSenha";
+import Administrativo from "../pages/Adm";
 
 export default function Routes() {
   return (
@@ -111,6 +115,13 @@ export default function Routes() {
       <MyRoute exact path="/formularios/:id" component={Criancas} isClosed />
       <MyRoute
         exact
+        path="/formularios/gravidas/:id"
+        component={FormsCuidadores}
+        isClosed
+      />
+
+      <MyRoute
+        exact
         path="/planos/planos-do-beneficiario/:id"
         component={PlanosDeVisitaDaCrianca}
         isClosed
@@ -161,7 +172,12 @@ export default function Routes() {
         isClosed
       />
       <MyRoute exact path="/supervisores" component={Supervisores} isClosed />
-      <MyRoute exact path="/meus-supervisores/detalhes/:id" component={DetalhesSupervisores} isClosed />
+      <MyRoute
+        exact
+        path="/meus-supervisores/detalhes/:id"
+        component={DetalhesSupervisores}
+        isClosed
+      />
       <MyRoute
         exact
         path="/formularios5/:id"
@@ -175,6 +191,24 @@ export default function Routes() {
         isClosed
       />
       <MyRoute exact path="/relatorios" component={Relatorios} isClosed />
+      <MyRoute
+        exact
+        path="/pedir-senha-nova"
+        component={PedirSenhaNova}
+        isClosed={false}
+      />
+      <MyRoute
+        exact
+        path="/perfil/resetar-senha/:token"
+        component={ResetarSenha}
+        isClosed={false}
+      />
+      <MyRoute
+        exact
+        path="/administrativo"
+        component={Administrativo}
+        isClosed={false}
+      />
       <MyRoute path="*" component={Page404} />
     </Switch>
   );
