@@ -1,17 +1,14 @@
 import React from "react";
-import { CiCompass1 } from "react-icons/ci";
 import {
   IoPersonAdd,
   IoPeopleSharp,
   IoReader,
   IoPeopleCircleSharp,
 } from "react-icons/io5";
-import { FiAlertTriangle } from "react-icons/fi";
 import { FaLocationDot } from "react-icons/fa6";
 import { ImProfile } from "react-icons/im";
 
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import { Nav, Section } from "./styled";
 

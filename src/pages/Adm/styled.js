@@ -17,6 +17,10 @@ export const Section = styled.section`
   margin-top: 20px;
 
   @media (max-width: 768px) {
+    width: 310px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
     flex-direction: column;
   }
 `;
@@ -27,15 +31,14 @@ export const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 300px;
-  max-width: 500px;
+  margin: 0 auto;
 
   h4 {
     color: black;
   }
 
   div {
-    width: 100%;
+    width: 220px;
     background: #00ffa0;
     padding: 1rem;
     border-radius: 1rem;
@@ -43,7 +46,9 @@ export const Nav = styled.nav`
     box-shadow: 0.4rem 0.4rem #05060f;
     overflow: hidden;
     color: black;
+    margin: 0 auto;
     margin-bottom: 10px;
+    text-align: center;
   }
 
   p {
