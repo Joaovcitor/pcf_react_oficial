@@ -5,7 +5,7 @@ export const Div = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #1c0373;
+  background-color: #04bf8a;
   width: 300px;
   padding: 20px;
   margin: 0 auto;
@@ -13,7 +13,7 @@ export const Div = styled.div`
   margin-top: 20px;
 
   span {
-    color: #f2ce1b;
+    color: #0a04bf;
   }
 
   h2 {
@@ -96,17 +96,25 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
-    color: white;
+    color: black;
+    font-weight: bolder;
   }
 
   input {
     height: 40px;
     font-size: 18px;
-    border: 1px solid rgb(255, 255, 255);
+    border: 1px solid rgb(0, 0, 0);
     padding: 0 10px;
     border-radius: 4px;
     &:focus {
-      border: 1px solid red;
+      border: 1px solid #7663f2;
     }
+  }
+
+  button {
+    background-color: #e688f2;
+    color: black;
+    width: 120px;
+    margin: 0 auto;
   }
 `;

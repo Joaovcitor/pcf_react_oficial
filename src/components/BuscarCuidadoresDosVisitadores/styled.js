@@ -10,7 +10,7 @@ export const Section = styled.section`
   margin-top: 20px;
 
   p {
-    color: black;
+    color: white;
     font-weight: bolder;
   }
 
@@ -29,19 +29,18 @@ export const Section = styled.section`
     margin: 0 auto;
     margin-bottom: 15px;
     display: flex;
-    background: #fff;
-    border: solid 4px #333;
-    box-shadow: -5px 5px #333;
+    background: #04bf8a;
+    border-radius: 16px;
+    border: solid 2px #333;
     transition: all 0.2s ease-in-out;
     display: flex;
     justify-content: center;
     flex-direction: column;
     text-align: center;
-    cursor: pointer;
   }
 
   .links {
-    background-color: white;
+    background-color: #e688f2;
     color: black;
     border-radius: 10em;
     font-size: 17px;

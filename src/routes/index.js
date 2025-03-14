@@ -43,6 +43,9 @@ import PedirSenhaNova from "../pages/Users/PedirSenhaNova";
 import ResetarSenha from "../pages/Users/ResetarSenha";
 import Administrativo from "../pages/Adm";
 
+import CriarFalta from "../pages/Faltas/CriarFalta";
+import RecorrerAFalta from "../pages/Faltas/RecorrerAFalta";
+
 export default function Routes() {
   return (
     <Switch>
@@ -207,7 +210,14 @@ export default function Routes() {
         exact
         path="/administrativo"
         component={Administrativo}
-        isClosed={false}
+        isClosed
+      />
+      <MyRoute exact path="/faltas/criar/:id" component={CriarFalta} isClosed />
+      <MyRoute
+        exact
+        path="/faltas/pedir-para-invalidar/:id"
+        component={RecorrerAFalta}
+        isClosed
       />
       <MyRoute path="*" component={Page404} />
     </Switch>

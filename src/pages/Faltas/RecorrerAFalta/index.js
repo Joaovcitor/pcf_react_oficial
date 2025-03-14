@@ -6,40 +6,34 @@ import { get } from "lodash";
 import axios from "../../../services/axios";
 import { toast } from "react-toastify";
 
-export default function CriarFalta({ match }) {
+export default function RecorrerAFalta({ match }) {
   const { id } = match.params;
-  const [motivo_da_falta, setMotivo] = useState(null);
-  const [quando_ocorreu_a_falta, setData] = useState(null);
+  const [pedir_para_invalidar_falta, setMotivo] = useState("");
 
   const [user, setUser] = useState([]);
 
   useEffect(() => {
     async function getData() {
-      const response = await axios.get("/");
-      console.log(response.data);
-      setUser(response.data.user);
+      const response = await axios.get(`/faltas/faltas-que-o-user-levou/${id}`);
+      setUser(response.data.falta);
     }
 
     getData();
-  }, []);
+  }, [id]);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const registradorId = user.id;
-    const userId = id;
-    console.log(quando_ocorreu_a_falta);
 
-    if (!motivo_da_falta)
-      return toast.error("Motivo da falta tem que ter mais de 4 caracteres");
+    if (!pedir_para_invalidar_falta)
+      return toast.error("Motivo tem que ter mais de 4 caracteres");
 
     try {
-      const response = await axios.post("/faltas/", {
-        motivo_da_falta: motivo_da_falta,
-        userId: userId,
-        registradorId: registradorId,
-        quando_ocorreu_a_falta: quando_ocorreu_a_falta,
+      const response = await axios.post("/faltas/pedir-para-invalidar", {
+        pedir_para_invalidar_falta,
+        id,
       });
-      toast.success("Falta gerada com sucesso!");
+      console.log();
+      toast.success(response.data.message);
     } catch (e) {
       const errors = get(e, "response.data.errors", "");
       if (typeof errors === "string") {
@@ -60,21 +54,14 @@ export default function CriarFalta({ match }) {
 
   return (
     <Div onSubmit={handleSubmit}>
-      <h2>Gerar falta para</h2>
-      <p>Motivo da falta</p>
+      <h2>Pedir invalidação</h2>
+      <p>Motivo</p>
       <textarea
         name="objetivo"
         onChange={(e) => setMotivo(e.target.value)}
         id="objetivo"
       ></textarea>
-      <p>Quando ocorreu essa falta (se não souber, não precisa colocar):</p>
-      <input
-        type="date"
-        name=""
-        id=""
-        onChange={(e) => setData(e.target.value)}
-      />
-      <button type="submit">Gerar falta</button>
+      <button type="submit">Enviar</button>
     </Div>
   );
 }

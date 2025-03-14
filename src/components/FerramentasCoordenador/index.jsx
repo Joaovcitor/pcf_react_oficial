@@ -23,13 +23,6 @@ export default function Header() {
           </Link>
         </div>
         <div>
-          <IoPeopleSharp size={38} style={{ color: "black" }} />
-          <p>Supervisores</p>
-          <Link className="links" to="/supervisores">
-            Acessar
-          </Link>
-        </div>
-        <div>
           <IoReader size={38} style={{ color: "black" }} />
           <p>Relatórios</p>
           <Link className="links" to="/relatorios">
@@ -51,7 +44,7 @@ export default function Header() {
           </Link>
         </div>
         <div>
-          <ImProfile size={38} style={{ color: "white" }} />
+          <ImProfile size={38} style={{ color: "black" }} />
           <p>Administrativo</p>
           <Link className="links" to="/administrativo">
             Acessar

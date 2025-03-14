@@ -37,13 +37,12 @@ export const Nav = styled.nav`
     box-sizing: border-box;
     width: 200px;
     height: 200px;
-    background: rgba(217, 217, 217, 0.58);
+    background: #a0d9d9;
     border: 1px solid white;
     box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
     backdrop-filter: blur(6px);
     border-radius: 17px;
     text-align: center;
-    cursor: pointer;
     transition: all 0.5s;
     display: flex;
     align-items: center;
@@ -61,7 +60,7 @@ export const Nav = styled.nav`
 
   .links {
     border: none;
-    background-color: #e3cd40;
+    background-color: #57aaf2;
     display: flex;
     margin-top: 25px;
     text-align: center;

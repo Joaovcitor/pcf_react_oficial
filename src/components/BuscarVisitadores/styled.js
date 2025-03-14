@@ -23,8 +23,9 @@ export const Section = styled.section`
     margin-bottom: 10px;
     padding: 10px;
     margin: 10px;
-    background-color: #e3cd40;
-    width: 200px;
+    background-color: #a0d9d9;
+    border: 1px solid rgb(80, 79, 88);
+    width: 280px;
     margin: 0 auto;
     margin-top: 20px;
     text-align: center;
