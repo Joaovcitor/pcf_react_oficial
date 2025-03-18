@@ -67,7 +67,19 @@ export default function AdministrativoVisitador() {
     <>
       <Section>
         <Nav>
-          <h4>Faltas geradas</h4>
+          <h4>Suas informações</h4>
+          <div className="info">
+            <h4>Nome: {usuarioLogado.name}</h4>
+            <h4>E-mail: {usuarioLogado.email}</h4>
+            <Link to={"/editar-usuario"} className="links">
+              Mudar E-mail ou senha
+            </Link>
+          </div>
+        </Nav>
+      </Section>
+      <Section>
+        <Nav>
+          <h4>Faltas geradas: {minhasFaltas.length}</h4>
           {minhasFaltas.length > 0 ? (
             minhasFaltas.map((falta) => {
               const usuarioQueDeuFalta = user.find(

@@ -2,28 +2,29 @@ import styled from "styled-components";
 import { primaryColor } from "../../config/colors";
 
 export const Section = styled.section`
-  /* display: grid;
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
   gap: 20px;
-  margin-top: 20px; */
+  margin-top: 20px;
 
   p {
-    color: black;
+    color: white;
+    font-weight: bold;
   }
 
-h3 {
-  color: white;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-}
-div {
+  h4 {
+    color: #f2594b;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+  div {
     margin-bottom: 10px;
     padding: 10px;
     margin: 10px;
-    background-color: #E3CD40;
+    background-color: #0c1a26;
     width: 250px;
     display: flex;
     justify-content: center;
@@ -37,7 +38,7 @@ div {
 
   .links {
     border: none;
-    background-color: blue;
+    background-color: #f2f2f2;
     display: flex;
     text-align: center;
     justify-content: center;
@@ -46,9 +47,9 @@ div {
     margin-top: 7px;
     padding: 5px;
     border-radius: 4px;
-    color: white;
+    color: black;
   }
-`
+`;
 
 export const Nav = styled.nav`
   padding: 20px;

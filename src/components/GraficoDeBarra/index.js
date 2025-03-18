@@ -16,7 +16,7 @@ const GraficoBarras = ({
       text: "Resultados Gerais",
       left: "center",
       textStyle: {
-        color: "#333",
+        color: "#00010D",
         fontSize: 20,
         fontWeight: "bold",
       },
@@ -28,7 +28,10 @@ const GraficoBarras = ({
       data: ["Quantidade"],
       top: "10%",
       textStyle: {
-        color: "#666",
+        color: "#00010D",
+        fontSize: 16,
+
+        fontWeight: "bold",
       },
     },
     grid: {
@@ -48,12 +51,12 @@ const GraficoBarras = ({
       ],
       axisLine: {
         lineStyle: {
-          color: "#333",
+          color: "#00010D",
         },
       },
       axisLabel: {
         textStyle: {
-          color: "#666",
+          color: "#00010D",
         },
       },
     },
@@ -61,12 +64,12 @@ const GraficoBarras = ({
       type: "value",
       axisLine: {
         lineStyle: {
-          color: "#333",
+          color: "#00010D",
         },
       },
       axisLabel: {
         textStyle: {
-          color: "#666",
+          color: "#00010D",
         },
       },
     },

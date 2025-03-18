@@ -18,7 +18,7 @@ export default function AdministrativoCoordenador() {
       try {
         const response = await axios.get("/faltas/");
         if (response.status === 204) {
-          console.log("Sem faltas");
+          return console.log("Sem faltas");
         }
         console.log(response.data.faltas);
         setFaltas(response.data.faltas);

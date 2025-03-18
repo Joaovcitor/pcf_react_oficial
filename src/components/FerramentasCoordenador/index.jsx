@@ -16,35 +16,35 @@ export default function Header() {
       <h3>Serviços e ferramentas</h3>
       <Nav>
         <div>
-          <IoPersonAdd size={38} style={{ color: "black" }} />
+          <IoPersonAdd size={38} style={{ color: "white" }} />
           <p>Cadastrar Supervisor</p>
           <Link className="links" to="/cadastrar-supervisor">
             Acessar
           </Link>
         </div>
         <div>
-          <IoReader size={38} style={{ color: "black" }} />
+          <IoReader size={38} style={{ color: "white" }} />
           <p>Relatórios</p>
           <Link className="links" to="/relatorios">
             Acessar
           </Link>
         </div>
         <div>
-          <IoReader size={38} style={{ color: "black" }} />
+          <IoReader size={38} style={{ color: "white" }} />
           <p>Ver todas as visitas</p>
           <Link className="links" to="/visitas">
             Acessar
           </Link>
         </div>
         <div>
-          <IoPeopleCircleSharp size={38} style={{ color: "black" }} />
+          <IoPeopleCircleSharp size={38} style={{ color: "white" }} />
           <p>Notificações</p>
           <Link className="links" to="/notificacoes">
             Acessar
           </Link>
         </div>
         <div>
-          <ImProfile size={38} style={{ color: "black" }} />
+          <ImProfile size={38} style={{ color: "white" }} />
           <p>Administrativo</p>
           <Link className="links" to="/administrativo">
             Acessar

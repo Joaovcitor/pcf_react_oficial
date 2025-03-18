@@ -5,7 +5,9 @@ export const Div = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #04bf8a;
+  /* background-color: #04bf8a; */
+  background-color: #053f5c;
+
   width: 300px;
   padding: 20px;
   margin: 0 auto;
@@ -13,7 +15,7 @@ export const Div = styled.div`
   margin-top: 20px;
 
   span {
-    color: #0a04bf;
+    color: #9fe7f5;
   }
 
   h2 {
@@ -96,7 +98,7 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
-    color: black;
+    color: rgb(255, 255, 255);
     font-weight: bolder;
   }
 
@@ -112,7 +114,8 @@ export const Form = styled.form`
   }
 
   button {
-    background-color: #e688f2;
+    /* background-color: #e688f2; */
+    background-color: #f7ad19;
     color: black;
     width: 120px;
     margin: 0 auto;

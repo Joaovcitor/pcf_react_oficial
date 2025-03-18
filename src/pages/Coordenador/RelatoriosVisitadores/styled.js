@@ -30,7 +30,7 @@ export const Div = styled.div`
     text-align: center;
     margin-bottom: 20px;
     margin-top: 20px;
-    color: #333;
+    color: white;
   }
 
   .naoBateu {
@@ -53,7 +53,7 @@ export const Div = styled.div`
       justify-content: space-around;
       align-items: center;
       flex-direction: column;
-      background-color: #0f8c3b;
+      background-color: #010326;
       width: 240px;
       margin: 0 auto;
       margin-bottom: 10px;

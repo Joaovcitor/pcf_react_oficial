@@ -55,9 +55,9 @@ export default function dados() {
         return (
           <div key={beneficiario.id}>
             <h4>Dados Cuidador</h4>
-            <p>Nome: {beneficiario.Caregiver.name}</p>
-            <p>CPF: {beneficiario.Caregiver.cpf}</p>
-            <p>RG: {beneficiario.Caregiver.rg}</p>
+            <p>Nome: {beneficiario.caregiver.name}</p>
+            <p>CPF: {beneficiario.caregiver.cpf}</p>
+            <p>RG: {beneficiario.caregiver.rg}</p>
             <br />
             <h4>Dados da criança</h4>
             <p>Nome: {beneficiario.name}</p>
@@ -71,7 +71,7 @@ export default function dados() {
             <p>Nome: {beneficiario.visitador.name}</p>
             <button
               onClick={() =>
-                handleSubmitValidar(beneficiario.id, beneficiario.Caregiver.id)
+                handleSubmitValidar(beneficiario.id, beneficiario.caregiver.id)
               }
               type="button"
               className="links"
@@ -82,28 +82,30 @@ export default function dados() {
         );
       })}
 
-      {caregivers.map((beneficiario) => {
-        return (
-          <div key={beneficiario.id}>
-            <h4>Dados da gestante</h4>
-            <p>Nome: {beneficiario.name}</p>
-            <p>CPF: {beneficiario.cpf}</p>
-            <p>RG: {beneficiario.rg}</p>
-            <br />
-            <h4>Dados do Visitador</h4>
-            <p>Nome: {beneficiario.visitador.name}</p>
-            <button
-              onClick={() =>
-                handleSubmitValidar(beneficiario.id, beneficiario.id)
-              }
-              type="button"
-              className="links"
-            >
-              Validar dados
-            </button>
-          </div>
-        );
-      })}
+      {caregivers.pregnant > 0
+        ? caregivers.map((beneficiario) => {
+            return (
+              <div key={beneficiario.id}>
+                <h4>Dados da gestante</h4>
+                <p>Nome: {beneficiario.name}</p>
+                <p>CPF: {beneficiario.cpf}</p>
+                <p>RG: {beneficiario.rg}</p>
+                <br />
+                <h4>Dados do Visitador</h4>
+                <p>Nome: {beneficiario.visitador.name}</p>
+                <button
+                  onClick={() =>
+                    handleSubmitValidar(beneficiario.id, beneficiario.id)
+                  }
+                  type="button"
+                  className="links"
+                >
+                  Validar dados
+                </button>
+              </div>
+            );
+          })
+        : ""}
     </Section>
   );
 }

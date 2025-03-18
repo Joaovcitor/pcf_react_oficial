@@ -5,7 +5,8 @@ export const Div = styled.form`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #F28705;
+  /* background-color: #F28705; */
+  background-color: #00010d;
   width: 350px;
   margin: 0 auto;
   margin-top: 20px;
@@ -20,7 +21,7 @@ export const Div = styled.form`
   p {
     font-size: 18px;
     /* margin-left: 15px; */
-    color: black;
+    color: white;
     margin-top: 10px;
   }
 
@@ -28,8 +29,8 @@ export const Div = styled.form`
     border: solid 1px black;
     padding: 5px;
     border-radius: 5px;
-    background-color: transparent;
-    color: white;
+    background-color: white;
+    color: black;
     font-weight: bolder;
     width: 180px;
     text-align: center;
@@ -41,8 +42,6 @@ export const Div = styled.form`
     background-color: transparent;
     font-size: 20px;
   }
-
-
 
   textarea {
     width: 280px;
@@ -59,6 +58,19 @@ export const Div = styled.form`
     font-size: 18px;
     margin-top: 10px;
   }
+  .link {
+    color: white;
+    display: flex;
+    /* background-color: #f2b441; */
+    background-color: #0367a6;
+    padding: 5px;
+    border-radius: 4px;
+    width: 120px;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
 `;
 
 export const Nav = styled.nav`
@@ -67,7 +79,7 @@ export const Nav = styled.nav`
   border-radius: 10px;
 
   span {
-    color: #F2B441;
+    color: #f2b441;
     font-weight: bolder;
   }
 
@@ -78,7 +90,8 @@ export const Nav = styled.nav`
   .link {
     color: black;
     display: flex;
-    background-color: #F2B441;
+    /* background-color: #f2b441; */
+    background-color: #0367a6;
     padding: 5px;
     border-radius: 4px;
     width: 120px;
@@ -87,5 +100,4 @@ export const Nav = styled.nav`
     justify-content: center;
     margin-top: 10px;
   }
-
 `;

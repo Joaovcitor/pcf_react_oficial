@@ -9,8 +9,9 @@ export const Section = styled.section`
   gap: 20px;
   padding: 20px;
   /* background-color: #d95032; */
-  background-color: #f2d399;
-  border: solid 0.5vmin #1b1959;
+  /* background-color: #f2d399; */
+  background-color: #011140;
+  border: solid 0.5vmin #a7d5f2;
   width: 85%;
   margin: 0 auto;
   border-radius: 20px;
@@ -44,7 +45,7 @@ export const Nav = styled.nav`
   h4 {
     width: 100%;
     text-align: center;
-    color: black;
+    color: white;
     font-weight: bolder;
   }
 
@@ -54,10 +55,11 @@ export const Nav = styled.nav`
     justify-content: center;
     align-items: center;
     width: 220px;
-    background: #f24405;
+    /* background: #f24405; */
+    background-color: #0367a6;
     padding: 1rem;
     border-radius: 1rem;
-    border: 0.5vmin solid #0d0d0d;
+    border: 0.5vmin solid #011140;
     /* box-shadow: 0.4rem 0.4rem #05060f; */
     overflow: hidden;
     color: white;

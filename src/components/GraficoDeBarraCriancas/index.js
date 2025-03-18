@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
-import ReactECharts from 'echarts-for-react';
+import React, { useEffect } from "react";
+import ReactECharts from "echarts-for-react";
 
 const GraficoBarrasCriancas = ({ caregiver, childrens, visitas, planos }) => {
   const criancaBpc = criancasBpc(childrens);
@@ -9,83 +9,90 @@ const GraficoBarrasCriancas = ({ caregiver, childrens, visitas, planos }) => {
 
   const options = {
     title: {
-      text: 'Tipos de beneficiários',
-      left: 'center',
+      text: "Tipos de beneficiários",
+      left: "center",
       textStyle: {
-        color: '#333',
+        color: "#00010D",
         fontSize: 20,
-        fontWeight: 'bold'
-      }
+        fontWeight: "bold",
+      },
     },
     tooltip: {
-      trigger: 'item'
+      trigger: "item",
     },
     legend: {
-      data: ['Quantidade'],
-      top: '10%',
+      data: ["Quantidade"],
+      top: "10%",
       textStyle: {
-        color: '#666'
-      }
+        color: "#00010D",
+        fontSize: 16,
+
+        fontWeight: "bold",
+      },
     },
     grid: {
-      left: '30%',
-      right: '30%',
-      bottom: '30%',
-      containLabel: true
+      left: "30%",
+      right: "30%",
+      bottom: "30%",
+      containLabel: true,
     },
     xAxis: {
-      type: 'category',
-      data: ['Gestantes', 'Crianças s/ BPC', 'Crianças c/ BPC'],
+      type: "category",
+      data: ["Gestantes", "Crianças s/ BPC", "Crianças c/ BPC"],
       axisLine: {
         lineStyle: {
-          color: '#333'
-        }
+          color: "#00010D",
+        },
       },
       axisLabel: {
         textStyle: {
-          color: '#666'
-        }
-      }
+          color: "#00010D",
+        },
+      },
     },
     yAxis: {
-      type: 'value',
+      type: "value",
       axisLine: {
         lineStyle: {
-          color: '#333'
-        }
+          color: "#00010D",
+        },
       },
       axisLabel: {
         textStyle: {
-          color: '#666'
-        }
-      }
+          color: "#00010D",
+        },
+      },
     },
     series: [
       {
-        name: 'Quantidade',
-        type: 'bar',
-        data: [gestantesFiltradas.length, criancaSemBpc.length, criancaBpc.length],
+        name: "Quantidade",
+        type: "bar",
+        data: [
+          gestantesFiltradas.length,
+          criancaSemBpc.length,
+          criancaBpc.length,
+        ],
         itemStyle: {
-          color: '#67c23a'
+          color: "#67c23a",
         },
-        barWidth: '40%'
-      }
-    ]
+        barWidth: "40%",
+      },
+    ],
   };
 
   return <ReactECharts option={options} />;
 };
 
 const criancasBpc = (child) => {
-  return child.filter(bpc => bpc.isBpc === true);
+  return child.filter((bpc) => bpc.isBpc === true);
 };
 
 const criancasSemBpc = (child) => {
-  return child.filter(bpc => bpc.isBpc === false);
+  return child.filter((bpc) => bpc.isBpc === false);
 };
 
 const gestantes = (pregnant) => {
-  return pregnant.filter(preg => preg.pregnant === true);
+  return pregnant.filter((preg) => preg.pregnant === true);
 };
 
 export default GraficoBarrasCriancas;
