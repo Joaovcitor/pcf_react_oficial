@@ -43,8 +43,22 @@ export default function AdministrativoCoordenador() {
   }, []);
 
   const faltasParaInvalidar = faltas.filter(
-    (f) => f.pedir_para_invalidar_falta !== null
+    (f) => f.pedir_para_invalidar_falta !== null && f.falta_invalida
   );
+
+  const handleInvalidarFalta = async (id) => {
+    if (!id) return;
+
+    try {
+      await axios.post("/faltas/invalidar-falta", {
+        id,
+      });
+
+      toast.info("Falta invalidada");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   searchAllUsers(setAllUsers);
   return (
@@ -76,7 +90,12 @@ export default function AdministrativoCoordenador() {
                 )}
                 {users.role === "visitador" ? (
                   <>
-                    <Link className="links">Detalhes</Link>
+                    <Link
+                      to={`/coordenador/visitadores/detalhes/${users.id}`}
+                      className="links"
+                    >
+                      Detalhes
+                    </Link>
                   </>
                 ) : (
                   ""
@@ -141,6 +160,43 @@ export default function AdministrativoCoordenador() {
       <Section>
         <Nav>
           <h4>Pedidos de invalidar falta</h4>
+          {faltasParaInvalidar.length > 0 ? (
+            faltasParaInvalidar.map((falta) => {
+              const usuarioQueLevouFalta = user.find(
+                (user) => user.id === falta.userId
+              );
+
+              return (
+                <div key={falta.id}>
+                  <p>Motivo para invalidar:</p>
+                  <span>{falta.pedir_para_invalidar_falta}</span>
+                  <p>Quem recebeu a falta:</p>
+                  <span>
+                    {usuarioQueLevouFalta
+                      ? usuarioQueLevouFalta.name
+                      : "Não informado"}
+                  </span>
+                  <p>Deseja invalidar a falta?</p>
+                  <nav className="buttons">
+                    <button
+                      onClick={() => handleInvalidarFalta(falta.id)}
+                      className="links"
+                    >
+                      Sim
+                    </button>
+                    <button className="links">Não</button>
+                  </nav>
+                </div>
+              );
+            })
+          ) : (
+            <p>Não há pedidos para invalidar faltas</p>
+          )}
+        </Nav>
+      </Section>
+      <Section>
+        <Nav>
+          <h4>Demandas</h4>
           {faltasParaInvalidar.length > 0 ? (
             faltasParaInvalidar.map((falta) => {
               const usuarioQueLevouFalta = user.find(

@@ -127,9 +127,7 @@ export default function AdministrativoVisitador() {
                 <p>Motivo para invalidar:</p>
                 <span>{falta.pedir_para_invalidar_falta}</span>
                 <p>Aceito:</p>
-                <span>
-                  {falta.pedido_para_invalidar_aceito ? "Sim" : "Não"}
-                </span>
+                <span>{falta.falta_invalidada ? "Sim" : "Não"}</span>
               </div>
             ))
           ) : (

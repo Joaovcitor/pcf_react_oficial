@@ -9,9 +9,9 @@ import Criancas from "../pages/Visitador/Criancas";
 import CadastrarCuidador from "../pages/Visitador/CadastrarCuidador";
 import CadastrarCrianca from "../pages/Visitador/CadastrarCrianca";
 import TodasAsVisitas from "../pages/Coordenador/VisitasFeitasPelosVisitadores";
-import VisitarPorGeolocalizacao from "../pages/Visitador/VisitarPorGeolocalizacao";
-import RealizarVisitasPorGeolocalizacao from "../pages/Visitador/RealizarVisitasPorGeolocalizacao";
-import RealizarVisitasMarcadas from "../pages/Visitador/RealizarVisitasMarcadas";
+import VisitarPorGeolocalizacao from "../pages/Geolocalizacao/VisitarPorGeolocalizacao";
+import RealizarVisitasPorGeolocalizacao from "../pages/Geolocalizacao/Criancas/RealizarVisitasPorGeolocalizacao";
+import RealizarVisitasMarcadas from "../pages/Geolocalizacao/RealizarVisitasMarcadas";
 import Familias from "../pages/Visitador/Familias";
 import PlanosDeVisita from "../pages/Visitador/PlanosDeVisita";
 import CriarPlanosDeVisitas from "../pages/Visitador/CriarPlanosDeVisitas";
@@ -38,13 +38,19 @@ import Relatorios from "../pages/Coordenador/RelatoriosVisitadores";
 import Page404 from "../pages/Page404";
 import BuscarSupervisores from "../components/BuscarSupervisores";
 import DetalhesSupervisores from "../components/DetalhesSupervisores";
-import FormsCuidadores from "../pages/Visitador/FormsCuidadores";
+import FormsCuidadores from "../pages/Gestante/FormsCuidadores";
 import PedirSenhaNova from "../pages/Users/PedirSenhaNova";
 import ResetarSenha from "../pages/Users/ResetarSenha";
 import Administrativo from "../pages/Adm";
 
 import CriarFalta from "../pages/Faltas/CriarFalta";
 import RecorrerAFalta from "../pages/Faltas/RecorrerAFalta";
+import RelatorioIndividualVisitador from "../pages/Coordenador/RelatoriosVisitador";
+import CriarPlanosDeVisitaGravida from "../pages/Gestante/CriarPlanosDeVisitasGravida";
+import RealizarVisitasDasGestantes from "../pages/Geolocalizacao/RealizarVisitasPorGeolocalizacao";
+import PlanosDeVisitasDaGestante from "../pages/Gestante/PlanosDeVisitaDaGestante";
+import CriarTabelaParaGestante from "../pages/Gestante/Tabelas";
+import MapaDeCalor from "../pages/Coordenador/MapaDeCalor";
 
 export default function Routes() {
   return (
@@ -57,6 +63,12 @@ export default function Routes() {
         exact
         path="/planos/criarplano/:id"
         component={CriarPlanosDeVisitas}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/planos/criarplano-gravida/:id"
+        component={CriarPlanosDeVisitaGravida}
         isClosed
       />
       <MyRoute exact path="/login" component={Login} isClosed={false} />
@@ -96,11 +108,17 @@ export default function Routes() {
         component={CadastrarCrianca}
         isClosed
       />
-      <MyRoute exact path="/visitas" component={TodasAsVisitas} isClosed />
+      <MyRoute exact path="/visitas" component={MapaDeCalor} isClosed />
       <MyRoute
         exact
         path="/visitas-marcadas"
         component={VisitarPorGeolocalizacao}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/visitas/visitas-agendadas-gravida/:id"
+        component={RealizarVisitasDasGestantes}
         isClosed
       />
       <MyRoute
@@ -131,11 +149,23 @@ export default function Routes() {
       />
       <MyRoute
         exact
+        path="/planos/planos-da-gestante/:id"
+        component={PlanosDeVisitasDaGestante}
+        isClosed
+      />
+      <MyRoute
+        exact
         path="/planos/editar/:id"
         component={EditarPlanosDeVisitas}
         isClosed
       />
       <MyRoute exact path="/tabelas/criar/:id" component={Tabelas} isClosed />
+      <MyRoute
+        exact
+        path="/tabelas/gestante/criar/:id"
+        component={CriarTabelaParaGestante}
+        isClosed
+      />
       <MyRoute
         exact
         path="/tabelas/editar/:id"
@@ -160,6 +190,12 @@ export default function Routes() {
         exact
         path="/visitadores/detalhes/:id"
         component={RelatoriosVisitadores}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/coordenador/visitadores/detalhes/:id"
+        component={RelatorioIndividualVisitador}
         isClosed
       />
       <MyRoute
@@ -205,6 +241,12 @@ export default function Routes() {
         path="/perfil/resetar-senha/:token"
         component={ResetarSenha}
         isClosed={false}
+      />
+      <MyRoute
+        exact
+        path="/administrativo"
+        component={Administrativo}
+        isClosed
       />
       <MyRoute
         exact

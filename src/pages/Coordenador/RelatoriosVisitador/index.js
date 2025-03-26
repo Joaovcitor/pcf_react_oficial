@@ -6,7 +6,7 @@ import { Div } from "./styled";
 import GraficoBarrasVisitadores from "../../../components/GraficoDeBarraVisitadores";
 import GraficoBarrasCriancas from "../../../components/GraficoDeBarraCriancas";
 
-export default function Visitadores({ match }) {
+export default function RelatorioIndividualVisitador({ match }) {
   const { id } = match.params;
   const [visitador, setVisitador] = useState([]);
   const [child, setChildrens] = useState([]);
@@ -22,7 +22,9 @@ export default function Visitadores({ match }) {
   useEffect(() => {
     async function getData() {
       try {
-        const response = await axios.get(`/detalhes/visitador/${id}`);
+        const response = await axios.get(
+          `/detalhes/coordenador/visitador/${id}`
+        );
         setVisitador(response.data.visitador);
         setChildrens(response.data.child);
         setAllPlanos(response.data.planos);
@@ -107,7 +109,7 @@ export default function Visitadores({ match }) {
         <p>Não tem criança</p>
       )}
 
-      <div>
+      {/* <div>
         <div className="dados-pesquisados">
           <h3>Planos {planos.length}</h3>
           {planos.length > 0 ? (
@@ -125,7 +127,7 @@ export default function Visitadores({ match }) {
             <li>Nenhum plano encontrado.</li>
           )}
         </div>
-      </div>
+      </div> */}
     </Div>
   );
 }

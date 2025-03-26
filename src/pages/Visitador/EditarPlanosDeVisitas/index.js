@@ -15,25 +15,28 @@ export default function PlanosDeVisita({ match }) {
     observacao: "",
     conseguiu_fazer: "Com ajuda",
   });
-  const [visitaFeita, setVisitaFeita] = useState({})
+  const [visitaFeita, setVisitaFeita] = useState({});
 
   useEffect(() => {
     async function getDataPlanos() {
       try {
         const response = await axios.get(`/planos/infosingleplano/${id}`);
         const { plano } = response.data;
+        console.log(response.data);
         setFormData({
           objetivo: plano.objetivo || "",
           etapa1: plano.etapa1 || "",
           etapa2: plano.etapa2 || "",
           etapa3: plano.etapa3 || "",
           observacao: plano.observacao || "",
-          conseguiu_fazer: plano.conseguiu_fazer || "Com ajuda"
+          conseguiu_fazer: plano.conseguiu_fazer || "Com ajuda",
         });
-        setVisitaFeita(response.data.visitaFeita)
+        if (response.data.visitaFeita) {
+          setVisitaFeita(response.data.visitaFeita);
+        }
       } catch (error) {
-        console.log(error)
-        toast.error('Erro ao buscar os dados do plano.');
+        console.log(error);
+        toast.error("Erro ao buscar os dados do plano.");
       }
     }
 
@@ -57,11 +60,11 @@ export default function PlanosDeVisita({ match }) {
       toast.success("Plano editado com sucesso!");
       history.push(`/planos/editar/${id}`);
     } catch (e) {
-      const errors = get(e, 'response.data.errors', '');
-      if (typeof errors === 'string') {
+      const errors = get(e, "response.data.errors", "");
+      if (typeof errors === "string") {
         toast.error(errors);
       } else if (Array.isArray(errors)) {
-        errors.forEach(error => {
+        errors.forEach((error) => {
           toast.error(error);
         });
       }
@@ -109,13 +112,20 @@ export default function PlanosDeVisita({ match }) {
             id="observacao"
           />
           <p>Conseguiu fazer:</p>
-          <select name="conseguiu_fazer" value={formData.conseguiu_fazer} onChange={handleInputChange} id="conseguiu_fazer">
+          <select
+            name="conseguiu_fazer"
+            value={formData.conseguiu_fazer}
+            onChange={handleInputChange}
+            id="conseguiu_fazer"
+          >
             <option value="Com ajuda">Com ajuda</option>
             <option value="Sem ajuda">Sem ajuda</option>
             <option value="Não quis fazer">Não quis fazer</option>
           </select>
         </>
-      ) : (<p>Você não terminou essa visita</p>)}
+      ) : (
+        <p>Você não terminou essa visita</p>
+      )}
       <button type="submit">Editar Plano</button>
     </Div>
   );

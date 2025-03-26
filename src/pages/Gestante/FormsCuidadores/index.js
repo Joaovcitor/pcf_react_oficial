@@ -32,13 +32,11 @@ export default function FormsCuidadores({ match }) {
         </Info>
         <Info>
           <p>Planos de visita</p>
-          <Link to={`/planos/planos-do-beneficiario/${cuidador.id}`}>
-            Acessar
-          </Link>
+          <Link to={`/planos/planos-da-gestante/${cuidador.id}`}>Acessar</Link>
         </Info>
         <Info>
           <p>Tabela de visita</p>
-          <Link to={`/tabelas/criar/${cuidador.id}`}>Acessar</Link>
+          <Link to={`/tabelas/gestante/criar/${cuidador.id}`}>Acessar</Link>
         </Info>
       </Infos>
     </Section>

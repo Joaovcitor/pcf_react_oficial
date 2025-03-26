@@ -46,7 +46,7 @@ export default function PlanosDeVisita() {
               Nome: <span>{child.name}</span>
             </p>
           </CardContent>
-          <Link to={`/planos/criarplano/${child.id}`}>
+          <Link to={`/planos/criarplano-gravida/${child.id}`}>
             <CardButton>Criar Plano</CardButton>
           </Link>
         </CardContainer>
