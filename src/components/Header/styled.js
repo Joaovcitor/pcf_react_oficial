@@ -2,23 +2,43 @@ import styled from "styled-components";
 import { primaryColor } from "../../config/colors";
 
 export const Nav = styled.nav`
-  /* background-color: #4C9770; */
-  background-color: #011126;
-  /* background-color: #5496bf; */
-  background-color: #053f5c;
-  /* border-bottom: 1px solid #011126; */
-  padding: 1px;
+  background: white url("/images/image.png") no-repeat center center;
+  background-size: cover;
+  /* position: relative; */
+  padding: 2.8rem;
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: space-around;
 
-  a {
-    color: #fff;
-    margin: 0 10px 0 0;
-    font-weight: bold;
+  /* Overlay escuro para melhor contraste (opcional) */
+  &::before {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(
+      255,
+      255,
+      255,
+      0.01
+    ); /* Overlay branco semi-transparente */
+    z-index: 0;
   }
 
-  img {
-    width: 70px;
+  /* Links (acima do overlay) */
+  a {
+    color: #011126; /* Cor escura para contraste */
+    margin: 0 1vw; /* Margem responsiva (1% da largura da tela) */
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+    font-size: clamp(14px, 2vw, 18px); /* Fonte responsiva */
+  }
+
+  /* Media Query para telas pequenas (ex: mobile) */
+  @media (max-width: 768px) {
+    flex-direction: column; /* Empilha os itens verticalmente */
+    padding: 1rem 5%;
+    a {
+      margin: 0.5rem 0; /* Margem vertical em telas pequenas */
+    }
   }
 `;

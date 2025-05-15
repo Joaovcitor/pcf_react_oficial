@@ -26,8 +26,8 @@ export default function Header() {
   return (
     <Nav>
       <Link to="/">
-        <img src="/images/Brasao.png" alt="" />
-        {/* <FaHome size={24} /> */}
+        {/* <img src="/images/image.png" alt="" /> */}
+        <FaHome size={24} />
       </Link>
       {isLoggedIn ? (
         <Link className="sair" onClick={handleLogout} to="/logout">

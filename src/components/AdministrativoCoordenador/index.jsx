@@ -63,6 +63,7 @@ export default function AdministrativoCoordenador() {
   searchAllUsers(setAllUsers);
   return (
     <>
+      <h4>Funcionalidade em testes</h4>
       <Section>
         <Nav>
           <h4>Todos os funcionários do sistema </h4>
@@ -111,7 +112,7 @@ export default function AdministrativoCoordenador() {
               </div>
             ))
           ) : (
-            <p>Você não possui nenhuma visita invalidada</p>
+            <h4>Você não possui nenhuma visita invalidada</h4>
           )}
         </Nav>
       </Section>
@@ -153,7 +154,7 @@ export default function AdministrativoCoordenador() {
               );
             })
           ) : (
-            <p>Você não possui nenhuma visita invalidada</p>
+            <h4>Você não possui nenhuma visita invalidada</h4>
           )}
         </Nav>
       </Section>
@@ -190,7 +191,7 @@ export default function AdministrativoCoordenador() {
               );
             })
           ) : (
-            <p>Não há pedidos para invalidar faltas</p>
+            <h4>Não há pedidos para invalidar faltas</h4>
           )}
         </Nav>
       </Section>
@@ -222,7 +223,7 @@ export default function AdministrativoCoordenador() {
               );
             })
           ) : (
-            <p>Você não possui nenhuma visita invalidada</p>
+            <h4>Você não possui nenhuma Demanda</h4>
           )}
         </Nav>
       </Section>

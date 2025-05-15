@@ -31,7 +31,7 @@ export default function Header() {
         </div>
         <div>
           <IoReader size={38} style={{ color: "white" }} />
-          <p>Ver todas as visitas</p>
+          <p>Mapa de calor</p>
           <Link className="links" to="/visitas">
             Acessar
           </Link>
