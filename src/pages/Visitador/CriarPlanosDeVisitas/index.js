@@ -56,15 +56,15 @@ export default function PlanosDeVisita({ match }) {
         );
       }
 
-      // Segunda chamada: agendar a visita com base no plano criado
-      await axios.post(`/visitasporgeolo/agendar-visita/${id}`, {
-        idChild: id,
-        planoId: response.data.plano.id,
-        data_que_vai_ser_realizada: dia_a_ser_realizada_a_visita,
-      });
+      // Segunda chamada: agendar a visita com base no plano criado (parado, por questões de servidor!)
+      // await axios.post(`/visitasporgeolo/agendar-visita/${id}`, {
+      //   idChild: id,
+      //   planoId: response.data.plano.id,
+      //   data_que_vai_ser_realizada: dia_a_ser_realizada_a_visita,
+      // });
 
       toast.success("Plano criado com sucesso e visita agendada");
-      history.push(`/planos/criarplano/${id}`);
+      // history.push(`/planos/criarplano/${id}`);
     } catch (e) {
       const errors = get(e, "response.data.errors", "");
       if (typeof errors === "string") {
