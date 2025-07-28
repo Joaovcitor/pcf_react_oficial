@@ -4,7 +4,7 @@ import { toast } from "react-toastify"; // Adicione esta importação
 
 // Criação de instância do Axios
 const api = axios.create({
-  baseURL: "http://192.168.1.71:3003/apiv1",
+  baseURL: "http://192.168.0.5:3003/apiv1",
   // baseURL: "http://localhost:3003/apiv1",
   withCredentials: true,
 });

@@ -33,7 +33,7 @@ export default function Visitador() {
           <>
             <FerramentasVisitadores />
             <Notifications endpoint={"minhas-notificacoes"} />
-            <TabelaDevisitasDosVisitadores />
+            {/* <TabelaDevisitasDosVisitadores /> */}
           </>
         );
       case "supervisor":
