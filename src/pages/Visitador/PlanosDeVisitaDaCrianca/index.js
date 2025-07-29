@@ -5,25 +5,29 @@ import { Div, Section } from "./styled";
 import { Link } from "react-router-dom";
 import axios from "../../../services/axios";
 
-export default function Login({ match }) {
-  const { id } = match.params;
-  const [plano, setPlano] = useState([]);
+// Renomeando o componente para maior clareza
+export default function PlanosDaCrianca({ match }) {
+  const { id } = match.params; // ID da criança
+  const [planos, setPlanos] = useState([]); // O estado agora guarda o array de planos
+  const [totalDePlanos, setTotalDePlanos] = useState(0); // Para o total geral
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const limit = 10;
+  const limit = 10; // O backend deve estar alinhado com esse limite
 
   useEffect(() => {
     async function getData() {
       try {
         setLoading(true);
-        const response = await axios.get(`/planos/infoallplanos/${id}`, {
-          params: { page, limit },
+
+        const response = await axios.get(`/planos/planos-da-crianca/${id}`, {
+          params: { page, pageSize: limit },
         });
 
-        setPlano(response.data.plano.rows);
-        setTotalPages(Math.ceil(response.data.plano.count / limit));
+        setPlanos(response.data.data);
+        setTotalPages(response.data.meta.totalPages);
+        setTotalDePlanos(response.data.meta.total);
       } catch (err) {
         console.error("Erro ao buscar planos:", err);
         setError("Erro ao carregar os planos. Tente novamente.");
@@ -32,33 +36,31 @@ export default function Login({ match }) {
       }
     }
     getData();
-  }, [id, page]);
+  }, [id, page]); // A dependência 'limit' não é necessária pois é uma constante
 
   if (loading) return <p>Carregando...</p>;
   if (error) return <p>{error}</p>;
-  if (!plano || plano.length === 0) return <p>Nenhum plano encontrado.</p>;
+  if (!planos || planos.length === 0)
+    return <p>Nenhum plano encontrado para esta criança.</p>;
 
   return (
     <div>
-      <h2>Quantidade de planos: {plano.length}</h2>
+      {/* Usando o total geral que vem do backend */}
+      <h2>Total de planos: {totalDePlanos}</h2>
       <Div>
-        {plano.map((planos) => (
-          <Section key={planos.id}>
+        {planos.map((plano) => (
+          <Section key={plano.id}>
             <p>
               Criado no dia{" "}
-              {planos.createdAt
-                ? format(new Date(planos.createdAt), "dd/MM/yyyy")
+              {plano.createdAt
+                ? format(new Date(plano.createdAt), "dd/MM/yyyy")
                 : "Data inválida"}
             </p>
-            <p>Objetivo: {planos.objetivo}</p>
+            <p>Objetivo: {plano.objetivo}</p>
             <p>
-              Dificuldade da atividade: {planos.grau_de_dificuldade_objetivo}
+              Dificuldade da atividade: {plano.grau_de_dificuldade_objetivo}
             </p>
-            <p>Momento 1: {planos.etapa1}</p>
-            <p>Momento 2: {planos.etapa2}</p>
-            <p>Momento 3: {planos.etapa3}</p>
-
-            <Link className="links" to={`/planos/editar/${planos.id}`}>
+            <Link className="links" to={`/planos/editar/${plano.id}`}>
               Acessar
             </Link>
           </Section>
@@ -78,8 +80,6 @@ export default function Login({ match }) {
           Próxima
         </button>
       </div>
-
-      {/* Controles de Paginação */}
     </div>
   );
 }

@@ -23,6 +23,7 @@ export default function Visitadores() {
     async function getData() {
       try {
         const response = await axios.get(`/detalhes/relatorio-geral`);
+        console.log(response.data);
         setVisitador(response.data.visitador);
         setChildrens(response.data.childrens);
         setCaregivers(response.data.caregivers);

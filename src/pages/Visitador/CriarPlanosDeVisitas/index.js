@@ -9,17 +9,17 @@ export default function PlanosDeVisita({ match }) {
   // eslint-disable-next-line react/prop-types
   const { id } = match.params;
   const [child, setChildrens] = useState([]);
-  const [dia_a_ser_realizada_a_visita, setDia] = useState("");
-  const [objetivo, setObjetivo] = useState("");
-  const [grau_de_dificuldade_objetivo, setGrau] = useState("");
+  const [scheduledDay, setDia] = useState("");
+  const [objective, setObjetivo] = useState("");
+  const [objectiveDifficulty, setGrau] = useState("");
   const [etapa1, setEtapa1] = useState("");
   const [etapa2, setEtapa2] = useState("");
   const [etapa3, setEtapa3] = useState("");
 
   useEffect(() => {
     async function getData() {
-      const response = await axios.get(`/crianca/info/${id}`);
-      setChildrens(response.data.child);
+      const response = await axios.get(`/crianca/${id}`);
+      setChildrens(response.data);
     }
 
     getData();
@@ -29,8 +29,8 @@ export default function PlanosDeVisita({ match }) {
     e.preventDefault();
 
     if (
-      objetivo.length < 3 ||
-      !grau_de_dificuldade_objetivo ||
+      objective.length < 3 ||
+      !objectiveDifficulty ||
       etapa1.length < 3 ||
       etapa2.length < 3 ||
       etapa3.length < 3
@@ -38,23 +38,20 @@ export default function PlanosDeVisita({ match }) {
       return toast.error("Preencha todos os campos");
     }
 
+    const dataFormatada = new Date(scheduledDay).toISOString();
+
     try {
+      console.log(objectiveDifficulty);
       // Primeira chamada: criação do plano
-      const response = await axios.post(`/planos/criarplano/${id}`, {
-        dia_a_ser_realizada_a_visita,
-        objetivo,
-        grau_de_dificuldade_objetivo,
+      const response = await axios.post(`/planos/${id}`, {
+        scheduledDay: dataFormatada,
+        objective,
+        objectiveDifficulty,
         etapa1,
         etapa2,
         etapa3,
         childId: id,
       });
-
-      if (!response.data.plano || !response.data.plano.id) {
-        return toast.error(
-          "Erro ao criar o plano. Verifique a resposta do servidor."
-        );
-      }
 
       // Segunda chamada: agendar a visita com base no plano criado (parado, por questões de servidor!)
       // await axios.post(`/visitasporgeolo/agendar-visita/${id}`, {
@@ -106,8 +103,8 @@ export default function PlanosDeVisita({ match }) {
         id="grau_de_dificuldade_objetivo"
       >
         <option value="Selecione">Selecione</option>
-        <option value="Fácil">Fácil</option>
-        <option value="Média">Média</option>
+        <option value="Facil">Facil</option>
+        <option value="Media">Media</option>
         <option value="Dificil">Dificil</option>
       </select>
       <p>Momento 1:</p>

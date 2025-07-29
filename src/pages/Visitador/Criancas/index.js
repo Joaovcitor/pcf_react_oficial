@@ -6,14 +6,15 @@ import { Section, Info, Infos } from "./styled";
 
 // eslint-disable-next-line react/prop-types
 export default function Login({ match }) {
-  const [child, setChildren] = useState("");
+  const [child, setChildren] = useState({});
   // eslint-disable-next-line react/prop-types
   const { id } = match.params;
 
   useEffect(() => {
     async function getData() {
-      const response = await axios.get(`/crianca/info/${id}`);
-      setChildren(response.data.child);
+      const response = await axios.get(`/crianca/${id}`);
+      console.log(response.data);
+      setChildren(response.data);
     }
     getData();
   }, []);

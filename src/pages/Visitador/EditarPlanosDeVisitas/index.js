@@ -12,7 +12,7 @@ export default function PlanosDeVisita({ match }) {
     etapa1: "",
     etapa2: "",
     etapa3: "",
-    observacao: "",
+    observation: "",
     conseguiu_fazer: "Com ajuda",
   });
   const [visitaFeita, setVisitaFeita] = useState({});
@@ -20,16 +20,16 @@ export default function PlanosDeVisita({ match }) {
   useEffect(() => {
     async function getDataPlanos() {
       try {
-        const response = await axios.get(`/planos/infosingleplano/${id}`);
-        const { plano } = response.data;
+        const response = await axios.get(`/planos/${id}`);
+        // const { plano } = response.data;
         console.log(response.data);
         setFormData({
-          objetivo: plano.objetivo || "",
-          etapa1: plano.etapa1 || "",
-          etapa2: plano.etapa2 || "",
-          etapa3: plano.etapa3 || "",
-          observacao: plano.observacao || "",
-          conseguiu_fazer: plano.conseguiu_fazer || "Com ajuda",
+          objetivo: response.data.objective || "",
+          etapa1: response.data.etapa1 || "",
+          etapa2: response.data.etapa2 || "",
+          etapa3: response.data.etapa3 || "",
+          observation: response.data.observation || "",
+          conseguiu_fazer: response.data.conseguiu_fazer || "Com ajuda",
         });
         if (response.data.visitaFeita) {
           setVisitaFeita(response.data.visitaFeita);
@@ -55,10 +55,10 @@ export default function PlanosDeVisita({ match }) {
     e.preventDefault();
 
     try {
-      await axios.put(`/planos/editar/${id}`, { ...formData, childId: id });
+      await axios.patch(`/planos/${id}`, { ...formData, childId: id });
 
       toast.success("Plano editado com sucesso!");
-      history.push(`/planos/editar/${id}`);
+      // history.push(`/planos/editar/${id}`);
     } catch (e) {
       const errors = get(e, "response.data.errors", "");
       if (typeof errors === "string") {
