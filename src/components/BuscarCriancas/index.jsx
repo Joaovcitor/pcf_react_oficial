@@ -9,16 +9,16 @@ export default function dados() {
 
   useEffect(() => {
     async function getData() {
-      const response = await axios.get("/crianca/infoall");
-      setChildres(response.data.children);
+      const response = await axios.get("/crianca/");
+      setChildres(response.data);
     }
     getData();
   }, []);
 
   useEffect(() => {
     async function getData() {
-      const response = await axios.get("/cuidador/showcuidadores");
-      setCaregivers(response.data.cuidadores);
+      const response = await axios.get("/cuidador");
+      setCaregivers(response.data);
     }
     getData();
   }, []);

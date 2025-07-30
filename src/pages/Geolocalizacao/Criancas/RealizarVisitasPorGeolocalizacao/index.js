@@ -15,25 +15,26 @@ export default function RealizarVisitasDasGestantes({ match }) {
       const response = await axios.get(
         `/visitasporgeolo/visitas-marcadas/${id}`
       );
-      console.log(response.data.visita);
-      setVisita(response.data.visita);
+      console.log(response.data);
+      setVisita(response.data);
     }
     getData();
   }, []);
+
+  const mostrarApenasVisitasNaoRealizadas = visita.filter(
+    (v) => v.isFinished === false
+  );
 
   return (
     <Sections>
       <h2>Visitas Marcadas</h2>
       <Div>
-        {visita.map((visitas) => {
+        {mostrarApenasVisitasNaoRealizadas.map((visitas) => {
           return (
             <Section key={visitas.id}>
               <p>
                 Data da realização da visita:{" "}
-                {format(
-                  new Date(visitas.data_que_vai_ser_realizada),
-                  "dd/MM/yyyy HH:mm"
-                )}
+                {format(new Date(visitas.scheduledDate), "dd/MM/yyyy HH:mm")}
               </p>
               <Link className="links" to={`/visitas/iniciar/${visitas.id}`}>
                 Realizar Visita

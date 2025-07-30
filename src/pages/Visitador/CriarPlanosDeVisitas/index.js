@@ -29,20 +29,36 @@ export default function PlanosDeVisita({ match }) {
     e.preventDefault();
 
     if (
+      !scheduledDay ||
       objective.length < 3 ||
       !objectiveDifficulty ||
+      objectiveDifficulty === "Selecione" ||
       etapa1.length < 3 ||
       etapa2.length < 3 ||
       etapa3.length < 3
     ) {
-      return toast.error("Preencha todos os campos");
+      if (!scheduledDay) {
+        return toast.error("Por favor, selecione a data da visita.");
+      }
+      return toast.error("Preencha todos os campos obrigatórios.");
     }
 
-    const dataFormatada = new Date(scheduledDay).toISOString();
-
     try {
-      console.log(objectiveDifficulty);
-      // Primeira chamada: criação do plano
+      const dateObject = new Date(scheduledDay);
+      if (isNaN(dateObject.getTime())) {
+        toast.error(
+          "Erro interno: A data selecionada é inválida. Tente selecionar novamente."
+        );
+        console.error(
+          "Tentativa de formatar um objeto 'Invalid Date'. Valor do input era:",
+          scheduledDay
+        );
+        return;
+      }
+
+      const dataFormatada = dateObject.toISOString();
+      console.log("3. Data formatada (ISO String) para envio:", dataFormatada);
+
       const response = await axios.post(`/planos/${id}`, {
         scheduledDay: dataFormatada,
         objective,
@@ -53,33 +69,31 @@ export default function PlanosDeVisita({ match }) {
         childId: id,
       });
 
-      // Segunda chamada: agendar a visita com base no plano criado (parado, por questões de servidor!)
-      // await axios.post(`/visitasporgeolo/agendar-visita/${id}`, {
-      //   idChild: id,
-      //   planoId: response.data.plano.id,
-      //   data_que_vai_ser_realizada: dia_a_ser_realizada_a_visita,
-      // });
+      // Segunda chamada: criação da visita
+      const visitaResponse = await axios.post(`/visitasporgeolo/`, {
+        childId: parseInt(id),
+        planId: response.data.id,
+        scheduledDate: dataFormatada,
+      });
 
       toast.success("Plano criado com sucesso e visita agendada");
-      // history.push(`/planos/criarplano/${id}`);
     } catch (e) {
-      const errors = get(e, "response.data.errors", "");
-      if (typeof errors === "string") {
-        toast.error(errors);
-      } else if (Array.isArray(errors)) {
-        errors.forEach((error) => {
-          toast.error(error);
-        });
-      } else if (typeof errors === "object") {
-        Object.values(errors).forEach((error) => {
-          if (typeof error === "string") {
-            toast.error(error);
-          }
-        });
+      console.error("ERRO CAPTURADO NA CHAMADA DA API:", e);
+      if (e.response) {
+        // Erro vindo da resposta da API (Axios)
+        console.error("Dados da resposta do erro:", e.response.data);
+        console.error("Status do erro:", e.response.status);
+        const errors =
+          e.response.data.errors ||
+          e.response.data.message ||
+          "Erro desconhecido no servidor.";
+        toast.error(Array.isArray(errors) ? errors.join(", ") : errors);
+      } else {
+        // Erro no próprio JavaScript (como o de data inválida)
+        toast.error(`Erro no cliente: ${e.message}`);
       }
     }
   }
-
   return (
     <Div onSubmit={handleSubmit}>
       <h2>Criar Plano de visita</h2>

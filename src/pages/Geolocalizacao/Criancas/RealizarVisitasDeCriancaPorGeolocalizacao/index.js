@@ -13,8 +13,8 @@ export default function dados({ match }) {
       const response = await axios.get(
         `/visitasporgeolo/visitas-marcadas/${id}`
       );
-      console.log(response.data.visita);
-      setVisita(response.data.visita);
+      console.log(response.data);
+      setVisita(response.data);
     }
     getData();
   }, []);
@@ -26,13 +26,13 @@ export default function dados({ match }) {
         {visita.map((visitas) => {
           return (
             <Section key={visitas.id}>
-              <p>
+              {/* <p>
                 Data da realização da visita:{" "}
                 {format(
                   new Date(visitas.data_que_vai_ser_realizada),
                   "dd/MM/yyyy HH:mm"
                 )}
-              </p>
+              </p> */}
               <Link className="links" to={`/visitas/iniciar/${visitas.id}`}>
                 Realizar Visita
               </Link>

@@ -20,9 +20,10 @@ export default function Dados({ match }) {
   useEffect(() => {
     async function getDados() {
       const verificarVisitaFinalizada = await axios.get(
-        `/visitasporgeolo/verificar-visita/${id}`
+        `/visitasporgeolo/${id}`
       );
-      setVisita(verificarVisitaFinalizada.data.visita);
+      setVisita(verificarVisitaFinalizada.data);
+      console.log(verificarVisitaFinalizada.data);
     }
     getDados();
   }, [id]);
@@ -33,12 +34,11 @@ export default function Dados({ match }) {
     const data_inicio = new Date().toISOString();
     setDataInicio(data_inicio);
 
-    if (!visita.beneficiario_em_casa) {
+    if (!visita.isBeneficiaryHome) {
       return toast.warn("Você disse que esse beneficiário não está em casa!");
     }
     try {
-      await axios.post(`/visitasporgeolo/realizarvisita/${id}`, {
-        idVisita: id,
+      await axios.patch(`/visitasporgeolo/${id}`, {
         latitude: location.latitude,
         longitude: location.longitude,
         hora_inicio: data_inicio,
@@ -57,26 +57,25 @@ export default function Dados({ match }) {
     setDataFim(data_fim);
 
     try {
-      const verificarVisitaFinalizada = await axios.get(
-        `/visitasporgeolo/verificar-visita/${id}`
-      );
+      // const verificarVisitaFinalizada = await axios.get(
+      //   `/visitasporgeolo/verificar-visita/${id}`
+      // );
 
-      if (!visita.beneficiario_em_casa) {
-        return toast.warn("Você disse que esse beneficiário não está em casa!");
-      }
+      // if (!visita.beneficiario_em_casa) {
+      //   return toast.warn("Você disse que esse beneficiário não está em casa!");
+      // }
 
-      if (
-        !verificarVisitaFinalizada.data.visita.latitude &&
-        !verificarVisitaFinalizada.data.visita.longitude
-      ) {
-        return toast.warning("Primeiro inicie a visita!");
-      }
+      // if (
+      //   !verificarVisitaFinalizada.data.latitude &&
+      //   !verificarVisitaFinalizada.data.longitude
+      // ) {
+      //   return toast.warning("Primeiro inicie a visita!");
+      // }
 
-      await axios.put(`/visitasporgeolo/finalizar-visita/${id}`, {
+      await axios.patch(`/visitasporgeolo/${id}/finalizar`, {
         id,
-        latitude_final: location_final.latitude_final,
-        longitude_final: location_final.longitude_final,
-        hora_fim: data_fim,
+        finalLatitude: location_final.latitude_final,
+        finalLongitude: location_final.longitude_final,
       });
 
       toast.success("Visita finalizada");

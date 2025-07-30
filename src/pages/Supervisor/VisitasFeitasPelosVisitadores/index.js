@@ -10,16 +10,16 @@ import { format } from "date-fns";
 export default function Visitadores({ match }) {
   const { id } = match.params;
   const [visitaFinalizadas, setVisitas] = useState([]);
-  const [visitasSemBeneficiarios, setVisitasSemBeneficiarios] = useState([]);
   const [invalidarHabilitado, setHabilitar] = useState(false);
 
   useEffect(() => {
     async function getData() {
       try {
-        const response = await axios.get(`/visitasporgeolo/visitas/${id}`);
+        const response = await axios.get(
+          `/visitasporgeolo/visitas-marcadas/${id}`
+        );
         console.log(response.data);
-        setVisitas(response.data.visitaFinalizadas);
-        setVisitasSemBeneficiarios(response.data.visitasSemBeneficiarios);
+        setVisitas(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
         toast.error("Erro ao carregar visitas.");
@@ -43,6 +43,10 @@ export default function Visitadores({ match }) {
     setHabilitar(true);
   };
 
+  const visitasSemBeneficiarios = visitaFinalizadas.filter(
+    (visita) => !visita.isBeneficiaryHome
+  );
+
   return (
     <>
       <Div>
@@ -52,14 +56,14 @@ export default function Visitadores({ match }) {
             {visitaFinalizadas.map((visita) => (
               <div key={visita.id} style={{ marginBottom: "20px" }}>
                 <h3>Visita ID: {visita.id}</h3>
-                <p>
+                {/* <p>
                   Horário que iniciou:{" "}
                   {format(visita.hora_inicio, "dd/MM/yyyy HH:mm:ss")}
                 </p>
                 <p>
                   Horário que finalizou:{" "}
                   {format(visita.hora_fim, "dd/MM/yyyy HH:mm:ss")}
-                </p>
+                </p> */}
                 <Mapa visita={visita} />
                 <button
                   onClick={() => handleSubmitValidarVisita(visita.id)}
