@@ -41,8 +41,10 @@ export default function Login() {
 
     if (formsErrors) return;
 
+    const dataFormatada = new Date(born).toISOString();
+
     try {
-      const response = await axios.post("/cuidador/cadastro", {
+      const response = await axios.post("/cuidador/", {
         name,
         endereco,
         rg,
@@ -50,7 +52,7 @@ export default function Login() {
         bairro,
         contato,
         pregnant: gestante,
-        born,
+        born: dataFormatada,
         week_pregnant,
       });
 

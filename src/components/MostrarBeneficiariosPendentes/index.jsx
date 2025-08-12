@@ -1,111 +1,117 @@
 import React, { useEffect, useState } from "react";
+import { Section, Card, Button } from "./styled";
 import axios from "../../services/axios";
-import { Section } from "./styled";
-import { format } from "date-fns";
-
 import { toast } from "react-toastify";
 import { get } from "lodash";
 
-export default function dados() {
-  const [childrens, setChildrens] = useState([]);
+// 2. Nome do componente em PascalCase (inicia com letra maiúscula)
+export default function Dados() {
   const [caregivers, setCaregivers] = useState([]);
+  // 3. Iniciar o loading como 'true' para mostrar feedback ao usuário
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function getData() {
-      const response = await axios.get("/supervisor/beneficiarios-pendentes");
-      console.log("Teste", response.data);
-      setChildrens(response.data.childrens);
-      setCaregivers(response.data.caregivers);
+      try {
+        const response = await axios.get("/cuidador/");
+        setCaregivers(response.data);
+      } catch (err) {
+        setError("Falha ao buscar os dados. Tente novamente mais tarde.");
+        const errors = get(err, "response.data.errors", []);
+        errors.forEach((errorMsg) => toast.error(errorMsg));
+      } finally {
+        setLoading(false);
+      }
     }
+
     getData();
   }, []);
 
-  const handleSubmitValidar = async (idChild, idCaregiver) => {
+  const handleSubmitValidar = async (idCaregiver) => {
+    setLoading(true);
     try {
-      await axios.put("/supervisor/validar-cuidador", {
-        idCaregiver,
-      });
+      await axios.put("/supervisor/validar-cuidador", { idCaregiver });
 
-      await axios.put("/supervisor/validar-crianca", {
-        idChild,
-      });
+      toast.success("Dados Validados com sucesso!");
 
-      toast.success("Dados Validados");
+      // getData();
     } catch (e) {
-      const errors = get(e, "response.data.errors", "");
-      if (typeof errors === "string") {
+      const errors = get(e, "response.data.errors", [
+        "Ocorreu um erro desconhecido.",
+      ]);
+      if (Array.isArray(errors)) {
+        errors.forEach((error) => toast.error(error));
+      } else {
         toast.error(errors);
-      } else if (Array.isArray(errors)) {
-        errors.forEach((error) => {
-          toast.error(error);
-        });
-      } else if (typeof errors === "object") {
-        Object.values(errors).forEach((error) => {
-          if (typeof error === "string") {
-            toast.error(error);
-          }
-        });
       }
+    } finally {
+      setLoading(false);
     }
   };
 
+  if (loading) return <p>Carregando...</p>;
+  if (error) return <p>{error}</p>;
+
+  const nonPregnantCaregivers = caregivers.filter(
+    (c) => !c.pregnant && c.children.length > 0
+  );
+  const pregnantBeneficiaries = caregivers.filter((c) => c.pregnant);
+
   return (
     <Section>
-      {childrens.map((beneficiario) => {
-        return (
-          <div key={beneficiario.id}>
-            <h4>Dados Cuidador</h4>
-            <p>Nome: {beneficiario.caregiver.name}</p>
-            <p>CPF: {beneficiario.caregiver.cpf}</p>
-            <p>RG: {beneficiario.caregiver.rg}</p>
-            <br />
-            <h4>Dados da criança</h4>
-            <p>Nome: {beneficiario.name}</p>
-            <p>
-              Data de nascimento:{" "}
-              {format(new Date(beneficiario.born), "dd-MM-yyyy")}
-            </p>
-            <p>NIS: {beneficiario.nis}</p>
-            <br />
-            <h4>Dados do Visitador</h4>
-            <p>Nome: {beneficiario.visitador.name}</p>
-            <button
-              onClick={() =>
-                handleSubmitValidar(beneficiario.id, beneficiario.caregiver.id)
-              }
-              type="button"
-              className="links"
-            >
-              Validar dados
-            </button>
-          </div>
-        );
-      })}
+      {nonPregnantCaregivers.length > 0 && <h1>Cuidadores</h1>}
+      {nonPregnantCaregivers.map((caregiver) => (
+        <Card
+          key={caregiver.id}
+          style={{ border: "1px solid #ccc", margin: "10px", padding: "10px" }}
+        >
+          <h2>
+            {caregiver.name} (CPF: {caregiver.cpf})
+          </h2>
+          <h3>Crianças:</h3>
+          <ul>
+            {caregiver.children.map((child) => (
+              <li key={child.id}>{child.name}</li>
+            ))}
+          </ul>
+          {caregiver.visitor?.name && (
+            <div>
+              <h3>Visitante:</h3>
+              <p>
+                Entrada em:{" "}
+                {new Date(caregiver.visitor.createdAt).toLocaleString("pt-BR")}
+              </p>
+            </div>
+          )}
+          <Button onClick={() => handleSubmitValidar(caregiver.id)}>
+            Validar dados
+          </Button>
+        </Card>
+      ))}
 
-      {caregivers.pregnant > 0
-        ? caregivers.map((beneficiario) => {
-            return (
-              <div key={beneficiario.id}>
-                <h4>Dados da gestante</h4>
-                <p>Nome: {beneficiario.name}</p>
-                <p>CPF: {beneficiario.cpf}</p>
-                <p>RG: {beneficiario.rg}</p>
-                <br />
-                <h4>Dados do Visitador</h4>
-                <p>Nome: {beneficiario.visitador.name}</p>
-                <button
-                  onClick={() =>
-                    handleSubmitValidar(beneficiario.id, beneficiario.id)
-                  }
-                  type="button"
-                  className="links"
-                >
-                  Validar dados
-                </button>
-              </div>
-            );
-          })
-        : ""}
+      {pregnantBeneficiaries.length > 0 && <h1>Gestantes</h1>}
+      {pregnantBeneficiaries.map((beneficiario) => (
+        <Card
+          key={beneficiario.id}
+          style={{ border: "1px solid #ccc", margin: "10px", padding: "10px" }}
+        >
+          <h4>Dados da gestante</h4>
+          <p>Nome: {beneficiario.name}</p>
+          <p>CPF: {beneficiario.cpf}</p>
+          <p>RG: {beneficiario.rg}</p>
+          <br />
+          {/* Acesso seguro ao nome do visitante */}
+          <h4>Dados do Visitador: {beneficiario.visitor?.name}</h4>
+          <Button
+            onClick={() => handleSubmitValidar(beneficiario.id)}
+            type="button"
+            className="links"
+          >
+            Validar dados
+          </Button>
+        </Card>
+      ))}
     </Section>
   );
 }

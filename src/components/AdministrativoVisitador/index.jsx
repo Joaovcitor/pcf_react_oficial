@@ -20,7 +20,7 @@ export default function AdministrativoVisitador() {
         if (response.status === 204) {
           console.log("Sem faltas");
         }
-        setFaltas(response.data.faltas);
+        setFaltas(response.data);
       } catch (e) {
         toast.error("Ocorreu um erro!");
       }

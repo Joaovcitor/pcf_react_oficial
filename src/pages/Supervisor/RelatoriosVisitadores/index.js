@@ -1,131 +1,160 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "../../../services/axios";
 import { Link } from "react-router-dom";
-import { Div } from "./styled";
-import GraficoBarrasVisitadores from "../../../components/GraficoDeBarraVisitadores";
-import GraficoBarrasCriancas from "../../../components/GraficoDeBarraCriancas";
+
+import {
+  Div,
+  PainelResumo,
+  CardResumo,
+  CriancasContainer,
+  CriancaCard,
+} from "./styled";
+
+import { FaChild, FaClipboardList, FaMapMarkedAlt } from "react-icons/fa";
 
 export default function Visitadores({ match }) {
   const { id } = match.params;
-  const [visitador, setVisitador] = useState([]);
-  const [child, setChildrens] = useState([]);
 
-  // states de pesquisa
+  const [visitador, setVisitador] = useState(null);
+  const [childrens, setChildrens] = useState([]);
+  const [planos, setPlanos] = useState([]);
+  const [visitasFeitas, setVisitasFeitas] = useState([]);
+
   const [inicioMes, setInicioMes] = useState("");
   const [fimMes, setFimMes] = useState("");
-  const [planos, setPlanos] = useState([]);
-  const [allPlanos, setAllPlanos] = useState([]);
-  const [visitasFeitas, setVisitasFeitas] = useState([]);
-  const [AllVisitasFeitas, setAllVisitasFeitas] = useState([]);
 
-  useEffect(() => {
-    async function getData() {
+  const fetchData = useCallback(
+    async (params = {}) => {
       try {
-        const response = await axios.get(`/detalhes/visitador/${id}`);
-        setVisitador(response.data.visitador);
-        setChildrens(response.data.child);
-        setAllPlanos(response.data.planos);
-        setAllVisitasFeitas(response.data.visitasFeitas);
-        console.log(response.data);
+        const response = await axios.get(`/users/${id}`, { params });
+        setVisitador(response.data);
+        setChildrens(response.data.children || []);
+        setPlanos(response.data.planosDeVisitas || []);
+        setVisitasFeitas(response.data.visitasFeitas || []);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       }
-    }
+    },
+    [id]
+  );
 
-    getData();
-  }, [id]);
-
-  // Função para filtrar planos com base nas datas
-  const filterPlanosByDate = () => {
-    const filteredPlanos = allPlanos.filter((plano) => {
-      const createdAt = new Date(plano.createdAt);
-      const startDate = new Date(inicioMes);
-      const endDate = new Date(fimMes);
-
-      return createdAt >= startDate && createdAt <= endDate;
-    });
-
-    const filteredVisitas = AllVisitasFeitas.filter((visita) => {
-      const createdAt = new Date(visita.createdAt);
-      const startDate = new Date(inicioMes);
-      const endDate = new Date(fimMes);
-
-      return createdAt >= startDate && createdAt <= endDate;
-    });
-
-    setPlanos(filteredPlanos);
-    setVisitasFeitas(filteredVisitas);
-  };
+  useEffect(() => {
+    fetchData();
+  }, [id, fetchData]);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    filterPlanosByDate();
+    if (inicioMes && fimMes) {
+      fetchData({ startDate: inicioMes, endDate: fimMes });
+    } else {
+      alert("Por favor, selecione as duas datas.");
+    }
   };
+
+  if (!visitador) return <p>Carregando...</p>;
+
+  const cards = [
+    {
+      id: 2,
+      title: "Crianças",
+      icon: <FaChild />,
+      value: childrens.length,
+      color: "#43a047",
+    },
+    {
+      id: 3,
+      title: "Planos",
+      icon: <FaClipboardList />,
+      value: planos.length,
+      color: "#fbc02d",
+    },
+    {
+      id: 4,
+      title: "Visitas Feitas",
+      icon: <FaMapMarkedAlt />,
+      value: visitasFeitas.length,
+      color: "#e64a19",
+    },
+  ];
 
   return (
     <Div>
-      <div>
-        <h3>
-          Relatórios gerais do <span>{visitador.name}</span>
-        </h3>
-      </div>
+      <h3>
+        Relatórios gerais do <span>{visitador.name}</span>
+      </h3>
+
       <form onSubmit={handleSearch}>
-        <label>Início do Mês:</label>
-        <input
-          type="date"
-          value={inicioMes}
-          onChange={(e) => setInicioMes(e.target.value)}
-        />
-
-        <label>Fim do Mês:</label>
-        <input
-          type="date"
-          value={fimMes}
-          onChange={(e) => setFimMes(e.target.value)}
-        />
-
-        <button type="submit">Gerar relatório</button>
+        <label>
+          Início do Mês:{" "}
+          <input
+            type="date"
+            value={inicioMes}
+            onChange={(e) => setInicioMes(e.target.value)}
+          />
+        </label>
+        <label>
+          Fim do Mês:{" "}
+          <input
+            type="date"
+            value={fimMes}
+            onChange={(e) => setFimMes(e.target.value)}
+          />
+        </label>
+        <button type="submit">Gerar Relatório</button>
       </form>
-      <GraficoBarrasVisitadores
-        childrens={child}
-        visitas={visitasFeitas}
-        planos={planos}
-      ></GraficoBarrasVisitadores>
-      {child.length > 0 ? (
-        child.map((crianca) => (
-          <div className="criancas" key={crianca.id}>
-            <p>Nome: {crianca.name}</p>
-            <p>Idade: {crianca.idade}</p>
-            <Link className="links">Editar informações da criança</Link>
-            <Link to={`/visitas/${crianca.id}`} className="links">
-              Ver visitas
-            </Link>
-          </div>
-        ))
-      ) : (
-        <p>Não tem criança</p>
-      )}
 
-      <div>
-        <div className="dados-pesquisados">
-          <h3>Planos {planos.length}</h3>
-          {planos.length > 0 ? (
-            planos.map((plano) => (
-              <div className="criancas" key={plano.id}>
-                <p>
-                  <span>Objetivo:</span> {plano.objetivo}
-                </p>
-                <p>Momento 1: {plano.etapa1}</p>
-                <p>Momento 2: {plano.etapa2}</p>
-                <p>Momento 3: {plano.etapa3}</p>
+      <PainelResumo>
+        {cards.map(({ id, title, icon, value, color }) => (
+          <CardResumo key={id} color={color}>
+            {React.cloneElement(icon, { color })}
+            <h5>{title}</h5>
+            <p>{value}</p>
+          </CardResumo>
+        ))}
+      </PainelResumo>
+
+      <CriancasContainer>
+        <h3>Crianças ({childrens.length})</h3>
+        {childrens.length > 0 ? (
+          childrens.map((crianca) => (
+            <CriancaCard key={crianca.id}>
+              <p>
+                <strong>Nome:</strong> {crianca.name}
+              </p>
+              <p>
+                <strong>Idade:</strong> {crianca.idade}
+              </p>
+              <div className="links">
+                <Link to={`/crianca/editar/${crianca.id}`}>
+                  Editar informações
+                </Link>
+                <Link to={`/visitas/${crianca.id}`}>Ver visitas</Link>
               </div>
-            ))
-          ) : (
-            <li>Nenhum plano encontrado.</li>
-          )}
-        </div>
-      </div>
+            </CriancaCard>
+          ))
+        ) : (
+          <p>Não tem criança cadastrada.</p>
+        )}
+      </CriancasContainer>
+
+      {/* <PlanosContainer>
+        <h3>Planos ({planos.length})</h3>
+        {planos.length > 0 ? (
+          planos.map((plano) => (
+            <PlanoItem key={plano.id}>
+              <p>
+                <strong>Objetivo:</strong> {plano.objetivo}
+              </p>
+              <p>Momento 1: {plano.etapa1}</p>
+              <p>Momento 2: {plano.etapa2}</p>
+              <p>Momento 3: {plano.etapa3}</p>
+            </PlanoItem>
+          ))
+        ) : (
+          <p>Nenhum plano encontrado.</p>
+        )}
+      </PlanosContainer> */}
     </Div>
   );
 }

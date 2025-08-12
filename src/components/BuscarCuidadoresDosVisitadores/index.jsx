@@ -9,9 +9,9 @@ export default function dados() {
 
   useEffect(() => {
     async function getData() {
-      const response = await axios.get("/cuidador/showcuidadores");
+      const response = await axios.get("/cuidador/meus-cuidadores");
       console.log(response.data);
-      setCuidadores(response.data.cuidadores);
+      setCuidadores(response.data);
     }
     getData();
   }, []);

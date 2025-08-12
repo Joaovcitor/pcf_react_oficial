@@ -20,8 +20,8 @@ export default function AdministrativoCoordenador() {
         if (response.status === 204) {
           return console.log("Sem faltas");
         }
-        console.log(response.data.faltas);
-        setFaltas(response.data.faltas);
+        console.log(response.data);
+        setFaltas(response.data);
       } catch (e) {
         toast.error("Ocorreu um erro!");
       }
@@ -34,7 +34,7 @@ export default function AdministrativoCoordenador() {
       try {
         const response = await axios.get("/users/");
 
-        setUser(response.data.users);
+        setUser(response.data);
       } catch (e) {
         toast.error("Ocorreu um erro!");
       }
@@ -43,7 +43,7 @@ export default function AdministrativoCoordenador() {
   }, []);
 
   const faltasParaInvalidar = faltas.filter(
-    (f) => f.pedir_para_invalidar_falta !== null && f.falta_invalida
+    (f) => f.invalidationRequest !== null && f.isInvalidated
   );
 
   const handleInvalidarFalta = async (id) => {
@@ -63,7 +63,6 @@ export default function AdministrativoCoordenador() {
   searchAllUsers(setAllUsers);
   return (
     <>
-      <h4>Funcionalidade em testes</h4>
       <Section>
         <Nav>
           <h4>Todos os funcionários do sistema </h4>
@@ -192,38 +191,6 @@ export default function AdministrativoCoordenador() {
             })
           ) : (
             <h4>Não há pedidos para invalidar faltas</h4>
-          )}
-        </Nav>
-      </Section>
-      <Section>
-        <Nav>
-          <h4>Demandas</h4>
-          {faltasParaInvalidar.length > 0 ? (
-            faltasParaInvalidar.map((falta) => {
-              const usuarioQueLevouFalta = user.find(
-                (user) => user.id === falta.userId
-              );
-
-              return (
-                <div key={falta.id}>
-                  <p>Motivo para invalidar:</p>
-                  <span>{falta.pedir_para_invalidar_falta}</span>
-                  <p>Quem recebeu a falta:</p>
-                  <span>
-                    {usuarioQueLevouFalta
-                      ? usuarioQueLevouFalta.name
-                      : "Não informado"}
-                  </span>
-                  <p>Deseja invalidar a falta?</p>
-                  <nav className="buttons">
-                    <button className="links">Sim</button>
-                    <button className="links">Não</button>
-                  </nav>
-                </div>
-              );
-            })
-          ) : (
-            <h4>Você não possui nenhuma Demanda</h4>
           )}
         </Nav>
       </Section>

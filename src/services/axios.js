@@ -4,8 +4,8 @@ import { toast } from "react-toastify"; // Adicione esta importação
 
 // Criação de instância do Axios
 const api = axios.create({
-  baseURL: "https://primeirainfanciasuasapi.socialquixada.com.br/apiv1",
-  // baseURL: "http://localhost:3003/apiv1",
+  // baseURL: "https://primeirainfanciasuasapi.socialquixada.com.br/apiv1",
+  baseURL: "http://localhost:3003/apiv1",
   withCredentials: true,
 });
 

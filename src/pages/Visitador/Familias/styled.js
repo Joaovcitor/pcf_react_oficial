@@ -5,64 +5,94 @@ export const Div = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  gap: 12px;
+  padding: 20px;
 
   p {
-    font-size: 18px;
-    color: white;
-    font-weight: bolder;
+    font-size: 1rem;
+    color: #333;
+    font-weight: 600;
+    margin: 4px 0;
   }
 
   h2 {
-    color: black;
+    color: #0367a6;
+    font-weight: bold;
+    margin-bottom: 10px;
   }
 
   input {
     border: none;
-    border-bottom: solid 1px black;
+    border-bottom: 2px solid #ccc;
     background-color: transparent;
-    color: white;
+    color: #333;
     text-align: center;
-    font-size: 18px;
+    font-size: 1rem;
+    padding: 6px;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-bottom-color: #0367a6;
+    }
+
+    &::placeholder {
+      color: #aaa;
+      font-style: italic;
+    }
   }
 `;
 
 export const Section = styled.section`
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  align-items: center;
   text-align: center;
-  width: 280px;
+  width: min(90%, 320px);
   background: white;
-  border-radius: 10px;
-  transition: border-radius 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px auto;
   box-shadow:
-    inset 0 -3em 3em rgba(0, 0, 0, 0.1),
-    0 0 0 2px rgb(190, 190, 190),
-    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-  padding: 10px;
-  margin: 0 auto;
-  margin-top: 15px;
-  margin-bottom: 20px;
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.03);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 6px 16px rgba(0, 0, 0, 0.12),
+      inset 0 -2px 6px rgba(0, 0, 0, 0.03);
+  }
 
   .link {
-    background-color: white;
-    color: black;
-    border-radius: 10em;
-    font-size: 17px;
+    background-color: #0367a6;
+    color: white;
+    border-radius: 8px;
+    font-size: 0.95rem;
     font-weight: 600;
-    padding: 10px;
+    padding: 10px 18px;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    border: 1px solid black;
-    box-shadow: 0 0 0 0 black;
-    margin-top: 30px;
+    transition:
+      background 0.3s ease,
+      transform 0.2s ease;
+    border: none;
+    margin-top: 20px;
+
     &:hover {
-      transform: translateY(-4px) translateX(-2px);
-      box-shadow: 2px 5px 0 0 black;
+      background-color: #024d7a;
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
     }
   }
 
   p {
-    color: black;
+    color: #555;
+    font-size: 0.95rem;
   }
 `;

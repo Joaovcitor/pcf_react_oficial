@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import axios from "../../services/axios";
 
 import { Div } from "./styled";
 import FerramentasVisitadores from "../../components/FerramentasVisitadores";
 import FerramentasSupervisores from "../../components/FerramentasSupervisores";
 import FerramentaCoordenador from "../../components/FerramentasCoordenador";
-import Notifications from "../../components/Notifications";
-import TabelaDevisitasDosVisitadores from "../../components/TabelaDeVisitasDosVisitadores";
 
 export default function Visitador() {
   const [users, setUsers] = useState(null);
@@ -32,7 +29,6 @@ export default function Visitador() {
         return (
           <>
             <FerramentasVisitadores />
-            <Notifications endpoint={"minhas-notificacoes"} />
             {/* <TabelaDevisitasDosVisitadores /> */}
           </>
         );
@@ -40,7 +36,6 @@ export default function Visitador() {
         return (
           <>
             <FerramentasSupervisores />
-            <Notifications endpoint={"supervisor-showall-notificacoes"} />
           </>
         );
       case "coordenador":

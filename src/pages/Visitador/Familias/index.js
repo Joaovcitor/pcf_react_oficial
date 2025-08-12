@@ -10,19 +10,33 @@ import {
 } from "date-fns";
 
 import axios from "../../../services/axios";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const [children, setFamilia] = useState([]);
   const [pregnants, setPregnants] = useState([]);
   useEffect(() => {
     async function getData() {
-      const response = await axios.get("/familias/showfamilias");
-      console.log(response.data);
-      setFamilia(response.data.children);
-      setPregnants(response.data.gravidas);
+      try {
+        const response = await axios.get("/cuidador/meus-cuidadores");
+        setPregnants(response.data);
+      } catch (e) {
+        console.log(e);
+        toast.error("Ocorreu um erro!");
+      }
     }
     getData();
   }, []);
+
+  useEffect(() => {
+    async function getData() {
+      const response = await axios.get("/crianca/");
+      setFamilia(response.data);
+    }
+    getData();
+  }, []);
+
+  const gravidas = pregnants.filter((p) => p.pregnant === true);
 
   function calcularIdadeCompleta(dataNascimento) {
     const hoje = new Date();
@@ -39,12 +53,9 @@ export default function Login() {
     return `${anos} anos, ${meses} meses e ${dias} dias`;
   }
 
-  for (let i = 0; i < children.length; i++) {
-    console.log(calcularIdadeCompleta(children[i].born));
-  }
   return (
     <Div>
-      <h2>Quantidade de beneficiários: {children.length}</h2>
+      <h2>Quantidade de Crianças: {children.length}</h2>
       {children.map((child) => (
         <Section key={child.id}>
           <p>Nome: {child.name}</p>
@@ -54,8 +65,8 @@ export default function Login() {
           </Link>
         </Section>
       ))}
-      <h2>Quantidade de Grávidas: {pregnants.length}</h2>
-      {pregnants.map((pregnant) => (
+      <h2>Quantidade de Grávidas: {gravidas.length}</h2>
+      {gravidas.map((pregnant) => (
         <Section key={pregnant.id}>
           <p>Nome: {pregnant.name}</p>
           <p>Idade: {calcularIdadeCompleta(pregnant.born)}</p>

@@ -56,7 +56,7 @@ export default function PlanosDaCrianca({ match }) {
                 ? format(new Date(plano.createdAt), "dd/MM/yyyy")
                 : "Data inválida"}
             </p>
-            <p>Objetivo: {plano.objetivo}</p>
+            <p>Objetivo: {plano.objective}</p>
             <p>
               Dificuldade da atividade: {plano.grau_de_dificuldade_objetivo}
             </p>

@@ -30,13 +30,13 @@ export default function Header() {
             Acessar
           </Link>
         </div>
-        <div>
+        {/* <div>
           <IoReader size={38} style={{ color: "white" }} />
           <p>Notificações</p>
           <Link className="links" to="/notificacoes">
             Acessar
           </Link>
-        </div>
+        </div> */}
         <div>
           <IoPeopleCircleSharp size={38} style={{ color: "white" }} />
           <p>Validar Adesão</p>

@@ -96,7 +96,7 @@ const GraficoBarras = ({
 };
 
 const filtroDeVisitasFeitas = (visitas) => {
-  return visitas.filter((visita) => visita.visita_marcada_finalizada === true);
+  return visitas.filter((visita) => visita.isScheduledVisitFinished === true);
 };
 
 export default GraficoBarras;

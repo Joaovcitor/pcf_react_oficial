@@ -6,7 +6,7 @@ export default function searchAllUsers(setAllUsers) {
       try {
         const response = await axios.get("/users/");
         console.log(response.data);
-        return setAllUsers(response.data.users);
+        return setAllUsers(response.data);
       } catch (e) {
         console.log(e);
       }

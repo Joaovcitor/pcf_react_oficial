@@ -32,8 +32,8 @@ export default function Login({ match }) {
 
   React.useEffect(() => {
     async function getData() {
-      const response = await axios.get(`/cuidador/showinfos/${id}`);
-      setCaregiver(response.data.cuidador);
+      const response = await axios.get(`/cuidador/${id}`);
+      setCaregiver(response.data);
     }
 
     getData();
@@ -52,12 +52,14 @@ export default function Login({ match }) {
 
     if (formsErrors) return;
 
+    const dataFormatada = new Date(born).toISOString();
+
     try {
-      await axios.post(`/crianca/adicionar/${id}`, {
+      await axios.post(`/crianca/${id}`, {
         name,
         sexo,
         isBpc,
-        born,
+        born: dataFormatada,
         nis,
         caregiverId: id,
       });

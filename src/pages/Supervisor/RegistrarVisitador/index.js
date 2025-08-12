@@ -17,18 +17,17 @@ export default function Login() {
   const [cras, setCras] = useState("");
   const [territorio, setTerritorio] = useState("");
 
-
   async function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      await axios.post("/supervisor/cadastrar-visitador", {
+      await axios.post("/users/criar-visitador", {
         name,
         password,
         email,
         cpf,
         confirmepassword,
         cras,
-        territorio
+        territorio,
       });
 
       toast.success("Visitador cadastrado com sucesso!");
