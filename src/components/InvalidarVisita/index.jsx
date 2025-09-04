@@ -5,14 +5,15 @@ import { Div } from "./styled";
 import { toast } from "react-toastify";
 
 export default function InvalidarVisita({ id }) {
-  const [motivo_da_invalidacao, setMotivo] = useState("");
+  const [invalidationReason, setMotivo] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await axios.post(`/visitasporgeolo/invalidar-visita/${id}`, {
-        motivo_da_invalidacao,
+      await axios.patch(`/visitasporgeolo/atualizar-visita/${id}`, {
+        isFakeVisit: false,
+        invalidationReason,
       });
       toast.info("Justificativa enviada com sucesso e visita invalidada!");
     } catch (e) {

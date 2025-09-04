@@ -18,7 +18,7 @@ export default function Visitadores({ match }) {
         const response = await axios.get(
           `/visitasporgeolo/visitas-marcadas/${id}`
         );
-        console.log(response.data);
+        console.log("data", response.data);
         setVisitas(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -31,7 +31,10 @@ export default function Visitadores({ match }) {
 
   const handleSubmitValidarVisita = async (idVisita) => {
     try {
-      await axios.post(`/visitasporgeolo/validar-visita/${idVisita}`);
+      await axios.patch(`/visitasporgeolo/atualizar-visita/${idVisita}`, {
+        isFakeVisit: false,
+        isValidationPending: false,
+      });
       toast.success("Visita validada com sucesso!");
     } catch (error) {
       console.error("Erro ao validar visita:", error);
@@ -47,13 +50,20 @@ export default function Visitadores({ match }) {
     (visita) => !visita.isBeneficiaryHome
   );
 
+  const visitasFinalizadasPeloVVisitador = visitaFinalizadas.filter(
+    (visita) => visita.isValidationPending === true
+  );
+
+  console.log("Filter", visitasFinalizadasPeloVVisitador);
+
   return (
     <>
       <Div>
-        {visitaFinalizadas.length > 0 && !visitaFinalizadas.visita_mentirosa ? (
+        {visitasFinalizadasPeloVVisitador.length > 0 &&
+        visitasFinalizadasPeloVVisitador ? (
           <div>
             <p>Visitas feitas pelo visitador:</p>
-            {visitaFinalizadas.map((visita) => (
+            {visitasFinalizadasPeloVVisitador.map((visita) => (
               <div key={visita.id} style={{ marginBottom: "20px" }}>
                 <h3>Visita ID: {visita.id}</h3>
                 {/* <p>
@@ -96,7 +106,7 @@ export default function Visitadores({ match }) {
             {visitasSemBeneficiarios.map((visita) => (
               <div key={visita.id} style={{ marginBottom: "20px" }}>
                 <h3>Visita ID: {visita.id}</h3>
-                <Mapa visita={visita} />
+                <Mapa visita={visita} id={id} />
                 <h3>Motivo da não realização:</h3>
                 <p>{visita.motivo_da_nao_realizacao}</p>
                 {/* <button

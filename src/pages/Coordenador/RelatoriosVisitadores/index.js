@@ -26,7 +26,7 @@ export default function Visitadores() {
   const fetchData = useCallback(async (params = {}) => {
     try {
       const response = await axios.get(`/users/`, { params });
-
+      console.log(response.data);
       if (!Array.isArray(response.data)) {
         toast.error("Formato inesperado de dados recebidos da API.");
         return;

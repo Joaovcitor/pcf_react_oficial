@@ -28,10 +28,11 @@ export default function Visitadores({ match }) {
     async (params = {}) => {
       try {
         const response = await axios.get(`/users/${id}`, { params });
+        console.log(response.data);
         setVisitador(response.data);
         setChildrens(response.data.children || []);
         setPlanos(response.data.planosDeVisitas || []);
-        setVisitasFeitas(response.data.visitasFeitas || []);
+        setVisitasFeitas(response.data.visitasPorGeolocalizacaos || []);
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       }
@@ -51,6 +52,10 @@ export default function Visitadores({ match }) {
       alert("Por favor, selecione as duas datas.");
     }
   };
+
+  const visitasFinalizadas = visitasFeitas.filter(
+    (visita) => visita.isFinished === true
+  );
 
   if (!visitador) return <p>Carregando...</p>;
 
@@ -73,7 +78,7 @@ export default function Visitadores({ match }) {
       id: 4,
       title: "Visitas Feitas",
       icon: <FaMapMarkedAlt />,
-      value: visitasFeitas.length,
+      value: visitasFinalizadas.length,
       color: "#e64a19",
     },
   ];
@@ -81,7 +86,7 @@ export default function Visitadores({ match }) {
   return (
     <Div>
       <h3>
-        Relatórios gerais do <span>{visitador.name}</span>
+        Relatórios gerais: <span>{visitador.name}</span>
       </h3>
 
       <form onSubmit={handleSearch}>

@@ -8,8 +8,8 @@ export default function dados() {
 
   useEffect(() => {
     async function getData() {
-      const response = await axios.get("/supervisor/info-dos-meus-visitadores");
-      setVisitadores(response.data.visitador);
+      const response = await axios.get("/supervisor/visitadores");
+      setVisitadores(response.data);
     }
     getData();
   }, []);

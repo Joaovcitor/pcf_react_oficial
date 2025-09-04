@@ -22,7 +22,7 @@ export default function PlanosDeVisita({ match }) {
       try {
         const response = await axios.get(`/planos/${id}`);
         // const { plano } = response.data;
-        console.log(response.data);
+        console.log("teste", response.data);
         setFormData({
           objetivo: response.data.objective || "",
           etapa1: response.data.etapa1 || "",
@@ -32,7 +32,7 @@ export default function PlanosDeVisita({ match }) {
           conseguiu_fazer: response.data.conseguiu_fazer || "Com ajuda",
         });
         if (response.data.visitaFeita) {
-          setVisitaFeita(response.data.visitaFeita);
+          setVisitaFeita(response.data.geoLocatedVisits);
         }
       } catch (error) {
         console.log(error);
@@ -102,7 +102,7 @@ export default function PlanosDeVisita({ match }) {
         onChange={handleInputChange}
         id="etapa3"
       />
-      {visitaFeita.finalizou ? (
+      {visitaFeita.isFinished ? (
         <>
           <p>Observação</p>
           <textarea

@@ -51,6 +51,7 @@ import RealizarVisitasDasGestantes from "../pages/Geolocalizacao/RealizarVisitas
 import PlanosDeVisitasDaGestante from "../pages/Gestante/PlanosDeVisitaDaGestante";
 import CriarTabelaParaGestante from "../pages/Gestante/Tabelas";
 import MapaDeCalor from "../pages/Coordenador/MapaDeCalor";
+import ModelosPlanos from "../pages/Supervisor/ModelosPlanos";
 
 export default function Routes() {
   return (
@@ -208,6 +209,12 @@ export default function Routes() {
         exact
         path="/beneficiarios-pendente"
         component={ValidarBeneficiarios}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/modelos"
+        component={ModelosPlanos}
         isClosed
       />
       <MyRoute exact path="/supervisores" component={Supervisores} isClosed />

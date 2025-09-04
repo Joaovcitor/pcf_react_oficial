@@ -19,7 +19,7 @@ export default function RealizarVisitasDasGestantes({ match }) {
       setVisita(response.data);
     }
     getData();
-  }, []);
+  }, [id]);
 
   const mostrarApenasVisitasNaoRealizadas = visita.filter(
     (v) => v.isFinished === false

@@ -1,7 +1,7 @@
-export const primaryColor = "#151F30";
-export const primaryDarkColor = "#2DA657";
+export const primaryColor = "#308C50";
+export const primaryDarkColor = "#1B5E20";
 
-export const successColor = "#0197F6";
-export const infoColor = "#0197F6";
-export const errorColor = "#F2Af29";
-export const warningColor = "#F2Af29";
+export const successColor = "#308C50";
+export const infoColor = "#11B4D9";
+export const errorColor = "#ef4444";
+export const warningColor = "#F2D544";

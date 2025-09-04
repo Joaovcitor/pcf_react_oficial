@@ -14,7 +14,7 @@ export const Div = styled.div`
     color: #222e3e;
 
     span {
-      color: #007bff;
+      color: #003a79ff;
       font-weight: 700;
     }
   }
