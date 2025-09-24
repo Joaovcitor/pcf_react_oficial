@@ -14,6 +14,7 @@ import {
   Assessment as AssessmentIcon,
   Map as MapIcon,
   AdminPanelSettings as AdminPanelSettingsIcon,
+  ChildCare as ChildCareIcon,
 } from '@mui/icons-material';
 import { Link } from "react-router-dom";
 
@@ -37,6 +38,14 @@ export default function FerramentasCoordenador() {
     },
     {
       id: 3,
+      title: "Crianças",
+      description: "Gerenciar crianças cadastradas no sistema",
+      icon: <ChildCareIcon sx={{ fontSize: 40 }} />,
+      color: "#E91E63",
+      link: "/coordenador/criancas",
+    },
+    {
+      id: 4,
       title: "Mapa de Calor",
       description: "Visualizar mapa de calor das visitas",
       icon: <MapIcon sx={{ fontSize: 40 }} />,
@@ -44,7 +53,7 @@ export default function FerramentasCoordenador() {
       link: "/visitas",
     },
     {
-      id: 4,
+      id: 5,
       title: "Administrativo",
       description: "Ferramentas administrativas avançadas",
       icon: <AdminPanelSettingsIcon sx={{ fontSize: 40 }} />,

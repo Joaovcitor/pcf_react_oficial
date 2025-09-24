@@ -28,6 +28,7 @@ import {
   Schedule as ScheduleIcon,
   CheckCircle as CheckCircleIcon,
   Close as CloseIcon,
+  Create as CreateIcon,
   ArrowBack as ArrowBackIcon,
   AutoAwesome as AutoAwesomeIcon,
 } from '@mui/icons-material';
@@ -49,9 +50,16 @@ export default function CriarPlanosDeVisitas({ match }) {
   const [creating, setCreating] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+  
+  // Estados para edição das etapas
+  const [editableObjetivo, setEditableObjetivo] = useState('');
+  const [editableEtapa1, setEditableEtapa1] = useState('');
+  const [editableEtapa2, setEditableEtapa2] = useState('');
+  const [editableEtapa3, setEditableEtapa3] = useState('');
 
   const steps = [
     'Selecionar Modelo',
+    'Personalizar Etapas',
     'Agendar Visita',
     'Confirmar Plano'
   ];
@@ -80,11 +88,33 @@ export default function CriarPlanosDeVisitas({ match }) {
 
   const handleModeloSelect = (modelo) => {
     setSelectedModelo(modelo);
+    
+    if (modelo) {
+      // Preenchendo com dados do modelo selecionado
+      setEditableObjetivo(modelo.objetivo);
+      setEditableEtapa1(modelo.etapa1);
+      setEditableEtapa2(modelo.etapa2);
+      setEditableEtapa3(modelo.etapa3);
+    } else {
+      // Criação manual - campos vazios
+      setEditableObjetivo('');
+      setEditableEtapa1('');
+      setEditableEtapa2('');
+      setEditableEtapa3('');
+    }
+    
     setActiveStep(1);
   };
 
   const handleNext = () => {
-    if (activeStep === 1 && !scheduledDay) {
+    if (activeStep === 1) {
+      // Validar se os campos editáveis estão preenchidos
+      if (!editableObjetivo.trim() || !editableEtapa1.trim() || !editableEtapa2.trim() || !editableEtapa3.trim()) {
+        toast.error('Por favor, preencha todas as etapas do plano');
+        return;
+      }
+    }
+    if (activeStep === 2 && !scheduledDay) {
       toast.error('Por favor, selecione a data da visita');
       return;
     }
@@ -112,13 +142,13 @@ export default function CriarPlanosDeVisitas({ match }) {
 
       const dataFormatada = dateObject.toISOString();
 
-      // Criar plano baseado no modelo
+      // Criar plano baseado no modelo editado
       const planResponse = await axios.post(`/planos/${id}`, {
         scheduledDay: dataFormatada,
-        objetivo: selectedModelo.objetivo,
-        etapa1: selectedModelo.etapa1,
-        etapa2: selectedModelo.etapa2,
-        etapa3: selectedModelo.etapa3,
+        objetivo: editableObjetivo,
+        etapa1: editableEtapa1,
+        etapa2: editableEtapa2,
+        etapa3: editableEtapa3,
         childId: id,
         modeloId: selectedModelo.id
       });
@@ -219,10 +249,52 @@ export default function CriarPlanosDeVisitas({ match }) {
           </Typography>
           
           {modelosFiltrados.length === 0 ? (
-             <Alert severity="info" sx={{ mb: 3 }}>
-               Nenhum modelo encontrado.
-               Entre em contato com seu supervisor para criar modelos adequados.
-             </Alert>
+            <Box>
+              <Alert severity="info" sx={{ mb: 3 }}>
+                <Typography variant="body1" sx={{ fontWeight: 'bold', mb: 1 }}>
+                  Nenhum modelo encontrado para esta faixa etária.
+                </Typography>
+                <Typography variant="body2">
+                  Você pode criar um plano personalizado preenchendo as etapas manualmente ou entrar em contato com seu supervisor para criar modelos adequados.
+                </Typography>
+              </Alert>
+              
+              <Paper 
+                elevation={3} 
+                sx={{ 
+                  p: 4, 
+                  borderRadius: 3,
+                  background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%)',
+                  border: '2px solid rgba(102, 126, 234, 0.1)',
+                  textAlign: 'center'
+                }}
+              >
+                <CreateIcon sx={{ fontSize: 60, color: '#667eea', mb: 2 }} />
+                <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, color: '#667eea' }}>
+                  Criar Plano Personalizado
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 3, color: 'text.secondary' }}>
+                  Crie um plano de visita do zero, definindo objetivo e etapas personalizadas para esta criança.
+                </Typography>
+                <Button
+                  variant="contained"
+                  size="large"
+                  onClick={() => handleModeloSelect(null)}
+                  sx={{
+                    background: 'linear-gradient(45deg, #667eea, #764ba2)',
+                    px: 4,
+                    py: 1.5,
+                    fontSize: '1.1rem',
+                    fontWeight: 'bold',
+                    '&:hover': {
+                      background: 'linear-gradient(45deg, #5a6fd8, #6a4190)',
+                    }
+                  }}
+                >
+                  Começar Criação Manual
+                </Button>
+              </Paper>
+            </Box>
           ) : (
             <Grid container spacing={3}>
               {modelosFiltrados.map((modelo) => (
@@ -317,6 +389,176 @@ export default function CriarPlanosDeVisitas({ match }) {
       {activeStep === 1 && (
         <Box>
           <Typography variant="h5" sx={{ mb: 3, fontWeight: 'bold' }}>
+            {selectedModelo ? '✏️ Personalizar Etapas do Plano' : '📝 Criar Plano Personalizado'}
+          </Typography>
+          
+          {selectedModelo ? (
+            <Alert severity="info" sx={{ mb: 3 }}>
+              <Typography variant="body2">
+                <strong>Modelo selecionado:</strong> Modelo #{selectedModelo?.id} - {selectedModelo?.faixaEtaria}
+                <br />
+                Você pode adaptar as etapas abaixo para sua realidade específica.
+              </Typography>
+            </Alert>
+          ) : (
+            <Alert severity="success" sx={{ mb: 3 }}>
+              <Typography variant="body2">
+                <strong>Criação Manual:</strong> Defina o objetivo e as etapas do plano de visita do zero.
+                <br />
+                Preencha todos os campos com informações específicas para esta criança.
+              </Typography>
+            </Alert>
+          )}
+          
+          <Paper elevation={2} sx={{ p: 4, borderRadius: 2 }}>
+            <Grid container spacing={3}>
+              {/* Objetivo */}
+              <Grid item xs={12}>
+                <Typography variant="h6" sx={{ mb: 2, color: '#667eea', fontWeight: 'bold' }}>
+                  🎯 Objetivo da Visita
+                </Typography>
+                <TextField
+                  fullWidth
+                  multiline
+                  rows={3}
+                  label="Objetivo"
+                  value={editableObjetivo}
+                  onChange={(e) => setEditableObjetivo(e.target.value)}
+                  placeholder="Descreva o objetivo principal desta visita..."
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      borderRadius: 2,
+                    },
+                  }}
+                />
+              </Grid>
+              
+              {/* Etapa 1 */}
+              <Grid item xs={12} md={4}>
+                <Box sx={{ 
+                  p: 3, 
+                  borderRadius: 3, 
+                  background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(102, 126, 234, 0.1) 100%)',
+                  border: '2px solid rgba(102, 126, 234, 0.1)',
+                  height: '100%'
+                }}>
+                  <Typography variant="h6" sx={{ color: '#667eea', fontWeight: 600, mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+                    1️⃣ Primeiro Momento
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    multiline
+                    rows={6}
+                    label="Atividades Iniciais"
+                    value={editableEtapa1}
+                    onChange={(e) => setEditableEtapa1(e.target.value)}
+                  placeholder={selectedModelo ? "Ex: Apresentação, avaliação do ambiente familiar..." : "Descreva as atividades do primeiro momento da visita..."}
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        borderRadius: 2,
+                        backgroundColor: 'white',
+                        '&.Mui-focused': {
+                          boxShadow: '0 0 0 3px rgba(102, 126, 234, 0.1)',
+                        }
+                      }
+                    }}
+                  />
+                </Box>
+              </Grid>
+              
+              {/* Etapa 2 */}
+              <Grid item xs={12} md={4}>
+                <Box sx={{ 
+                  p: 3, 
+                  borderRadius: 3, 
+                  background: 'linear-gradient(135deg, rgba(118, 75, 162, 0.05) 0%, rgba(118, 75, 162, 0.1) 100%)',
+                  border: '2px solid rgba(118, 75, 162, 0.1)',
+                  height: '100%'
+                }}>
+                  <Typography variant="h6" sx={{ color: '#764ba2', fontWeight: 600, mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+                    2️⃣ Segundo Momento
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    multiline
+                    rows={6}
+                    label="Atividades Principais"
+                    value={editableEtapa2}
+                    onChange={(e) => setEditableEtapa2(e.target.value)}
+                    placeholder={selectedModelo ? "Ex: Desenvolvimento de atividades específicas..." : "Descreva as atividades principais da visita..."}
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        borderRadius: 2,
+                        backgroundColor: 'white',
+                        '&.Mui-focused': {
+                          boxShadow: '0 0 0 3px rgba(118, 75, 162, 0.1)',
+                        }
+                      }
+                    }}
+                  />
+                </Box>
+              </Grid>
+              
+              {/* Etapa 3 */}
+              <Grid item xs={12} md={4}>
+                <Box sx={{ 
+                  p: 3, 
+                  borderRadius: 3, 
+                  background: 'linear-gradient(135deg, rgba(76, 175, 80, 0.05) 0%, rgba(76, 175, 80, 0.1) 100%)',
+                  border: '2px solid rgba(76, 175, 80, 0.1)',
+                  height: '100%'
+                }}>
+                  <Typography variant="h6" sx={{ color: '#4caf50', fontWeight: 600, mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+                    3️⃣ Terceiro Momento
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    multiline
+                    rows={6}
+                    label="Atividades Finais"
+                    value={editableEtapa3}
+                    onChange={(e) => setEditableEtapa3(e.target.value)}
+                    placeholder={selectedModelo ? "Ex: Encerramento, orientações finais..." : "Descreva as atividades de encerramento da visita..."}
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        borderRadius: 2,
+                        backgroundColor: 'white',
+                        '&.Mui-focused': {
+                          boxShadow: '0 0 0 3px rgba(76, 175, 80, 0.1)',
+                        }
+                      }
+                    }}
+                  />
+                </Box>
+              </Grid>
+            </Grid>
+            
+            <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', mt: 4 }}>
+              <Button
+                variant="outlined"
+                onClick={handleBack}
+                sx={{ px: 4 }}
+              >
+                Voltar
+              </Button>
+              <Button
+                variant="contained"
+                onClick={handleNext}
+                sx={{
+                  background: 'linear-gradient(45deg, #667eea, #764ba2)',
+                  px: 4,
+                }}
+              >
+                Continuar para Agendamento
+              </Button>
+            </Box>
+          </Paper>
+        </Box>
+      )}
+
+      {activeStep === 2 && (
+        <Box>
+          <Typography variant="h5" sx={{ mb: 3, fontWeight: 'bold' }}>
             📅 Agendar Visita
           </Typography>
           
@@ -399,15 +641,27 @@ export default function CriarPlanosDeVisitas({ match }) {
               <Grid item xs={12} md={6}>
                 <Box sx={{ mb: 3 }}>
                   <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 1 }}>
-                    🎯 Modelo Selecionado:
+                    🎯 {selectedModelo ? 'Modelo Selecionado:' : 'Tipo de Plano:'}
                   </Typography>
-                  <Chip
-                    label={`Modelo #${selectedModelo?.id} - ${selectedModelo?.faixaEtaria}`}
-                    sx={{
-                      background: 'linear-gradient(45deg, #667eea, #764ba2)',
-                      color: 'white',
-                    }}
-                  />
+                  {selectedModelo ? (
+                    <Chip
+                      label={`Modelo #${selectedModelo?.id} - ${selectedModelo?.faixaEtaria}`}
+                      sx={{
+                        background: 'linear-gradient(45deg, #667eea, #764ba2)',
+                        color: 'white',
+                        fontWeight: 'bold',
+                      }}
+                    />
+                  ) : (
+                    <Chip
+                      label="Plano Personalizado"
+                      sx={{
+                        background: 'linear-gradient(45deg, #4caf50, #45a049)',
+                        color: 'white',
+                        fontWeight: 'bold',
+                      }}
+                    />
+                  )}
                 </Box>
               </Grid>
             </Grid>

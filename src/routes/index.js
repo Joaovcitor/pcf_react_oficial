@@ -8,6 +8,8 @@ import MyRoute from "./MyRoute";
 import Criancas from "../pages/Visitador/Criancas";
 import CadastrarCuidador from "../pages/Visitador/CadastrarCuidador";
 import CadastrarCrianca from "../pages/Visitador/CadastrarCrianca";
+import DetalhesCrianca from "../pages/Visitador/DetalhesCrianca";
+import EditarCrianca from "../pages/Visitador/EditarCrianca";
 import TodasAsVisitas from "../pages/Coordenador/VisitasFeitasPelosVisitadores";
 import VisitarPorGeolocalizacao from "../pages/Geolocalizacao/VisitarPorGeolocalizacao";
 import RealizarVisitasPorGeolocalizacao from "../pages/Geolocalizacao/Criancas/RealizarVisitasPorGeolocalizacao";
@@ -52,6 +54,7 @@ import PlanosDeVisitasDaGestante from "../pages/Gestante/PlanosDeVisitaDaGestant
 import CriarTabelaParaGestante from "../pages/Gestante/Tabelas";
 import MapaDeCalor from "../pages/Coordenador/MapaDeCalor";
 import ModelosPlanos from "../pages/Supervisor/ModelosPlanos";
+import ListarCriancas from "../pages/Coordenador/ListarCriancas";
 
 export default function Routes() {
   return (
@@ -107,6 +110,18 @@ export default function Routes() {
         exact
         path="/crianca/cadastrar/:id"
         component={CadastrarCrianca}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/crianca/:id"
+        component={DetalhesCrianca}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/crianca/editar/:id"
+        component={EditarCrianca}
         isClosed
       />
       <MyRoute exact path="/visitas" component={MapaDeCalor} isClosed />
@@ -218,6 +233,12 @@ export default function Routes() {
         isClosed
       />
       <MyRoute exact path="/supervisores" component={Supervisores} isClosed />
+      <MyRoute
+        exact
+        path="/coordenador/criancas"
+        component={ListarCriancas}
+        isClosed
+      />
       <MyRoute
         exact
         path="/meus-supervisores/detalhes/:id"

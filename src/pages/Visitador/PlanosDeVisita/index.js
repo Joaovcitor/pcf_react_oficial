@@ -16,12 +16,11 @@ export default function PlanosDeVisita() {
   }, []);
   useEffect(() => {
     async function getData() {
-      const response = await axios.get("/cuidador/");
+      const response = await axios.get("/cuidador/meus-cuidadores");
       setPregnants(response.data);
     }
     getData();
   }, []);
-
   const gravidas = pregnants.filter((f) => f.pregnant);
   console.log(gravidas);
 

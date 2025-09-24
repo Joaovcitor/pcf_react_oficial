@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
 // eslint-disable-next-line react/prop-types
-export default function MyRoute({ component: Component, isClosed, ...rest }) {
+export default function MyRoute({ component: Component, isClosed = false, ...rest }) {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
   if (isClosed && !isLoggedIn) {
@@ -21,11 +21,7 @@ export default function MyRoute({ component: Component, isClosed, ...rest }) {
   return <Route {...rest} component={Component} />;
 }
 
-MyRoute.defaultProps = {
-  isClosed: false,
-};
-
-MyRoute.PropTypes = {
+MyRoute.propTypes = {
   component: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
     .isRequired,
   isClosed: PropTypes.bool,
