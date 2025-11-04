@@ -39,6 +39,8 @@ import {
   CalendarToday as CalendarIcon,
 } from "@mui/icons-material";
 
+import VisitadorDetalhesPDFGenerator from "../../../components/VisitadorDetalhesPDFGenerator";
+
 export default function RelatoriosVisitadores({ match }) {
   const { id } = match.params;
 
@@ -241,6 +243,14 @@ export default function RelatoriosVisitadores({ match }) {
           >
             Gerar Relatório
           </Button>
+          <VisitadorDetalhesPDFGenerator
+            visitador={visitador}
+            childrens={childrens}
+            planos={planos}
+            visitasFeitas={visitasFeitas}
+            inicioMes={inicioMes}
+            fimMes={fimMes}
+          />
         </Box>
       </Paper>
 

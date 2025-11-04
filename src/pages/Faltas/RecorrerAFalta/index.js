@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import { Div, Nav, RadioGroup } from "./styled";
+import { Container, Div, Nav, RadioGroup } from "./styled";
 import { get } from "lodash";
 import axios from "../../../services/axios";
 import { toast } from "react-toastify";
@@ -14,8 +14,9 @@ export default function RecorrerAFalta({ match }) {
 
   useEffect(() => {
     async function getData() {
-      const response = await axios.get(`/faltas/faltas-que-o-user-levou/${id}`);
-      setUser(response.data.falta);
+      const response = await axios.get(`/faltas/${id}`);
+      console.log(response.data);
+      setUser(response.data);
     }
 
     getData();
@@ -28,11 +29,12 @@ export default function RecorrerAFalta({ match }) {
       return toast.error("Motivo tem que ter mais de 4 caracteres");
 
     try {
-      const response = await axios.post("/faltas/pedir-para-invalidar", {
-        pedir_para_invalidar_falta,
-        id,
-      });
-      console.log();
+      const response = await axios.patch(
+        `/faltas/pedir-para-invalidar-falta/${id}`,
+        {
+          invalidationRequest: pedir_para_invalidar_falta,
+        }
+      );
       toast.success(response.data.message);
     } catch (e) {
       const errors = get(e, "response.data.errors", "");
@@ -53,15 +55,34 @@ export default function RecorrerAFalta({ match }) {
   }
 
   return (
-    <Div onSubmit={handleSubmit}>
-      <h2>Pedir invalidação</h2>
-      <p>Motivo</p>
-      <textarea
-        name="objetivo"
-        onChange={(e) => setMotivo(e.target.value)}
-        id="objetivo"
-      ></textarea>
-      <button type="submit">Enviar</button>
-    </Div>
+    <Container>
+      <Div onSubmit={handleSubmit}>
+        <div className="header">
+          <span className="icon">🛡️</span>
+          <h2>Pedido de Invalidação de Falta</h2>
+        </div>
+        <p className="subtitle">
+          Explique, com clareza, o motivo para solicitar a invalidação desta
+          falta.
+        </p>
+
+        <Nav>
+          <span>Resumo da falta</span>
+          <p>Motivo: {user?.reason || "Motivo não informado"}</p>
+        </Nav>
+
+        <label htmlFor="objetivo">Motivo da solicitação</label>
+        <textarea
+          name="objetivo"
+          onChange={(e) => setMotivo(e.target.value)}
+          id="objetivo"
+          placeholder="Descreva o motivo com detalhes (ex.: justificativa, contexto, evidências)..."
+        ></textarea>
+
+        <div className="actions">
+          <button type="submit">Enviar pedido</button>
+        </div>
+      </Div>
+    </Container>
   );
 }

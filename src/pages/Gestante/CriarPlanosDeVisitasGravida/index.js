@@ -1,7 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Div, Nav, StyledDateInput } from "./styled";
+import {
+  Container,
+  Box,
+  Typography,
+  Paper,
+  Grid,
+  TextField,
+  Select,
+  MenuItem,
+  Button,
+  Divider,
+  Chip,
+} from "@mui/material";
+import {
+  Schedule as ScheduleIcon,
+  Assignment as AssignmentIcon,
+} from "@mui/icons-material";
 import { get } from "lodash";
 import axios from "../../../services/axios";
+import history from "../../../services/history";
 import { toast } from "react-toastify";
 
 // eslint-disable-next-line react/prop-types
@@ -18,9 +35,8 @@ export default function CriarPlanosDeVisitaGravida({ match }) {
 
   useEffect(() => {
     async function getData() {
-      const response = await axios.get(`/cuidador/showinfos/${id}`);
-      console.log(response.data);
-      setChildrens(response.data.cuidador);
+      const response = await axios.get(`/cuidador/${id}`);
+      setChildrens(response.data);
     }
 
     getData();
@@ -29,43 +45,43 @@ export default function CriarPlanosDeVisitaGravida({ match }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (
-      objetivo.length < 3 ||
-      !grau_de_dificuldade_objetivo ||
-      etapa1.length < 3 ||
-      etapa2.length < 3 ||
-      etapa3.length < 3
-    ) {
-      return toast.error("Preencha todos os campos");
+    // Validação mais robusta dos campos obrigatórios
+    if (!objetivo.trim()) {
+      return toast.error("Por favor, preencha o objetivo da visita");
+    }
+
+    if (!etapa1.trim()) {
+      return toast.error("Por favor, preencha o primeiro momento");
+    }
+
+    if (!etapa2.trim()) {
+      return toast.error("Por favor, preencha o segundo momento");
+    }
+
+    if (!etapa3.trim()) {
+      return toast.error("Por favor, preencha o terceiro momento");
+    }
+
+    if (!dia_a_ser_realizada_a_visita) {
+      return toast.error("Por favor, selecione a data da visita");
     }
 
     try {
+      // Dados conforme PlanoDeVisitaCreateDTO
+      const planoData = {
+        objective: objetivo.trim(),
+        etapa1: etapa1.trim(),
+        etapa2: etapa2.trim(),
+        etapa3: etapa3.trim(),
+        scheduledDay: new Date(dia_a_ser_realizada_a_visita),
+        caregiverId: parseInt(id, 10),
+      };
+
       // Primeira chamada: criação do plano
-      const response = await axios.post(`/planos/criarplano-gravida/${id}`, {
-        dia_a_ser_realizada_a_visita,
-        objetivo,
-        grau_de_dificuldade_objetivo,
-        etapa1,
-        etapa2,
-        etapa3,
-        caregiverId: id,
-      });
-
-      if (!response.data.plano || !response.data.plano.id) {
-        return toast.error(
-          "Erro ao criar o plano. Verifique a resposta do servidor."
-        );
-      }
-
-      // Segunda chamada: agendar a visita com base no plano criado
-      await axios.post(`/visitasporgeolo/agendar-visita-gravida/${id}`, {
-        CaregiverId: id,
-        planoId: response.data.plano.id,
-        data_que_vai_ser_realizada: dia_a_ser_realizada_a_visita,
-      });
+      await axios.post(`/planos/`, planoData);
 
       toast.success("Plano criado com sucesso e visita agendada");
-      history.push(`/planos/criarplano/${id}`);
+      history.push(`/planos/criarplano-gravida/${id}`);
     } catch (e) {
       const errors = get(e, "response.data.errors", "");
       if (typeof errors === "string") {
@@ -85,51 +101,141 @@ export default function CriarPlanosDeVisitaGravida({ match }) {
   }
 
   return (
-    <Div onSubmit={handleSubmit}>
-      <h2>Criar Plano de visita</h2>
+    <Container maxWidth="md" component="form" onSubmit={handleSubmit}>
+      <Box sx={{ py: 3 }}>
+        <Box sx={{ mb: 3, textAlign: "center" }}>
+          <Typography variant="h4" fontWeight="bold" gutterBottom>
+            Criar Plano de Visita (Gestante)
+          </Typography>
+          <Typography variant="subtitle1" color="text.secondary">
+            {child?.name ? (
+              <>
+                <AssignmentIcon
+                  sx={{ mr: 1, fontSize: 18, color: "text.secondary" }}
+                />
+                Cuidador: {child.name}
+              </>
+            ) : (
+              "Carregando cuidador..."
+            )}
+          </Typography>
+        </Box>
 
-      <p>Quando você vai realizar a visita?</p>
-      <StyledDateInput
-        name="dia_a_ser_realizada_a_visita"
-        onChange={(e) => setDia(e.target.value)}
-        id="dia_a_ser_realizada_a_visita"
-      />
-      <p>Objetivo:</p>
-      <textarea
-        name="objetivo"
-        onChange={(e) => setObjetivo(e.target.value)}
-        id="objetivo"
-      ></textarea>
-      <p>Qual a dificuldade dessa atividade?</p>
-      <select
-        name="grau_de_dificuldade_objetivo"
-        onChange={(e) => setGrau(e.target.value)}
-        id="grau_de_dificuldade_objetivo"
-      >
-        <option value="Selecione">Selecione</option>
-        <option value="Fácil">Fácil</option>
-        <option value="Média">Média</option>
-        <option value="Dificil">Dificil</option>
-      </select>
-      <p>Momento 1:</p>
-      <textarea
-        name="etapa1"
-        onChange={(e) => setEtapa1(e.target.value)}
-        id="etapa1"
-      ></textarea>
-      <p>Momento 2:</p>
-      <textarea
-        name="etapa2"
-        onChange={(e) => setEtapa2(e.target.value)}
-        id="etapa2"
-      ></textarea>
-      <p>Momento 3:</p>
-      <textarea
-        name="etapa3"
-        onChange={(e) => setEtapa3(e.target.value)}
-        id="etapa3"
-      ></textarea>
-      <button type="submit">Criar Plano</button>
-    </Div>
+        <Paper elevation={2} sx={{ p: 4, borderRadius: 2 }}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
+                🎯 Objetivo da Visita
+              </Typography>
+              <TextField
+                fullWidth
+                multiline
+                rows={3}
+                label="Objetivo"
+                value={objetivo}
+                onChange={(e) => setObjetivo(e.target.value)}
+                placeholder="Descreva o objetivo principal desta visita..."
+              />
+            </Grid>
+
+            <Grid item xs={12} md={4}>
+              <Typography variant="subtitle1" sx={{ mb: 1, fontWeight: 600 }}>
+                1️⃣ Primeiro Momento
+              </Typography>
+              <TextField
+                fullWidth
+                multiline
+                rows={6}
+                label="Atividades Iniciais"
+                value={etapa1}
+                onChange={(e) => setEtapa1(e.target.value)}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={4}>
+              <Typography variant="subtitle1" sx={{ mb: 1, fontWeight: 600 }}>
+                2️⃣ Segundo Momento
+              </Typography>
+              <TextField
+                fullWidth
+                multiline
+                rows={6}
+                label="Atividades Principais"
+                value={etapa2}
+                onChange={(e) => setEtapa2(e.target.value)}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={4}>
+              <Typography variant="subtitle1" sx={{ mb: 1, fontWeight: 600 }}>
+                3️⃣ Terceiro Momento
+              </Typography>
+              <TextField
+                fullWidth
+                multiline
+                rows={6}
+                label="Atividades Finais"
+                value={etapa3}
+                onChange={(e) => setEtapa3(e.target.value)}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Typography variant="subtitle1" sx={{ mb: 1, fontWeight: 600 }}>
+                📅 Data da Visita
+              </Typography>
+              <TextField
+                type="datetime-local"
+                fullWidth
+                value={dia_a_ser_realizada_a_visita}
+                onChange={(e) => setDia(e.target.value)}
+                InputLabelProps={{ shrink: true }}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Typography variant="subtitle1" sx={{ mb: 1, fontWeight: 600 }}>
+                🔧 Dificuldade da atividade
+              </Typography>
+              <Select
+                fullWidth
+                value={grau_de_dificuldade_objetivo}
+                onChange={(e) => setGrau(e.target.value)}
+                displayEmpty
+              >
+                <MenuItem value="">
+                  <em>Selecione</em>
+                </MenuItem>
+                <MenuItem value="Fácil">Fácil</MenuItem>
+                <MenuItem value="Média">Média</MenuItem>
+                <MenuItem value="Dificil">Difícil</MenuItem>
+              </Select>
+            </Grid>
+          </Grid>
+
+          <Divider sx={{ my: 3 }} />
+
+          <Box sx={{ display: "flex", gap: 2, justifyContent: "center" }}>
+            <Button
+              variant="outlined"
+              onClick={() => history.push(`/planos/criarplano/${id}`)}
+            >
+              Voltar
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{
+                background: "linear-gradient(45deg, #4caf50, #45a049)",
+                px: 4,
+                py: 1.5,
+              }}
+            >
+              Criar Plano
+            </Button>
+          </Box>
+        </Paper>
+      </Box>
+    </Container>
   );
 }

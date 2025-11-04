@@ -24,7 +24,7 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemIcon
+  ListItemIcon,
 } from "@mui/material";
 import {
   Person as PersonIcon,
@@ -36,7 +36,7 @@ import {
   People as PeopleIcon,
   Assignment as AssignmentIcon,
   Visibility as VisibilityIcon,
-  AccountCircle as AccountCircleIcon
+  AccountCircle as AccountCircleIcon,
 } from "@mui/icons-material";
 
 export default function MostrarBeneficiariosPendentes() {
@@ -48,7 +48,9 @@ export default function MostrarBeneficiariosPendentes() {
     setLoading(true);
     try {
       const response = await axios.get("/cuidador/");
-      setCaregivers(response.data);
+      const lista = Array.isArray(response.data) ? response.data : [];
+      const pendentes = lista.filter((c) => c.isPending === true);
+      setCaregivers(pendentes);
       setError(null);
     } catch (err) {
       setError("Falha ao buscar os dados. Tente novamente mais tarde.");
@@ -69,11 +71,11 @@ export default function MostrarBeneficiariosPendentes() {
 
   const handleSubmitValidar = async (idCaregiver) => {
     try {
-      await axios.put("/supervisor/validar-cuidador", { idCaregiver });
+      await axios.patch(`/cuidador/validar/${idCaregiver}`);
       toast.success("Dados validados com sucesso!");
-      
+
       // Atualizar a lista após validação
-      setCaregivers(prev => prev.filter(c => c.id !== idCaregiver));
+      setCaregivers((prev) => prev.filter((c) => c.id !== idCaregiver));
     } catch (e) {
       const errors = get(e, "response.data.errors", [
         "Ocorreu um erro desconhecido.",
@@ -88,7 +90,12 @@ export default function MostrarBeneficiariosPendentes() {
 
   if (loading) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="400px"
+      >
         <CircularProgress size={60} />
       </Box>
     );
@@ -221,13 +228,13 @@ export default function MostrarBeneficiariosPendentes() {
             <Typography variant="h5" fontWeight="bold">
               Cuidadores Pendentes
             </Typography>
-            <Chip 
-              label={`${nonPregnantCaregivers.length} pendente${nonPregnantCaregivers.length !== 1 ? 's' : ''}`}
+            <Chip
+              label={`${nonPregnantCaregivers.length} pendente${nonPregnantCaregivers.length !== 1 ? "s" : ""}`}
               color="info"
               variant="outlined"
             />
           </Box>
-          
+
           <Grid container spacing={3}>
             {nonPregnantCaregivers.map((caregiver) => (
               <Grid item xs={12} md={6} key={caregiver.id}>
@@ -268,7 +275,11 @@ export default function MostrarBeneficiariosPendentes() {
                     <Divider sx={{ my: 2 }} />
 
                     <Box mb={2}>
-                      <Typography variant="subtitle2" fontWeight="bold" gutterBottom>
+                      <Typography
+                        variant="subtitle2"
+                        fontWeight="bold"
+                        gutterBottom
+                      >
                         Crianças ({caregiver.children.length}):
                       </Typography>
                       <List dense>
@@ -285,7 +296,11 @@ export default function MostrarBeneficiariosPendentes() {
 
                     {caregiver.visitor?.name && (
                       <Box>
-                        <Typography variant="subtitle2" fontWeight="bold" gutterBottom>
+                        <Typography
+                          variant="subtitle2"
+                          fontWeight="bold"
+                          gutterBottom
+                        >
                           Visitador:
                         </Typography>
                         <Box display="flex" alignItems="center" gap={1}>
@@ -295,7 +310,10 @@ export default function MostrarBeneficiariosPendentes() {
                           </Typography>
                         </Box>
                         <Typography variant="caption" color="text.secondary">
-                          Entrada em: {new Date(caregiver.visitor.createdAt).toLocaleString("pt-BR")}
+                          Entrada em:{" "}
+                          {new Date(caregiver.visitor.createdAt).toLocaleString(
+                            "pt-BR"
+                          )}
                         </Typography>
                       </Box>
                     )}
@@ -310,7 +328,8 @@ export default function MostrarBeneficiariosPendentes() {
                       sx={{
                         background: "linear-gradient(45deg, #4CAF50, #45a049)",
                         "&:hover": {
-                          background: "linear-gradient(45deg, #45a049, #3d8b40)",
+                          background:
+                            "linear-gradient(45deg, #45a049, #3d8b40)",
                         },
                       }}
                     >
@@ -332,13 +351,13 @@ export default function MostrarBeneficiariosPendentes() {
             <Typography variant="h5" fontWeight="bold">
               Gestantes Pendentes
             </Typography>
-            <Chip 
-              label={`${pregnantBeneficiaries.length} pendente${pregnantBeneficiaries.length !== 1 ? 's' : ''}`}
+            <Chip
+              label={`${pregnantBeneficiaries.length} pendente${pregnantBeneficiaries.length !== 1 ? "s" : ""}`}
               color="warning"
               variant="outlined"
             />
           </Box>
-          
+
           <Grid container spacing={3}>
             {pregnantBeneficiaries.map((beneficiario) => (
               <Grid item xs={12} md={6} key={beneficiario.id}>
@@ -370,11 +389,7 @@ export default function MostrarBeneficiariosPendentes() {
                         <Typography variant="h6" fontWeight="bold">
                           {beneficiario.name}
                         </Typography>
-                        <Chip
-                          label="Gestante"
-                          color="warning"
-                          size="small"
-                        />
+                        <Chip label="Gestante" color="warning" size="small" />
                       </Box>
                     </Box>
 
@@ -393,11 +408,18 @@ export default function MostrarBeneficiariosPendentes() {
                       </Box>
                       {beneficiario.visitor?.name && (
                         <Box>
-                          <Typography variant="subtitle2" fontWeight="bold" gutterBottom>
+                          <Typography
+                            variant="subtitle2"
+                            fontWeight="bold"
+                            gutterBottom
+                          >
                             Visitador:
                           </Typography>
                           <Box display="flex" alignItems="center" gap={1}>
-                            <AccountCircleIcon fontSize="small" color="action" />
+                            <AccountCircleIcon
+                              fontSize="small"
+                              color="action"
+                            />
                             <Typography variant="body2">
                               {beneficiario.visitor.name}
                             </Typography>
@@ -416,7 +438,8 @@ export default function MostrarBeneficiariosPendentes() {
                       sx={{
                         background: "linear-gradient(45deg, #FF9800, #F57C00)",
                         "&:hover": {
-                          background: "linear-gradient(45deg, #F57C00, #E65100)",
+                          background:
+                            "linear-gradient(45deg, #F57C00, #E65100)",
                         },
                       }}
                     >

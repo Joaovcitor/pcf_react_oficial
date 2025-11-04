@@ -22,7 +22,7 @@ function* loginRequest({ payload }) {
     history.push(payload.prevPath);
   } catch (e) {
     console.log(e);
-    toast.error("E-mail ou senha inválidos");
+    toast.error(get(e, "response.data.message", "Erro ao fazer login"));
     yield put(actions.loginFailure());
   }
 }
@@ -41,7 +41,7 @@ function* registerRequest({ payload }) {
     if (id) {
       yield call(axios.patch, "/login/editar", {
         email: email,
-        password: password
+        password: password,
       });
       toast.success("Conta alterada com sucesso");
     }

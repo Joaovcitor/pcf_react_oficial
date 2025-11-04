@@ -108,3 +108,5 @@ export const Nav = styled.nav`
     margin-top: 10px;
   }
 `;
+
+// Removidos componentes de diálogo/atualização de gravidez conforme solicitação

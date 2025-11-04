@@ -35,7 +35,10 @@ import ValidarBeneficiarios from "../pages/Supervisor/ValidarBeneficiarios";
 import Supervisores from "../pages/Coordenador/Supervisores";
 import Formulario5 from "../pages/Formularios/Formularios5";
 import Formulario7 from "../pages/Formularios/Formularios7";
+import FormulariosBeneficiario from "../pages/Formularios/Beneficiario";
 import Relatorios from "../pages/Coordenador/RelatoriosVisitadores";
+import SupervisorCuidadores from "../pages/Supervisor/Cuidadores";
+import CoordenadorCuidadores from "../pages/Coordenador/Cuidadores";
 
 import Page404 from "../pages/Page404";
 import BuscarSupervisores from "../components/BuscarSupervisores";
@@ -43,6 +46,7 @@ import DetalhesSupervisores from "../components/DetalhesSupervisores";
 import FormsCuidadores from "../pages/Gestante/FormsCuidadores";
 import PedirSenhaNova from "../pages/Users/PedirSenhaNova";
 import ResetarSenha from "../pages/Users/ResetarSenha";
+import ResetPassword from "../pages/ResetPassword";
 import Administrativo from "../pages/Adm";
 
 import CriarFalta from "../pages/Faltas/CriarFalta";
@@ -55,6 +59,17 @@ import CriarTabelaParaGestante from "../pages/Gestante/Tabelas";
 import MapaDeCalor from "../pages/Coordenador/MapaDeCalor";
 import ModelosPlanos from "../pages/Supervisor/ModelosPlanos";
 import ListarCriancas from "../pages/Coordenador/ListarCriancas";
+
+// Posts
+import PostsVisitador from "../pages/Visitador/Posts";
+import PostsSupervisor from "../pages/Supervisor/Posts";
+import PostsCoordenador from "../pages/AdministrativoCoordenador/Posts";
+import CriarPostSupervisor from "../pages/Supervisor/CriarPost";
+import CriarPostCoordenador from "../pages/AdministrativoCoordenador/CriarPost";
+import CriarFormulario from "../pages/Supervisor/CriarFormulario";
+import FormulariosSupervisor from "../pages/Supervisor/Formularios";
+import DashboardRH from "../pages/RH/DashboardRH";
+import CriarUsuarioRH from "../pages/Coordenador/CriarUsuarioRH";
 
 export default function Routes() {
   return (
@@ -75,6 +90,7 @@ export default function Routes() {
         component={CriarPlanosDeVisitaGravida}
         isClosed
       />
+
       <MyRoute exact path="/login" component={Login} isClosed={false} />
       <MyRoute
         exact
@@ -112,12 +128,7 @@ export default function Routes() {
         component={CadastrarCrianca}
         isClosed
       />
-      <MyRoute
-        exact
-        path="/crianca/:id"
-        component={DetalhesCrianca}
-        isClosed
-      />
+      <MyRoute exact path="/crianca/:id" component={DetalhesCrianca} isClosed />
       <MyRoute
         exact
         path="/crianca/editar/:id"
@@ -149,7 +160,13 @@ export default function Routes() {
         component={RealizarVisitasPorGeolocalizacao}
         isClosed
       />
-      <MyRoute exact path="/formularios/:id" component={Criancas} isClosed />
+      <MyRoute exact path="/formularios/:id" component={FormulariosBeneficiario} isClosed />
+      <MyRoute
+        exact
+        path="/formularios/desenvolvimento-infantil/:id"
+        component={FormulariosBeneficiario}
+        isClosed
+      />
       <MyRoute
         exact
         path="/formularios/gravidas/:id"
@@ -194,6 +211,12 @@ export default function Routes() {
         component={Visitadores}
         isClosed
       />
+      <MyRoute
+        exact
+        path="/supervisor/cuidadores"
+        component={SupervisorCuidadores}
+        isClosed
+      />
       <MyRoute exact path="/cuidadores" component={Cuidadores} isClosed />
       <MyRoute exact path="/notificacoes" component={Notifications} isClosed />
       <MyRoute
@@ -226,13 +249,14 @@ export default function Routes() {
         component={ValidarBeneficiarios}
         isClosed
       />
+      <MyRoute exact path="/modelos" component={ModelosPlanos} isClosed />
+      <MyRoute exact path="/supervisores" component={Supervisores} isClosed />
       <MyRoute
         exact
-        path="/modelos"
-        component={ModelosPlanos}
+        path="/coordenador/cuidadores"
+        component={CoordenadorCuidadores}
         isClosed
       />
-      <MyRoute exact path="/supervisores" component={Supervisores} isClosed />
       <MyRoute
         exact
         path="/coordenador/criancas"
@@ -272,6 +296,12 @@ export default function Routes() {
       />
       <MyRoute
         exact
+        path="/reset-password/:token"
+        component={ResetPassword}
+        isClosed={false}
+      />
+      <MyRoute
+        exact
         path="/administrativo"
         component={Administrativo}
         isClosed
@@ -289,6 +319,65 @@ export default function Routes() {
         component={RecorrerAFalta}
         isClosed
       />
+
+      {/* Rotas de Posts */}
+      <MyRoute exact path="/posts" component={PostsVisitador} isClosed />
+      <MyRoute
+        exact
+        path="/visitador/posts"
+        component={PostsVisitador}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/supervisor/posts"
+        component={PostsSupervisor}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/coordenador/posts"
+        component={PostsCoordenador}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/supervisor/criar-post"
+        component={CriarPostSupervisor}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/coordenador/criar-post"
+        component={CriarPostCoordenador}
+        isClosed
+      />
+
+      {/* Rotas de Formulários */}
+      <MyRoute
+        exact
+        path="/supervisor/formularios"
+        component={FormulariosSupervisor}
+        isClosed
+      />
+      <MyRoute
+        exact
+        path="/supervisor/criar-formulario"
+        component={CriarFormulario}
+        isClosed
+      />
+
+      {/* Rota do Dashboard RH */}
+      <MyRoute exact path="/rh/dashboard" component={DashboardRH} isClosed />
+
+      {/* Rota para Criar Usuário RH */}
+      <MyRoute
+        exact
+        path="/coordenador/criar-usuario-rh"
+        component={CriarUsuarioRH}
+        isClosed
+      />
+
       <MyRoute path="*" component={Page404} />
     </Switch>
   );

@@ -7,6 +7,7 @@ import searchAllUsers from "../../utils/Adm/searchAllUsers";
 import { Link } from "react-router-dom";
 import AdministrativoCoordenador from "../../components/AdministrativoCoordenador";
 import AdministrativoVisitador from "../../components/AdministrativoVisitador";
+import AdministrativoSupervisor from "../../components/AdministrativoSupervisor";
 
 export default function Administrativo() {
   const [user, setUser] = useState([]);
@@ -37,7 +38,11 @@ export default function Administrativo() {
         );
       }
       case "supervisor": {
-        toast.info("Espere");
+        return (
+          <>
+            <AdministrativoSupervisor></AdministrativoSupervisor>
+          </>
+        );
       }
     }
   }

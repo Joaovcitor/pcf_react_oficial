@@ -36,6 +36,7 @@ import {
   Home as HomeIcon,
   Refresh as RefreshIcon
 } from "@mui/icons-material";
+import RelatoriosPDFGenerator from "../../../components/RelatoriosPDFGenerator";
 
 export default function Visitadores() {
   const [visitadores, setVisitadores] = useState([]);
@@ -64,7 +65,9 @@ export default function Visitadores() {
 
       const allChildren = data.flatMap((v) => v.children || []);
       const allPlanos = data.flatMap((v) => v.planosDeVisitas || []);
-      const allVisitas = data.flatMap((v) => v.visitasPorGeolocalizacao || []);
+      // A API retorna visitas no campo 'visitasPorGeolocalizacaos'
+      // Corrigindo para usar a chave correta e evitar contagem zerada
+      const allVisitas = data.flatMap((v) => v.visitasPorGeolocalizacaos || []);
       const allCaregivers = data.flatMap((v) => v.visitorCaregivers || []);
 
       setChildrens(allChildren);
@@ -163,11 +166,22 @@ export default function Visitadores() {
         <Typography variant="h4" component="h1" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
           Relatório Geral
         </Typography>
-        <Tooltip title="Atualizar dados">
-          <IconButton onClick={handleRefresh} disabled={loading} color="primary">
-            <RefreshIcon />
-          </IconButton>
-        </Tooltip>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Tooltip title="Atualizar dados">
+            <IconButton onClick={handleRefresh} disabled={loading} color="primary">
+              <RefreshIcon />
+            </IconButton>
+          </Tooltip>
+          <RelatoriosPDFGenerator
+            visitadores={visitadores}
+            childrens={childrens}
+            planos={planos}
+            visitasFeitas={visitasFeitas}
+            caregivers={caregivers}
+            inicioMes={inicioMes}
+            fimMes={fimMes}
+          />
+        </Box>
       </Box>
 
       {/* Filtros de Data */}

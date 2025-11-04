@@ -42,7 +42,7 @@ const iconeValidada = createCustomIcon('#4caf50'); // Verde
 const iconeInvalida = createCustomIcon('#f44336'); // Vermelho
 const iconePadrao = createCustomIcon('#2196f3'); // Azul
 
-  const MapaDeMarcadores = ({ visita, id }) => {
+  const MapaDeMarcadores = ({ visita, id, visitas: visitasProp }) => {
   const [visitas, setVisitas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -76,6 +76,16 @@ const iconePadrao = createCustomIcon('#2196f3'); // Azul
         if (visita && visita.latitude && visita.longitude) {
           console.log("Usando visita específica:", visita);
           setVisitas([visita]);
+          setLoading(false);
+          return;
+        }
+
+        // Se uma lista de visitas foi passada pela página, usa ela
+        if (Array.isArray(visitasProp) && visitasProp.length > 0) {
+          const visitasValidas = visitasProp.filter(
+            (v) => v.latitude && v.longitude
+          );
+          setVisitas(visitasValidas);
           setLoading(false);
           return;
         }

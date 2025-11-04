@@ -34,6 +34,7 @@ import {
 } from "@mui/icons-material";
 import axios from "../../../services/axios";
 import Mapa from "../../../components/Mapa";
+import VisitasPDFGenerator from "../../../components/VisitasPDFGenerator";
 import { toast } from "react-toastify";
 
 export default function MapaDeCalor({ match }) {
@@ -55,17 +56,17 @@ export default function MapaDeCalor({ match }) {
   const fetchVisitas = async () => {
     setLoading(true);
     try {
-      // Buscar todas as visitas do sistema
-      const response = await axios.get('/visitas/todas'); // Ajuste a rota conforme sua API
+      // Buscar todas as visitas do sistema (coordenador)
+      const response = await axios.get('/visitasporgeolo/coordenador/all');
       const visitasData = response.data || [];
       
       setVisitas(visitasData);
       
       // Calcular estatísticas
       const total = visitasData.length;
-      const finalizadas = visitasData.filter(v => v.isFinished === true).length;
-      const pendentes = visitasData.filter(v => v.isFinished === false).length;
-      const invalidas = visitasData.filter(v => v.visita_mentirosa === true).length;
+      const finalizadas = visitasData.filter(v => (v.isFinished === true) || (v.visita_marcada_finalizada === true)).length;
+      const pendentes = visitasData.filter(v => (v.isFinished === false) || (v.visita_marcada_finalizada === false) || v.isValidationPending === true).length;
+      const invalidas = visitasData.filter(v => (v.visita_mentirosa === true) || (v.isFakeVisit === true)).length;
       
       setStats({ total, finalizadas, pendentes, invalidas });
       
@@ -80,9 +81,12 @@ export default function MapaDeCalor({ match }) {
 
   const visitasFiltradas = visitas.filter(visita => {
     // Filtro por status
-    if (filtroStatus === 'finalizadas' && !visita.isFinished) return false;
-    if (filtroStatus === 'pendentes' && visita.isFinished) return false;
-    if (filtroStatus === 'invalidas' && !visita.visita_mentirosa) return false;
+    const isFinalizada = visita.isFinished === true || visita.visita_marcada_finalizada === true;
+    const isPendente = visita.isValidationPending === true || visita.isFinished === false || visita.visita_marcada_finalizada === false;
+    const isInvalida = visita.isFakeVisit === true || visita.visita_mentirosa === true;
+    if (filtroStatus === 'finalizadas' && !isFinalizada) return false;
+    if (filtroStatus === 'pendentes' && !isPendente) return false;
+    if (filtroStatus === 'invalidas' && !isInvalida) return false;
     
     // Filtro por data (se especificado)
     if (filtroData) {
@@ -106,6 +110,16 @@ export default function MapaDeCalor({ match }) {
     setFiltroStatus('todas');
     setFiltroData('');
   };
+
+  const periodoLabel = (() => {
+    if (!filtroData) return 'Período completo (sem filtro)';
+    try {
+      const d = new Date(filtroData);
+      return `Data selecionada: ${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+    } catch (e) {
+      return `Filtro de data: ${String(filtroData)}`;
+    }
+  })();
 
   if (loading) {
     return (
@@ -282,6 +296,7 @@ export default function MapaDeCalor({ match }) {
                 >
                   Atualizar
                 </Button>
+                <VisitasPDFGenerator visitas={visitasFiltradas} stats={stats} periodoLabel={periodoLabel} />
               </Stack>
             </Grid>
             

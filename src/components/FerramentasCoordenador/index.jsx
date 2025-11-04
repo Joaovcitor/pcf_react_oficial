@@ -14,7 +14,9 @@ import {
   Assessment as AssessmentIcon,
   Map as MapIcon,
   AdminPanelSettings as AdminPanelSettingsIcon,
-  ChildCare as ChildCareIcon,
+  Article as ArticleIcon,
+  GroupAdd as GroupAddIcon,
+  SupervisorAccount as SupervisorAccountIcon,
 } from '@mui/icons-material';
 import { Link } from "react-router-dom";
 
@@ -38,14 +40,22 @@ export default function FerramentasCoordenador() {
     },
     {
       id: 3,
-      title: "Crianças",
-      description: "Gerenciar crianças cadastradas no sistema",
-      icon: <ChildCareIcon sx={{ fontSize: 40 }} />,
-      color: "#E91E63",
-      link: "/coordenador/criancas",
+      title: "Cuidadores",
+      description: "Listar cuidadores e crianças vinculadas",
+      icon: <SupervisorAccountIcon sx={{ fontSize: 40 }} />,
+      color: "#308C50",
+      link: "/coordenador/cuidadores",
     },
     {
       id: 4,
+      title: "Posts",
+      description: "Criar e visualizar posts do sistema",
+      icon: <ArticleIcon sx={{ fontSize: 40 }} />,
+      color: "#9C27B0",
+      link: "/coordenador/posts",
+    },
+    {
+      id: 5,
       title: "Mapa de Calor",
       description: "Visualizar mapa de calor das visitas",
       icon: <MapIcon sx={{ fontSize: 40 }} />,
@@ -53,12 +63,20 @@ export default function FerramentasCoordenador() {
       link: "/visitas",
     },
     {
-      id: 5,
+      id: 6,
       title: "Administrativo",
       description: "Ferramentas administrativas avançadas",
       icon: <AdminPanelSettingsIcon sx={{ fontSize: 40 }} />,
       color: "#308C50",
       link: "/administrativo",
+    },
+    {
+      id: 7,
+      title: "Criar Usuário RH",
+      description: "Registrar novo usuário do setor de RH",
+      icon: <GroupAddIcon sx={{ fontSize: 40 }} />,
+      color: "#FF5722",
+      link: "/coordenador/criar-usuario-rh",
     },
   ];
 

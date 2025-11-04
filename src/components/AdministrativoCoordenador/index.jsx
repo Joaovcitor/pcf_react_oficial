@@ -15,7 +15,6 @@ import {
   Avatar,
   Divider,
   Paper,
-  IconButton,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -38,6 +37,7 @@ import {
   Cancel as CancelIcon,
   Visibility as VisibilityIcon,
   PersonOff as PersonOffIcon,
+  PersonAdd as PersonAddIcon,
   Assignment as AssignmentIcon,
   AdminPanelSettings as AdminIcon,
   SupervisorAccount as SupervisorIcon,
@@ -77,6 +77,9 @@ export default function AdministrativoCoordenador() {
   const [tabValue, setTabValue] = useState(0);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedFalta, setSelectedFalta] = useState(null);
+  
+  // Estados para ativação/desativação de usuários
+  const [activationLoading, setActivationLoading] = useState(false);
 
   useEffect(() => {
     async function getData() {
@@ -165,6 +168,50 @@ export default function AdministrativoCoordenador() {
     );
   }
 
+  // Funções para alteração de email
+  // Removidas funções de alteração de email e senha para coordenador
+
+  // Funções para ativar/desativar usuários
+  const handleActivateUser = async (usuario) => {
+    try {
+      setActivationLoading(true);
+      await axios.patch(`/users/${usuario.id}/ativar`);
+      
+      toast.success(`Usuário ${usuario.name} ativado com sucesso!`);
+      
+      // Atualizar a lista de usuários
+      const updatedUsers = allUsers.map(u => 
+        u.id === usuario.id ? { ...u, isActive: true } : u
+      );
+      setAllUsers(updatedUsers);
+    } catch (error) {
+      console.error("Erro ao ativar usuário:", error);
+      toast.error("Erro ao ativar usuário");
+    } finally {
+      setActivationLoading(false);
+    }
+  };
+
+  const handleDeactivateUser = async (usuario) => {
+    try {
+      setActivationLoading(true);
+      await axios.patch(`/users/${usuario.id}/desativar`);
+      
+      toast.success(`Usuário ${usuario.name} desativado com sucesso!`);
+      
+      // Atualizar a lista de usuários
+      const updatedUsers = allUsers.map(u => 
+        u.id === usuario.id ? { ...u, isActive: false } : u
+      );
+      setAllUsers(updatedUsers);
+    } catch (error) {
+      console.error("Erro ao desativar usuário:", error);
+      toast.error("Erro ao desativar usuário");
+    } finally {
+      setActivationLoading(false);
+    }
+  };
+
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       {/* Header */}
@@ -226,119 +273,167 @@ export default function AdministrativoCoordenador() {
         </Typography>
         
         {allUsers.length > 0 ? (
-          <Grid container spacing={3}>
-            {allUsers.map((usuario) => (
-              <Grid item xs={12} md={6} lg={4} key={usuario.id}>
-                <Card
-                  sx={{
-                    height: '100%',
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
-                      boxShadow: '0 8px 25px rgba(0,0,0,0.15)',
-                    },
-                  }}
-                >
-                  <CardContent>
-                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                      <Avatar
-                        sx={{
-                          bgcolor: getRoleColor(usuario.role),
-                          mr: 2,
-                          width: 56,
-                          height: 56,
-                        }}
-                      >
-                        {getRoleIcon(usuario.role)}
-                      </Avatar>
-                      <Box sx={{ flex: 1 }}>
-                        <Typography variant="h6" sx={{ fontWeight: 600, mb: 0.5 }}>
-                          {usuario.name}
-                        </Typography>
-                        <Chip
-                          label={usuario.role}
-                          size="small"
+          ['coordenador', 'supervisor', 'visitador'].map((roleKey) => {
+            const roleLabels = {
+              coordenador: 'Coordenadores',
+              supervisor: 'Supervisores',
+              visitador: 'Visitadores',
+            };
+            const usersByRole = allUsers.filter(u => u.role === roleKey);
+
+            return (
+              <Box key={roleKey} sx={{ mb: 4 }}>
+                <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+                  {roleLabels[roleKey]} ({usersByRole.length})
+                </Typography>
+                {usersByRole.length > 0 ? (
+                  <Grid container spacing={3}>
+                    {usersByRole.map((usuario) => (
+                      <Grid item xs={12} md={6} lg={4} key={usuario.id}>
+                        <Card
                           sx={{
-                            bgcolor: getRoleColor(usuario.role),
-                            color: 'white',
-                            fontWeight: 600,
-                            textTransform: 'capitalize',
+                            height: '100%',
+                            transition: 'all 0.3s ease',
+                            '&:hover': {
+                              transform: 'translateY(-4px)',
+                              boxShadow: '0 8px 25px rgba(0,0,0,0.15)',
+                            },
                           }}
-                        />
-                      </Box>
-                    </Box>
-
-                    <Divider sx={{ my: 2 }} />
-
-                    <Box sx={{ mb: 2 }}>
-                      <Typography variant="body2" color="text.secondary">
-                        Status da Conta:
-                      </Typography>
-                      <Chip
-                        label={usuario.isActive ? "Ativa" : "Desativada"}
-                        color={usuario.isActive ? "success" : "error"}
-                        size="small"
-                        sx={{ mt: 0.5 }}
-                      />
-                    </Box>
-
-                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                      {usuario.role === "supervisor" && (
-                        <Button
-                          component={Link}
-                          to={`/meus-supervisores/detalhes/${usuario.id}`}
-                          variant="outlined"
-                          size="small"
-                          startIcon={<VisibilityIcon />}
-                          fullWidth
                         >
-                          Ver Detalhes
-                        </Button>
-                      )}
-                      
-                      {usuario.role === "visitador" && (
-                        <Button
-                          component={Link}
-                          to={`/coordenador/visitadores/detalhes/${usuario.id}`}
-                          variant="outlined"
-                          size="small"
-                          startIcon={<VisibilityIcon />}
-                          fullWidth
-                        >
-                          Ver Detalhes
-                        </Button>
-                      )}
-                      
-                      {usuario.role !== "coordenador" && (
-                        <>
-                          <Button
-                            component={Link}
-                            to={`/faltas/criar/${usuario.id}`}
-                            variant="contained"
-                            size="small"
-                            startIcon={<WarningIcon />}
-                            color="warning"
-                            fullWidth
-                          >
-                            Gerar Falta
-                          </Button>
-                          <Button
-                            variant="outlined"
-                            size="small"
-                            startIcon={<PersonOffIcon />}
-                            color="error"
-                            fullWidth
-                          >
-                            Desativar Conta
-                          </Button>
-                        </>
-                      )}
-                    </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
+                          <CardContent>
+                            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                              <Avatar
+                                sx={{
+                                  bgcolor: getRoleColor(usuario.role),
+                                  mr: 2,
+                                  width: 56,
+                                  height: 56,
+                                }}
+                              >
+                                {getRoleIcon(usuario.role)}
+                              </Avatar>
+                              <Box sx={{ flex: 1 }}>
+                                <Typography variant="h6" sx={{ fontWeight: 600, mb: 0.5 }}>
+                                  {usuario.name}
+                                </Typography>
+                                <Chip
+                                  label={usuario.role}
+                                  size="small"
+                                  sx={{
+                                    bgcolor: getRoleColor(usuario.role),
+                                    color: 'white',
+                                    fontWeight: 600,
+                                    textTransform: 'capitalize',
+                                  }}
+                                />
+                              </Box>
+                            </Box>
+
+                            <Divider sx={{ my: 2 }} />
+
+                            <Box sx={{ mb: 2 }}>
+                              <Typography variant="body2" color="text.secondary">
+                                Email:
+                              </Typography>
+                              <Typography variant="body1" sx={{ fontWeight: 500, mb: 1 }}>
+                                {usuario.email}
+                              </Typography>
+                            </Box>
+
+                            <Box sx={{ mb: 2 }}>
+                              <Typography variant="body2" color="text.secondary">
+                                Status da Conta:
+                              </Typography>
+                              <Chip
+                                label={usuario.isActive ? "Ativa" : "Desativada"}
+                                color={usuario.isActive ? "success" : "error"}
+                                size="small"
+                                sx={{ mt: 0.5 }}
+                              />
+                            </Box>
+
+                            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                              {usuario.role === "supervisor" && (
+                                <Button
+                                  component={Link}
+                                  to={`/meus-supervisores/detalhes/${usuario.id}`}
+                                  variant="outlined"
+                                  size="small"
+                                  startIcon={<VisibilityIcon />}
+                                  fullWidth
+                                >
+                                  Ver Detalhes
+                                </Button>
+                              )}
+                              
+                              {usuario.role === "visitador" && (
+                                <Button
+                                  component={Link}
+                                  to={`/visitadores/detalhes/${usuario.id}`}
+                                  variant="outlined"
+                                  size="small"
+                                  startIcon={<VisibilityIcon />}
+                                  fullWidth
+                                >
+                                  Ver Detalhes
+                                </Button>
+                              )}
+                              
+                              {usuario.role !== "coordenador" && (
+                                <>
+                                  <Button
+                                    component={Link}
+                                    to={`/faltas/criar/${usuario.id}`}
+                                    variant="contained"
+                                    size="small"
+                                    startIcon={<WarningIcon />}
+                                    color="warning"
+                                    fullWidth
+                                  >
+                                    Gerar Falta
+                                  </Button>
+                                  
+                                  {usuario.isActive ? (
+                                    <Button
+                                      variant="outlined"
+                                      size="small"
+                                      startIcon={<PersonOffIcon />}
+                                      color="error"
+                                      fullWidth
+                                      onClick={() => handleDeactivateUser(usuario)}
+                                      disabled={activationLoading}
+                                    >
+                                      {activationLoading ? <CircularProgress size={20} /> : "Desativar Conta"}
+                                    </Button>
+                                  ) : (
+                                    <Button
+                                      variant="outlined"
+                                      size="small"
+                                      startIcon={<PersonAddIcon />}
+                                      color="success"
+                                      fullWidth
+                                      onClick={() => handleActivateUser(usuario)}
+                                      disabled={activationLoading}
+                                    >
+                                      {activationLoading ? <CircularProgress size={20} /> : "Ativar Conta"}
+                                    </Button>
+                                  )}
+                                </>
+                              )}
+                            </Box>
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                    ))}
+                  </Grid>
+                ) : (
+                  <Alert severity="info" sx={{ textAlign: 'center' }}>
+                    Nenhum {roleLabels[roleKey].toLowerCase()} encontrado
+                  </Alert>
+                )}
+              </Box>
+            );
+          })
         ) : (
           <Alert severity="info" sx={{ textAlign: 'center' }}>
             Nenhum usuário encontrado no sistema
@@ -487,7 +582,9 @@ export default function AdministrativoCoordenador() {
         )}
       </TabPanel>
 
-      {/* Dialog de Confirmação */}
+      {/* Removidos diálogos de alteração de email e senha para coordenador */}
+
+      {/* Dialog de Confirmação para invalidar falta */}
       <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
         <DialogTitle>Confirmar Invalidação de Falta</DialogTitle>
         <DialogContent>

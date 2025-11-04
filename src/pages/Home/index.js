@@ -19,6 +19,7 @@ import {
 import FerramentasVisitadores from "../../components/FerramentasVisitadores";
 import FerramentasSupervisores from "../../components/FerramentasSupervisores";
 import FerramentaCoordenador from "../../components/FerramentasCoordenador";
+import FerramentasRH from "../../components/FerramentasRH";
 
 export default function Home() {
   const [users, setUsers] = useState(null);
@@ -63,6 +64,13 @@ export default function Home() {
           icon: <AdminIcon sx={{ fontSize: 40 }} />,
           color: "#308C50",
         };
+      case "rh":
+        return {
+          title: "Recursos Humanos",
+          subtitle: "Painel de Ferramentas do RH",
+          icon: <AdminIcon sx={{ fontSize: 40 }} />,
+          color: "#2196f3",
+        };
       default:
         return {
           title: "Dashboard",
@@ -82,6 +90,8 @@ export default function Home() {
         return <FerramentasSupervisores />;
       case "coordenador":
         return <FerramentaCoordenador />;
+      case "rh":
+        return <FerramentasRH />;
       default:
         return null;
     }

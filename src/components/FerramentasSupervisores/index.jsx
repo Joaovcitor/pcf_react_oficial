@@ -14,6 +14,9 @@ import {
   People as PeopleIcon,
   VerifiedUser as VerifiedUserIcon,
   Assignment as AssignmentIcon,
+  Article as ArticleIcon,
+  Description as FormIcon,
+  SupervisorAccount as SupervisorAccountIcon,
 } from '@mui/icons-material';
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -46,11 +49,35 @@ export default function FerramentasSupervisores() {
     },
     {
       id: 4,
+      title: "Posts",
+      description: "Criar e visualizar posts do sistema",
+      icon: <ArticleIcon sx={{ fontSize: 40 }} />,
+      color: "#9C27B0",
+      link: "/supervisor/posts",
+    },
+    {
+      id: 5,
+      title: "Formulários",
+      description: "Gerenciar formulários personalizados",
+      icon: <FormIcon sx={{ fontSize: 40 }} />,
+      color: "#FF5722",
+      link: "/supervisor/formularios",
+    },
+    {
+      id: 6,
       title: "Modelos de Planos",
       description: "Gerenciar modelos de planos de visitas",
       icon: <AssignmentIcon sx={{ fontSize: 40 }} />,
       color: "#308C50",
       link: "/modelos",
+    },
+    {
+      id: 7,
+      title: "Meus Cuidadores",
+      description: "Listar cuidadores e suas crianças",
+      icon: <SupervisorAccountIcon sx={{ fontSize: 40 }} />,
+      color: "#308C50",
+      link: "/supervisor/cuidadores",
     },
   ];
 

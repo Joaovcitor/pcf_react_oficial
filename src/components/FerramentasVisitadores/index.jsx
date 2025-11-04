@@ -8,7 +8,7 @@ import {
   Typography,
   Avatar,
   Container,
-} from '@mui/material';
+} from "@mui/material";
 import {
   PersonAdd as PersonAddIcon,
   People as PeopleIcon,
@@ -16,7 +16,8 @@ import {
   SupervisorAccount as SupervisorAccountIcon,
   LocationOn as LocationOnIcon,
   AdminPanelSettings as AdminPanelSettingsIcon,
-} from '@mui/icons-material';
+  Article as ArticleIcon,
+} from "@mui/icons-material";
 
 import { Link } from "react-router-dom";
 
@@ -54,16 +55,24 @@ export default function FerramentasVisitadores() {
       color: "#308C50",
       link: "/cuidadores",
     },
-    {
-      id: 5,
-      title: "Realizar Visitas",
-      description: "Executar visitas agendadas",
-      icon: <LocationOnIcon sx={{ fontSize: 40 }} />,
-      color: "#11B4D9",
-      link: "/visitas-marcadas",
-    },
+    // {
+    //   id: 5,
+    //   title: "Realizar Visitas",
+    //   description: "Executar visitas agendadas",
+    //   icon: <LocationOnIcon sx={{ fontSize: 40 }} />,
+    //   color: "#11B4D9",
+    //   link: "/visitas-marcadas",
+    // },
     {
       id: 6,
+      title: "Posts",
+      description: "Visualizar posts do sistema",
+      icon: <ArticleIcon sx={{ fontSize: 40 }} />,
+      color: "#9C27B0",
+      link: "/visitador/posts",
+    },
+    {
+      id: 7,
       title: "Administrativo",
       description: "Ferramentas administrativas",
       icon: <AdminPanelSettingsIcon sx={{ fontSize: 40 }} />,
@@ -79,12 +88,12 @@ export default function FerramentasVisitadores() {
           variant="h4"
           sx={{
             fontWeight: 700,
-            textAlign: 'center',
+            textAlign: "center",
             mb: 1,
-            background: 'linear-gradient(45deg, #11B4D9, #308C50)',
-            backgroundClip: 'text',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
+            background: "linear-gradient(45deg, #11B4D9, #308C50)",
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
           }}
         >
           Ferramentas do Visitador
@@ -92,8 +101,8 @@ export default function FerramentasVisitadores() {
         <Typography
           variant="body1"
           sx={{
-            textAlign: 'center',
-            color: 'text.secondary',
+            textAlign: "center",
+            color: "text.secondary",
             mb: 4,
           }}
         >
@@ -108,32 +117,32 @@ export default function FerramentasVisitadores() {
               component={Link}
               to={ferramenta.link}
               sx={{
-                height: '100%',
-                textDecoration: 'none',
-                background: 'rgba(255, 255, 255, 0.95)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
+                height: "100%",
+                textDecoration: "none",
+                background: "rgba(255, 255, 255, 0.95)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
                 borderRadius: 3,
-                boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
-                transition: 'all 0.3s ease-in-out',
-                '&:hover': {
-                  transform: 'translateY(-8px)',
-                  boxShadow: '0px 8px 30px rgba(0, 0, 0, 0.15)',
-                  '& .avatar': {
-                    transform: 'scale(1.1)',
+                boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+                transition: "all 0.3s ease-in-out",
+                "&:hover": {
+                  transform: "translateY(-8px)",
+                  boxShadow: "0px 8px 30px rgba(0, 0, 0, 0.15)",
+                  "& .avatar": {
+                    transform: "scale(1.1)",
                   },
                 },
               }}
             >
-              <CardActionArea sx={{ height: '100%' }}>
+              <CardActionArea sx={{ height: "100%" }}>
                 <CardContent
                   sx={{
                     p: 3,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    textAlign: 'center',
-                    height: '100%',
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    textAlign: "center",
+                    height: "100%",
                   }}
                 >
                   <Avatar
@@ -143,7 +152,7 @@ export default function FerramentasVisitadores() {
                       width: 64,
                       height: 64,
                       mb: 2,
-                      transition: 'transform 0.3s ease-in-out',
+                      transition: "transform 0.3s ease-in-out",
                     }}
                   >
                     {ferramenta.icon}
@@ -153,7 +162,7 @@ export default function FerramentasVisitadores() {
                     sx={{
                       fontWeight: 600,
                       mb: 1,
-                      color: 'text.primary',
+                      color: "text.primary",
                     }}
                   >
                     {ferramenta.title}
@@ -161,7 +170,7 @@ export default function FerramentasVisitadores() {
                   <Typography
                     variant="body2"
                     sx={{
-                      color: 'text.secondary',
+                      color: "text.secondary",
                       lineHeight: 1.5,
                     }}
                   >

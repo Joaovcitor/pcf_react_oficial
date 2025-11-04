@@ -72,12 +72,18 @@ export default function CriarFalta({ match }) {
     const userId = id;
 
     try {
-      await axios.post("/faltas/", {
-        motivo_da_falta: motivo_da_falta,
+      const payload = {
+        reason: motivo_da_falta,
         userId: userId,
         registradorId: registradorId,
-        quando_ocorreu_a_falta: quando_ocorreu_a_falta,
-      });
+      };
+
+      // Adicionar data de ocorrência apenas se foi informada
+      if (quando_ocorreu_a_falta) {
+        payload.occurrenceDate = new Date(quando_ocorreu_a_falta);
+      }
+
+      await axios.post("/faltas/gerar-falta", payload);
       
       toast.success("Falta gerada com sucesso!");
       setMotivo("");
